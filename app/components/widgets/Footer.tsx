@@ -1,5 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+import facebook from '/public/assets/facebook.png'
+import instagram from '/public/assets/instagram.png'
+import tiktok from '/public/assets/tiktok.png'
+import youtube from '/public/assets/Youtube.png'
 
 export default function Footer() {
   return (
@@ -20,10 +24,10 @@ export default function Footer() {
               <Image src="/whitelogo.png" width={100} height={100} alt="Logo" /> {/* Replace with your logo */}
             </div>
             <div className="flex justify-center  space-x-4 items-center mb-4">
-              <span><Image src="/assets/facebook.png" alt="fb" height={10} width={10} /></span>
-              <span><Image src="/assets/instagram.png" alt="ins" height={10} width={10} /></span>
-              <span><Image src="/assets/tiktok.png" alt="tiktok" height={10} width={10} /></span>
-              <span><Image src="/assets/Youtube.png" alt="yt" height={10} width={10} /></span>
+              <span><Image src={facebook} alt="fb" height={10} width={10} /></span>
+              <span><Image src={instagram} alt="ins" height={10} width={10} /></span>
+              <span><Image src={tiktok} alt="tiktok" height={10} width={10} /></span>
+              <span><Image src={youtube} alt="yt" height={10} width={10} /></span>
             </div>
             <p className="text-sm text-center">
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industryss standard dummy text since the 1500s.

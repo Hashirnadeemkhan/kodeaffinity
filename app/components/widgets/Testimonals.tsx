@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import stars from "/public/assets/star.png"
 
 const testimonialsData = [
   {
@@ -88,7 +89,7 @@ const Testimonals = () => {
                 {Array.from({ length: testimonial.stars }).map((_, starIndex) => (
                   <Image
                     key={starIndex}
-                    src="/assets/star.png"
+                    src={stars}
                     alt="star"
                     height={20}
                     width={20}

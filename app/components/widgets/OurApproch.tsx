@@ -48,47 +48,47 @@ const OurApproch = () => {
 
   return (
     <Wrapper>
-      <section className="flex flex-col lg:flex-row justify-between items-center px-40 py-16 bg-gray-50">
+      <section className="flex flex-col lg:flex-row justify-between items-center px-6 md:px-20 lg:px-40 py-16 bg-gray-50">
         {/* Left Side - Text Content */}
         <div className="w-full lg:w-1/2">
-          <h3 className="text-[#569acc] font-semibold uppercase">Our Approach</h3>
-          <h2 className="text-3xl font-bold mt-2">
+          <h3 className="text-[#569acc] font-semibold uppercase text-center lg:text-left">Our Approach</h3>
+          <h2 className="text-3xl font-bold mt-2 text-center lg:text-left">
             We believe in a comprehensive approach to digital marketing
           </h2>
-          <p className="text-gray-600 mt-4">
+          <p className="text-gray-600 mt-4 text-center lg:text-left">
             Our process begins with getting to know our clients and understanding
             their business goals. We conduct thorough research to identify the
             best digital marketing strategies for their industry, target audience,
             and budget.
           </p>
 
-          <h3 className="text-[#569acc] font-semibold uppercase mt-12">
+          <h3 className="text-[#569acc] font-semibold uppercase mt-12 text-center lg:text-left">
             Industry Experiences
           </h3>
-          <h2 className="text-3xl font-bold mt-2">
+          <h2 className="text-3xl font-bold mt-2 text-center lg:text-left">
             Where Technology & Strategy Converge
           </h2>
-          <p className="text-gray-600 mt-4">
+          <p className="text-gray-600 mt-4 text-center lg:text-left">
             At Bonjo Tech, we take pride in being a data-driven and results-oriented
             agency. We have a team of experienced digital marketing experts who stay
             up-to-date with the latest industry trends and technologies.
           </p>
 
-          <ul className="mt-6 space-y-2 text-blue-800">
-            <li className="flex items-center">
+          <ul className="mt-6 space-y-2 text-blue-800 text-center lg:text-left">
+            <li className="flex items-center justify-center lg:justify-start">
               <span className="mr-2">+</span> Best Tools & Strategies
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center justify-center lg:justify-start">
               <span className="mr-2">+</span> Transparency and Communication
             </li>
-            <li className="flex items-center">
+            <li className="flex items-center justify-center lg:justify-start">
               <span className="mr-2">+</span> Personalized Solutions
             </li>
           </ul>
         </div>
 
         {/* Right Side - Stats Boxes */}
-        <div className="w-full lg:w-1/2 grid grid-cols-2 gap-6 bg-white p-8 rounded-lg shadow-lg mt-10 lg:mt-0">
+        <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-8 rounded-lg shadow-lg mt-10 lg:mt-0">
           <div className="text-center">
             <h3 className="text-4xl font-bold count-up" data-end="19">0</h3>
             <p className="text-gray-500">Total Top Services</p>

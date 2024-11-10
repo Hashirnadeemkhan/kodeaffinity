@@ -44,22 +44,22 @@ const PricingSection = () => {
   ];
 
   return (
-    <div className="bg-black text-white p-8 lg:p-20">
-      <h2 className="text-center text-3xl lg:text-5xl font-bold mb-10">
+    <div className="bg-black text-white p-8 md:p-12 lg:p-20">
+      <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-10">
         Our Pricing
       </h2>
-      <h3 className="text-center text-xl lg:text-2xl font-semibold mb-5">
+      <h3 className="text-center text-lg md:text-xl lg:text-2xl font-semibold mb-4 md:mb-5">
         You can find a <span className="text-purple-500">cheap plan</span>
       </h3>
       
       {/* Tab Navigation */}
-      <div className="flex justify-center mb-10">
+      <div className="flex flex-wrap justify-center mb-8 md:mb-10">
         {["Web Development", "App Development", "Logo Design", "Animation", "Illustration", "Branding", "SaaS", "SEO", "SMM"].map((tab) => (
           <button
             key={tab}
-            className={`px-5 py-2 m-1 rounded-lg ${
+            className={`px-3 md:px-5 py-2 m-1 rounded-lg ${
               activeTab === tab ? "bg-purple-700 text-white" : "text-white"
-            } hover:bg-purple-700`}
+            } hover:bg-purple-700 transition duration-300`}
             onClick={() => handleTabClick(tab)}
           >
             {tab}
@@ -68,15 +68,15 @@ const PricingSection = () => {
       </div>
 
       {/* Pricing Cards */}
-      <div className="grid gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+      <div className="grid gap-6 md:gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
         {packages.map((pkg) => (
           <div
             key={pkg.name}
             className="bg-gray-800 rounded-lg p-6 flex flex-col items-center text-center shadow-lg"
           >
-            <h3 className="text-xl font-semibold mb-2">{pkg.name}</h3>
-            <p className="text-4xl font-bold mb-4">${pkg.price}</p>
-            <button className="bg-purple-500 text-white py-2 px-4 rounded-md mb-4 hover:bg-purple-700">
+            <h3 className="text-lg md:text-xl font-semibold mb-2">{pkg.name}</h3>
+            <p className="text-3xl md:text-4xl font-bold mb-4">${pkg.price}</p>
+            <button className="bg-purple-500 text-white py-2 px-4 rounded-md mb-4 hover:bg-purple-700 transition duration-300">
               Add To Cart
             </button>
             <ul className="text-left">
