@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import stars from "/public/assets/star.png"
+import stars from "/public/assets/stars.png"
 
 const testimonialsData = [
   {
