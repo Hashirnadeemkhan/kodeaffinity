@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import facebook from '@/public/assets/facebook.png'
-import instagram from '@/public/assets/instagram.png';
-import tiktok from '@/public/assets/tiktok.png'
-import youtube from '@/public/assets/Youtube.png'
+import facebook from '/public/assets/facebook.png'
+import instagram from '/public/assets/instagram.png';
+import tiktok from '/public/assets/tiktok.png'
+import youtube from '/public/assets/Youtube.png'
 
 export default function Footer() {
   return (
