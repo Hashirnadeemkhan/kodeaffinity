@@ -11,7 +11,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-md mx-auto top-4 w-[90%] lg:w-[85%]  rounded-lg z-10 ">
       <div className="lg:px-16 px-10 flex justify-between items-center">
         <div className="flex items-center">
-          <Image src="/logo.png" alt="Logo" height={100} width={100} className="w-24" />
+          <Image src="/logo.png" alt="Logo" height={100} width={100}  />
         </div>
         <div className="hidden md:flex lg:space-x-16 md:space-x-7">
           <Link href="/" className="text-gray-00 hover:text-gray-600">Home</Link>
