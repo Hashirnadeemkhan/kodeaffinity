@@ -44,12 +44,12 @@ const PricingSection = () => {
   ];
 
   return (
-    <div className="bg-black text-white p-8 md:p-12 lg:p-20">
-      <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-10">
+    <div className="bg-white text-black p-8 md:p-12 lg:p-20">
+      <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-10 ">
         Our Pricing
       </h2>
       <h3 className="text-center text-lg md:text-xl lg:text-2xl font-semibold mb-4 md:mb-5">
-        You can find a <span className="text-purple-500">cheap plan</span>
+        You can find a <span className=" bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent ">cheap plan</span>
       </h3>
       
       {/* Tab Navigation */}
@@ -58,8 +58,8 @@ const PricingSection = () => {
           <button
             key={tab}
             className={`px-3 md:px-5 py-2 m-1 rounded-lg ${
-              activeTab === tab ? "bg-purple-700 text-white" : "text-white"
-            } hover:bg-purple-700 transition duration-300`}
+              activeTab === tab ? "bg-red-500 text-black" : "text-black"
+            } hover:bg-red-760 transition duration-300`}
             onClick={() => handleTabClick(tab)}
           >
             {tab}
@@ -72,17 +72,17 @@ const PricingSection = () => {
         {packages.map((pkg) => (
           <div
             key={pkg.name}
-            className="bg-gray-800 rounded-lg p-6 flex flex-col items-center text-center shadow-lg"
+            className=" rounded-lg p-6 flex flex-col items-center text-center shadow-lg"
           >
             <h3 className="text-lg md:text-xl font-semibold mb-2">{pkg.name}</h3>
             <p className="text-3xl md:text-4xl font-bold mb-4">${pkg.price}</p>
-            <button className="bg-purple-500 text-white py-2 px-4 rounded-md mb-4 hover:bg-purple-700 transition duration-300">
+            <button className="bg-red-500 text-white py-2 px-4 rounded-md mb-4 hover:bg-red-700 transition duration-300">
               Add To Cart
             </button>
             <ul className="text-left">
               {pkg.features.map((feature, index) => (
                 <li key={index} className="flex items-center text-gray-400 mb-2">
-                  <span className="text-purple-500 mr-2">✔</span>
+                  <span className="text-red-500 mr-2">✔</span>
                   {feature}
                 </li>
               ))}

@@ -1,6 +1,6 @@
 
 import Footer from "@/app/components/widgets/Footer"
-import Hero from "@/app/components/widgets/Hero"
+// import Hero from "@/app/components/widgets/Hero"
 import About from "@/app/components/widgets/Journey"
 import Navbar from "@/app/components/widgets/Navbar"
 import OurApproch from "@/app/components/widgets/OurApproch"
@@ -11,7 +11,7 @@ const page = () => {
   return (
     <div>
       <Navbar/>
-      <Hero/>
+      {/* <Hero/> */}
       <About/>
       <OurApproch/>
       <OurProcess/>

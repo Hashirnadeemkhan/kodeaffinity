@@ -95,7 +95,7 @@ const Insights = () => {
                 initial="hidden"
                 animate={textControls}
                 variants={textAnimation}
-                className="lg:text-4xl text-2xl font-bold text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent"
+                className="lg:text-4xl text-2xl font-bold  mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent"
               >
                 Lorem ipsum Lorem
               </motion.h3>

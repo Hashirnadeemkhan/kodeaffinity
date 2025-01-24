@@ -1,31 +1,47 @@
+"use client"
 import React from 'react';
 import Wrapper from '../shared/Wrapper';
 
 const CoreValue = () => {
   return (
-    <div className='bg-[#4a4c4f] pt-10 pb-10'>
+    
+    <div className='bg- pt-16 pb-16'>
       <Wrapper>
-        <div className='text-center space-y-10'>
-          <h3 className='text-purple-500 font-bold '>CORE VALUE</h3>
-          <h2 className='text-white text-4xl'>Unveiling our <span className='text-[#574ecb]'>core values </span> <br />
-            for lasting impact.
+        <div className='text-center space-y-12'>
+          {/* Title Section */}
+          <h3 className='text-red-600 font-semibold tracking-wide text-sm'>OUR CORE VALUE</h3>
+          <h2 className='text-black text-5xl font-bold'>
+            Building a <span className='bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent'>Foundation</span> <br />
+            for Enduring Success
           </h2>
-          <div className='flex flex-col md:flex-row justify-center items-center text-white gap-x-10 gap-y-6'>
-            {/* boxes */}
-            <div className='shadow-xl bg-[#333333] p-10 space-y-5 rounded-xl w-full md:w-1/3'>
-              <div>icon</div>
-              <p className='text-2xl'>People</p>
-              <p className='text-gray-400'>Our clients and users are at the core of everything we do. We are committed to understanding their needs and delivering beyond expectations.</p>
+
+          {/* Values Section */}
+          <div className='flex flex-col md:flex-row justify-center items-start text-white gap-x-8 gap-y-8'>
+            {/* Box 1 */}
+            <div className='bg-white shadow-md hover:shadow-lg p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-105'>
+              <div className='text-indigo-400 text-5xl mb-4'>👥</div>
+              <h4 className='text-2xl font-semibold mb-3 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent '>People</h4>
+              <p className='text-black'>
+                Our clients and users are at the center of everything we do. We listen, innovate, and exceed expectations.
+              </p>
             </div>
-            <div className='shadow-xl bg-[#574ecb] p-10 space-y-5 rounded-xl w-full md:w-1/3'>
-              <div>icon</div>
-              <p className='text-2xl'>Innovation</p>
-              <p className='text-gray-400'>Our clients and users are at the core of everything we do. We are committed to understanding their needs and delivering beyond expectations.</p>
+
+            {/* Box 2 */}
+            <div className='bg-red-500 shadow-md hover:shadow-lg p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-105'>
+              <div className='text-white text-5xl mb-4'>💡</div>
+              <h4 className='text-2xl font-semibold mb-3 '>Innovation</h4>
+              <p className='text-gray-100'>
+                We push the boundaries of technology to deliver creative and effective solutions that drive results.
+              </p>
             </div>
-            <div className='shadow-xl p-10 space-y-5 bg-[#333333] rounded-xl w-full md:w-1/3'>
-              <div>icon</div>
-              <p className='text-2xl'>Mission</p>
-              <p className='text-gray-400'>Our clients and users are at the core of everything we do. We are committed to understanding their needs and delivering beyond expectations.</p>
+
+            {/* Box 3 */}
+            <div className='bg-white shadow-md hover:shadow-lg p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-105'>
+              <div className='text-indigo-400 text-5xl mb-4'>🎯</div>
+              <h4 className='text-2xl font-semibold mb-3 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent'>Mission</h4>
+              <p className='text-black'>
+                Our mission is to empower businesses with IT solutions that make a lasting positive impact on their growth.
+              </p>
             </div>
           </div>
         </div>
