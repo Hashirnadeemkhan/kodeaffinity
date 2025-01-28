@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Navbar from "../widgets/Navbar";
 import Hero from "../widgets/Hero";
@@ -15,18 +16,23 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({ isAboutOnly, isReducedHeight })
       className="bg-cover bg-center"
       style={{
         backgroundImage:
-          'linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)),url("/mainbg.png")', // Background image
+          'linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9)),url("/mainbg.png")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed", // Keep background fixed
-        minHeight: isReducedHeight ? "50vh" : "100vh", // Adjust height dynamically
+        backgroundAttachment: "fixed", // Use fixed for larger screens
       }}
     >
-      <div className="pt-6">
-        <Navbar />
+      <div
+        className={`min-h-[50vh] md:min-h-[30vh] ${
+          isReducedHeight ? "lg:min-h-[50vh]" : "lg:min-h-screen"
+        }`}
+      >
+        <div className="pt-6">
+          <Navbar />
+        </div>
+        <Hero isAboutOnly={isAboutOnly} />
       </div>
-      <Hero isAboutOnly={isAboutOnly} />
     </div>
   );
 };

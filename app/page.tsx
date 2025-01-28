@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div>
     
-     <Layout/>
+    <Layout isAboutOnly={false} isReducedHeight={false} />
       <Reviews/>
       <AboutUs/>
       <Services/>

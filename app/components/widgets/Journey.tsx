@@ -62,7 +62,7 @@ const About = () => {
     <div>
       <Wrapper>
         <div
-          className="flex flex-col md:flex-row items-center justify-center p-10 bg-white overflow-hidden"
+          className="flex flex-col md:flex-row items-center justify-center md:mt-20 bg-white overflow-hidden"
           ref={ref}
         >
           <motion.div

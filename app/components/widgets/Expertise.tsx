@@ -24,7 +24,7 @@ const Expertise = () => {
   };
 
   return (
-    <div className="bg-white text-black py-12 px-6">
+    <div className="bg-white text-black py-12 px-6 lg:mt-20 mt-10">
       <div className="max-w-5xl mx-auto">
         <div className="mb-8">
           <h5 className="text-red-500 uppercase tracking-wide font-semibold">

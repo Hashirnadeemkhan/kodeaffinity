@@ -21,7 +21,7 @@ const Hero: React.FC<HeroProps> = ({ isAboutOnly }) => {
     return (
       <Wrapper>
         <section className="flex justify-center items-center mt-20">
-          <h1 className="text-7xl md:text-6xl font-semibold bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent ">
+          <h1 className="text-5xl md:text-6xl font-semibold bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent ">
             About US
           </h1>
         </section>
