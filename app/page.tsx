@@ -27,8 +27,8 @@ export default function Home() {
       <Faqs/>
       <Contact/>
       <Insights/>
-      <Companies/>
       <Testimonals/>
+      <Companies/>
       <Footer/>
     </div>
 

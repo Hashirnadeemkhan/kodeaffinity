@@ -58,7 +58,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <div className="bg-white text-black p-8  lg:p-20">
+    <div className="bg-gray-50 text-black p-8  lg:p-20">
       <h2 className="text-center text-lg font-bold mb-2 text-red-600">
         Our Pricing
       </h2>

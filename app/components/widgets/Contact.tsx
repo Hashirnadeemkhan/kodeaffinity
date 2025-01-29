@@ -45,7 +45,7 @@ const Contact = () => {
   }, [controls]);
 
   return (
-    <div className="flex items-center justify-center bg-white" ref={ref}>
+    <div className="flex items-center justify-center bg-white mt-10 mb-10" ref={ref}>
       <motion.form
         className="w-full max-w-3xl p-8"
         initial="hidden"

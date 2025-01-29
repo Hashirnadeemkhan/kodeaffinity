@@ -19,52 +19,43 @@ const OurProcess = () => {
         {/* Text Section */}
         <div className="flex-1">
           <h5 className="text-white lg:text-xl text-sm uppercase tracking-wide font-semibold mb-2">
-            Our Proven Process:
+          Our Expertise:
           </h5>
           <h1 className="text-4xl md:text-2xl lg:text-4xl font-bold leading-tight">
             A Streamlined Approach That <span className="text-white italic">ensures success</span>
           </h1>
-          <ul className="mt-6 space-y-4 text-gray-400">
+          <ul className="mt-6 space-y-4 text-white">
             <li className="flex items-start">
               <span className="lg:text-2xl text-lg mr-2">✔️</span>
               <div className='text-sm lg:text-lg'>
-                <strong>Discovery:</strong> We truly understand your business to learn more.
+                <strong>Custom Software Development:</strong>Creating scalable, robust, and secure software tailored to your unique business requirements.
               </div>
             </li>
             <li className="flex items-start">
               <span className=" lg:text-2xl text-lg mr-2">✔️</span>
               <div className='text-sm lg:text-lg'>
-                <strong>Strategy:</strong> Develop a plan that works for you.
+                <strong>Mobile Application Development: </strong> Designing intuitive and user-friendly mobile applications that engage customers and boost brand loyalty.
+
               </div>
             </li>
             <li className="flex items-start">
               <span className=" lg:text-2xl text-lg mr-2">✔️</span>
               <div className='text-sm lg:text-lg'>
-                <strong>Design:</strong> Make forms that are easy to use and fun to use.
-              </div>
-            </li>
-            <li className="flex items-start">
-              <span className="lg:text-2xl text-lg mr-2">✔️</span>
-              <div className='text-sm lg:text-lg'>
-                <strong>Development:</strong> Use cutting-edge technology to bring your ideas to life.
-              </div>
-            </li>
-            <li className="flex items-start">
-              <span className="lg:text-2xl text-lg mr-2">✔️</span>
-              <div className='text-sm lg:text-lg'>
-                <strong>Optimize:</strong> Make small changes to get the best results.
+                <strong>IT Consultancy:  </strong>Offering strategic guidance to optimize your IT infrastructure, streamline processes, and improve efficiency.
+
               </div>
             </li>
             <li className="flex items-start">
               <span className=" lg:text-2xl text-lg mr-2">✔️</span>
               <div className='text-sm lg:text-lg'>
-                <strong>Support:</strong> Help you can trust to keep your business growing.
+                <strong>Digital Transformation: </strong> : Helping businesses adapt to the digital era by leveraging cutting-edge technologies and solutions
+
               </div>
             </li>
+          
+         
           </ul>
-          <button className="lg:mt-8 mt-3 lg:px-6 px-3 lg:py-3 py-2 ml-4 text-sm lg:text-lg  bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition duration-300">
-            Know More
-          </button>
+        
         </div>
         
         {/* Image Section */}

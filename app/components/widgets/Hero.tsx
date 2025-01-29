@@ -2,28 +2,55 @@
 import Image from "next/image";
 import Button from "../shared/Button";
 import Wrapper from "../shared/Wrapper";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+
 
 // Define the type for the component props
 interface HeroProps {
-  isAboutOnly: boolean;
+  isAboutOnly?: boolean
+  isPricingOnly?: boolean
 }
 
-const Hero: React.FC<HeroProps> = ({ isAboutOnly }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+const Hero: React.FC<HeroProps> = ({ isAboutOnly, isPricingOnly }) => {
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+    setIsLoaded(true)
+  }, [])
 
-  if (isAboutOnly) {
-    // Render only the About heading when the prop is passed
+  if (isAboutOnly || isPricingOnly) {
+    // Render only the About or Pricing heading when the prop is passed
+    const title = isAboutOnly ? "About Us" : "Pricing"
+    const breadcrumbPage = isAboutOnly ? "About" : "Pricing"
+
     return (
       <Wrapper>
-        <section className="flex justify-center items-center mt-20">
+        <section className="flex flex-col gap-y-5 justify-center items-center mt-20">
           <h1 className="text-5xl md:text-6xl font-semibold bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent ">
-            About US
+            {title}
           </h1>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbLink asChild>
+                <Link href="/">Home</Link>
+              </BreadcrumbLink>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink>
+                  <BreadcrumbPage>{breadcrumbPage}</BreadcrumbPage>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
         </section>
       </Wrapper>
     );
@@ -40,17 +67,13 @@ const Hero: React.FC<HeroProps> = ({ isAboutOnly }) => {
           >
             <h4 className="font-normal text-black">Hello there!</h4>
             <h1 className="text-4xl md:text-6xl font-semibold text-gray-800 leading-tight">
-              Empowering your Business with IT Solutions
+            Empowering Businesses with Cutting-Edge IT Solutions
             </h1>
             <p className="mt-6 text-lg text-gray-600">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur
-              quia laborum voluptate repellat perferendis labore magnam est
-              excepturi. Vel quas soluta nostrum et ullam quod, sed laborum sit,
-              in id reprehenderit mollitia. Repellat iste, odio praesentium est
-              quo non nesciunt iusto ab labore voluptatum assumenda.
+            At Kode Affinity, we turn your vision into reality with innovative, scalable, and tailored IT solutions. From stunning websites to dynamic mobile apps and strategic branding, we’re here to help your business thrive in a digital-first world.
             </p>
             <div className="mt-5 transition-opacity duration-1000 delay-500 mb-10">
-              <Button text="About us"></Button>
+              <Button text="Get Started Now"></Button>
             </div>
           </div>
         </div>

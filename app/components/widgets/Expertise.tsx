@@ -2,7 +2,6 @@ import React from 'react';
 // import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from 'next/image';
 
 const Expertise = () => {
   const settings = {
@@ -34,7 +33,8 @@ const Expertise = () => {
             Bringing Your <span className="bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent italic">vision to life</span>
           </h1>
           <p className="mt-4 text-base md:text-lg">
-            At Intact One Solution, our portfolio highlights our commitment to quality and innovation. {`We've`} collaborated with clients from various industries, including technology, healthcare, and e-commerce, transforming their visions into successful outcomes. Explore our projects to see how our expertise can bring your ideas to life.
+          At Kode Affinity, our mission is to help businesses unlock their full potential through technology. We are dedicated to providing end-to-end IT solutions that drive growth, efficiency, and long-term success.
+
           </p>
         </div>
       </div>

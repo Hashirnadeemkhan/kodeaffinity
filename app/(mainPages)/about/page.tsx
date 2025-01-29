@@ -20,9 +20,9 @@ const page = () => {
       <CoreValue/>
       <Expertise/>
       <OurProcess/>
-      <Testimonals/>
       <PricingSection/>
       <FAQSection/>
+      <Testimonals/>
       <Companies/>
      <Footer/>
     </div>

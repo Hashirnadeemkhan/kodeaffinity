@@ -97,12 +97,10 @@ const Choose = () => {
               Stands Out?
             </h2>
             <p className="mt-4 text-gray-600 lg:text-lg text-sm mb-5">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry standard dummy
-              text ever since the 1500s, when an unknown printer took a galley
-              of type and scrambled it to make a type specimen book.
+            At Kode Affinity, we’re not just service providers—we’re your digital partners. We combine creativity, technical expertise, and strategic thinking to deliver solutions that align with your business goals. Our focus is on helping you succeed in a competitive digital landscape.
+
             </p>
-            <Button text={"Learn more"} />
+            {/* <Button text={"Learn more"} /> */}
           </motion.div>
         </div>
       </Wrapper>

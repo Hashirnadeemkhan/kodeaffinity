@@ -87,7 +87,7 @@ const AboutUs = () => {
             variants={textAnimation}
           >
             <motion.h4 className="text-xl font-semibold text-gray-700 mb-2">
-              About Us
+            Who We Are
             </motion.h4>
 
             <motion.h2 className="lg:text-5xl text-4xl font-bold leading-tight">
@@ -96,9 +96,11 @@ const AboutUs = () => {
             </motion.h2>
 
             <motion.p className="mt-4 text-gray-600 lg:text-lg text-sm mb-5">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industryss standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            At Kode Affinity, we are your trusted partner in navigating the ever-evolving digital landscape. Specializing in custom software development, IT consultancy, and digital transformation solutions, we empower businesses to achieve their goals with innovative technology. Backed by years of experience and a team of skilled professionals, our vision is to drive success for our clients by delivering tailored solutions that are as unique as their businesses. With Kode Affinity, innovation meets reliability.
+
+
             </motion.p>
-            <Button text={'About Us'} />
+            <Button text={'Learn More'} />
           </motion.div>
         </div>
       </Wrapper>

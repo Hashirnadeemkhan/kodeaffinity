@@ -3,6 +3,7 @@ import Image from 'next/image';
 import facebook from '/public/assets/facebook.png'
 import instagram from '/public/assets/instagram.png';
 import tiktok from '/public/assets/tiktok.png'
+import Link from 'next/link';
 import youtube from '/public/assets/Youtube.png'
 
 export default function Footer() {
@@ -38,11 +39,11 @@ export default function Footer() {
           <div className="w-full md:w-1/5 text-center md:text-left mb-6 md:mb-0">
             <h3 className="font-bold mb-4 lg:text-2xl text-xl">Quick Links</h3>
             <ul className="space-y-5">
-              <li><a href="#" className="hover:underline">Home</a></li>
-              <li><a href="#" className="hover:underline">About Us</a></li>
-              <li><a href="#" className="hover:underline">Pricings</a></li>
-              <li><a href="#" className="hover:underline">Services</a></li>
-              <li><a href="#" className="hover:underline">Contact</a></li>
+              <li><Link href="#" className="hover:underline">Home</Link></li>
+              <li><Link href="#" className="hover:underline">About Us</Link></li>
+              <li><Link href="#" className="hover:underline">Pricings</Link></li>
+              <li><Link href="#" className="hover:underline">Services</Link></li>
+              <li><Link href="#" className="hover:underline">Contact</Link></li>
             </ul>
           </div>
 
@@ -50,10 +51,10 @@ export default function Footer() {
           <div className="w-full md:w-1/4 text-center md:text-left mb-6 md:mb-0">
             <h3 className="font-bold mb-4 lg:text-2xl text-xl">Resources</h3>
             <ul className="space-y-5">
-              <li><a href="#" className="hover:underline">Portfolio</a></li>
-              <li><a href="#" className="hover:underline">Blogs</a></li>
-              <li><a href="#" className="hover:underline">Privacy Policy</a></li>
-              <li><a href="#" className="hover:underline">Terms & Conditions</a></li>
+              <li><Link href="#" className="hover:underline">Portfolio</Link></li>
+              <li><Link href="#" className="hover:underline">Blogs</Link></li>
+              <li><Link href="#" className="hover:underline">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:underline">Terms & Conditions</Link></li>
             </ul>
           </div>
 
