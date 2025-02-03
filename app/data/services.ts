@@ -15,6 +15,7 @@ export interface Service {
       slug: "web-design-development",
       information:
         "Intact One Solution offers state-of-the-art web design and development services customized to meet the needs of businesses in Pakistan and the Middle East. We create SEO-optimized, visually stunning, and user-friendly websites that enhance brand visibility and drive business growth. Our expertise in responsive web design ensures that your website delivers a seamless experience across both desktop and mobile devices, helping you connect with your audience effortlessly.",
+      // image: ""
     },
     {
       id: "2",

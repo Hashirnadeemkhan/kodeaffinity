@@ -85,11 +85,11 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white shadow-lg px-6 py-4 text-center">
-          <Link href="/" className="block text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
+        <div className="md:hidden bg-white shadow-lg px-6 py-4 text-center ">
+          <Link href="/" className="block  text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
             Home
           </Link>
-          <Link href="/about" className="block text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
+          <Link href="/about" className="block f text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
             About us
           </Link>
 

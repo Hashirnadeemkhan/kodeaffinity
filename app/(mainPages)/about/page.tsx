@@ -6,8 +6,6 @@ import Expertise from '@/app/components/widgets/Expertise';
 import OurProcess from '@/app/components/widgets/OurProcess';
 import Testimonals from '@/app/components/widgets/Testimonals';
 import PricingSection from '@/app/components/widgets/PricingSection';
-// import OurApproch from '@/app/components/widgets/OurApproch';
-import Footer from '@/app/components/widgets/Footer';
 import FAQSection from '@/app/components/widgets/Faqs';
 import Companies from '@/app/components/widgets/Companies';
 import Layout from "../../components/(private)/Layout";
@@ -24,7 +22,7 @@ const page = () => {
       <FAQSection/>
       <Testimonals/>
       <Companies/>
-     <Footer/>
+
     </div>
   )
 }

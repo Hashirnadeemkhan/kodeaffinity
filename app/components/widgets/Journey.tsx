@@ -85,11 +85,11 @@ const About = () => {
             animate={textControls}
             variants={textAnimation}
           >
-            <motion.h4 className="text-xl font-semibold text-gray-700 mb-2">
+            <motion.h4 className="text-xl font-semibold text-red-600 mb-2">
               OUR JOURNEY
             </motion.h4>
 
-            <motion.h2 className="lg:text-5xl text-4xl font-bold leading-tight">
+            <motion.h2 className="lg:text-5xl text-4xl  leading-tight">
               Empowering your <br />
               Business Through <br />
               Innovation

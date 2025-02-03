@@ -29,7 +29,7 @@ const Expertise = () => {
           <h5 className="text-red-500 uppercase tracking-wide font-semibold">
             Showcasing Our Expertise
           </h5>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+          <h1 className="text-4xl md:text-5xl  leading-tight">
             Bringing Your <span className="bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent italic">vision to life</span>
           </h1>
           <p className="mt-4 text-base md:text-lg">

@@ -10,8 +10,7 @@ const PricingPage = () => {
       <Layout isPricingOnly={true} isReducedHeight={true} />
       <PricingSection />
       <Creativity/>
-   
-      <Footer />
+  
     </div>
   )
 }
