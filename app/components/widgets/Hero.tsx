@@ -58,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ isAboutOnly, isPricingOnly }) => {
 
   return (
     <Wrapper>
-      <section className="flex flex-col lg:flex-row items-center mt-14">
+      <section className="flex flex-col lg:flex-row items-center md:mt-14">
         <div className="container px-6 mt-10">
           <div
             className={`max-w-xl transition-all duration-1000 ${

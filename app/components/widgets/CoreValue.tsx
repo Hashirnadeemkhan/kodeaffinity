@@ -12,10 +12,10 @@ const CoreValue = () => {
   return (
     <div className="bg-gray-50 pt-1 pb-14">
       <Wrapper>
-        <div className="text-center md:space-y-6 space-y-2 md:mt-10 lg:mt-20 ">
+        <div className=" md:space-y-6 space-y-2 md:mt-10 lg:mt-20 ">
           {/* Title Section */}
           <motion.h3
-            className="text-red-600 font-semibold tracking-wide text-sm mt-10"
+            className="text-red-600 font-semibold tracking-wider text-lg mt-10 text-start md:text-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
@@ -37,27 +37,27 @@ const CoreValue = () => {
           </motion.h2>
 
           {/* Values Section */}
-          <div className="flex flex-col md:flex-row justify-center items-start text-white gap-x-8 gap-y-8">
+          <div className="flex flex-col md:flex-row  text-white gap-x-8 gap-y-8">
             {/* Box 1 */}
             <motion.div
-              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-[1.02]"
+              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-[1.02] flex flex-col items-center justify-center md:items-start md:justify-start"
               variants={fadeUpVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <div className="text-indigo-400 text-5xl mb-4">👥</div>
+              <div className="text-indigo-400 text-5xl mb-4 ">👥</div>
               <h4 className="text-2xl font-semibold mb-3 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent">
                 Integrity
               </h4>
-              <p className="text-black text-sm lg:text-lg">
+              <p className="text-black text-sm lg:text-lg md:text-start text-center">
                 We believe in building trust through transparent and ethical business practices.
               </p>
             </motion.div>
 
             {/* Box 2 */}
             <motion.div
-              className="shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-[1.02]"
+              className="shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-[1.02] flex flex-col items-center justify-center md:items-start md:justify-start"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, rgba(127, 29, 29, 0.8), rgba(107, 33, 168, 0.8), rgba(30, 58, 138, 0.8))",
@@ -72,14 +72,14 @@ const CoreValue = () => {
             >
               <div className="text-white text-5xl mb-4">💡</div>
               <h4 className="text-2xl font-semibold mb-3 text-white">Innovation</h4>
-              <p className="text-gray-100 text-sm lg:text-lg">
+              <p className="text-gray-100 text-sm lg:text-lg md:text-start text-center">
                 Constantly evolving, we bring fresh ideas and advanced technology to the table.
               </p>
             </motion.div>
 
             {/* Box 3 */}
             <motion.div
-              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-[1.02]"
+              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 transition-transform hover:scale-[1.02] flex flex-col items-center justify-center md:items-start md:justify-start"
               variants={fadeUpVariants}
               initial="hidden"
               whileInView="visible"
@@ -89,7 +89,7 @@ const CoreValue = () => {
               <h4 className="text-2xl font-semibold mb-3 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent">
                 Excellence
               </h4>
-              <p className="text-black text-sm lg:text-lg">
+              <p className="text-black text-sm lg:text-lg md:text-start text-center">
                 We take pride in delivering high-quality solutions that exceed expectations.
               </p>
             </motion.div>

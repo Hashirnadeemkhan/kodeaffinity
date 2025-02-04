@@ -62,7 +62,7 @@ const About = () => {
     <div>
       <Wrapper>
         <div
-          className="flex flex-col md:flex-row items-center justify-center md:mt-20 bg-white overflow-hidden"
+          className="flex flex-col md:flex-row items-center justify-center mt-10 bg-white overflow-hidden"
           ref={ref}
         >
           <motion.div
@@ -85,11 +85,11 @@ const About = () => {
             animate={textControls}
             variants={textAnimation}
           >
-            <motion.h4 className="text-xl font-semibold text-red-600 mb-2">
-              OUR JOURNEY
+            <motion.h4 className="md:text-xl text-lg font-semibold text-red-600 mb-2">
+             Our Journey
             </motion.h4>
 
-            <motion.h2 className="lg:text-5xl text-4xl  leading-tight">
+            <motion.h2 className="md:text-5xl text-3xl  leading-tight">
               Empowering your <br />
               Business Through <br />
               Innovation

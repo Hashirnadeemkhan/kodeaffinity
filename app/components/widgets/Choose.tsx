@@ -61,11 +61,11 @@ const Choose = () => {
     <div>
       <Wrapper>
         <div
-          className="flex flex-col md:flex-row items-center justify-center p-10 bg-white overflow-hidden"
+          className="flex flex-col md:flex-row items-center justify-center p-10  md:gap-x-10 bg-white overflow-hidden"
           ref={ref}
         >
           <motion.div
-            className="flex-1"
+          
             initial="hidden"
             animate={imageControls}
             variants={imageAnimation}
@@ -73,23 +73,24 @@ const Choose = () => {
             <Image
               src="/assets/about.png"
               alt="about"
-              height={450}
-              width={450}
+              height={500}
+              width={500}
+              className="md:w-[300px] md:h-[300px] lg:h-[400px] lg:w-[400px]"
               // layout="responsive" // Make the image responsive
               // objectFit="contain" // Scale the image properly
             />
           </motion.div>
 
           <motion.div
-            className="mt-8 md:mt-0 flex-1"
+            className="mt-8 md:mt-0 flex-1 "
             initial="hidden"
             animate={textControls}
             variants={textAnimation}
           >
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">
+            <h3 className="md:text-xl text-lg font-semibold text-gray-700 mb-2 ">
               Why Choose Us
             </h3>
-            <h2 className="text-5xl font-bold leading-tight">
+            <h2 className="md:text-5xl text-3xl font-bold leading-tigh ">
               Why{" "}
               <span className="bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent">
                 KodeAffinity

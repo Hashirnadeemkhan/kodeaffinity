@@ -69,7 +69,7 @@ const Testimonials = () => {
   )
 
   return (
-    <div className="mt-32 mb-20">
+    <div className="mt-20">
       <h1 className="text-center font-semibold lg:text-5xl text-3xl">TESTIMONIALS</h1>
       <hr className="border-red-700 mb-10 w-52 mx-auto mt-2" />
 

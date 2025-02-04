@@ -1,22 +1,18 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
+import { FaChevronDown } from "react-icons/fa";
 
 const Contact = () => {
   const controls = useAnimation();
-  const ref = useRef<HTMLDivElement | null>(null); // Specify ref type
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Animation variants for form elements
   const formVariants = {
-    hidden: { opacity: 0, y: 20 }, // Start position: 20px down and fully transparent
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }, // Animate to original position
-    },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  // Observe when the component comes into view
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -26,21 +22,14 @@ const Contact = () => {
           controls.start("hidden");
         }
       },
-      {
-        threshold: 0.1, // Trigger when 10% of the component is in view
-      }
+      { threshold: 0.1 }
     );
 
-    const currentRef = ref.current; // Copy ref.current to a variable
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    const currentRef = ref.current;
+    if (currentRef) observer.observe(currentRef);
 
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef); // Use the variable in cleanup
-      }
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, [controls]);
 
@@ -92,16 +81,34 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        <motion.div className="mb-4 px-3" variants={formVariants}>
-          <select
-            className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+      
+        <motion.div className="relative mb-4 px-3" variants={formVariants}>
+          <button
+            type="button"
+            className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 flex justify-between items-center"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            <option>Type Service</option>
-            <option>Web Development</option>
-            <option>Mobile App Development</option>
-            <option>Digital Marketing</option>
-            <option>IT Consulting</option>
-          </select>
+            {"Type Service"}
+            <FaChevronDown className={`transition-transform ${dropdownOpen ? "rotate-180" : "rotate-0"}`} />
+          </button>
+          {dropdownOpen && (
+            <motion.ul
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute left-0 w-full mt-2 bg-white border border-red-800 rounded-lg shadow-lg"
+            >
+              {["Web Development", "Mobile App Development", "Digital Marketing", "IT Consulting"].map((service) => (
+                <li
+                  key={service}
+                  className="px-4 py-2 hover:bg-red-700 hover:text-white cursor-pointer"
+                  onClick={() => { setDropdownOpen(false); }}
+                >
+                  {service}
+                </li>
+              ))}
+            </motion.ul>
+          )}
         </motion.div>
 
         <motion.div className="mb-4 px-3" variants={formVariants}>

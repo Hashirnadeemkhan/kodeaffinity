@@ -4,19 +4,21 @@ import { motion, AnimatePresence } from "framer-motion"
 
 const PricingSection = () => {
   const [activeTab, setActiveTab] = useState("All")
-  const [expandedPackage, setExpandedPackage] = useState<string | null>(null)
+  const [expandedPackage, setExpandedPackage] = useState<{ [key: string]: string | null }>({})
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab)
-    setExpandedPackage(null) // Reset expanded state when changing tabs
+    setExpandedPackage({}) // Reset expanded state when changing tabs
   }
 
-  const togglePackageExpansion = (packageName: string) => {
-    setExpandedPackage(expandedPackage === packageName ? null : packageName)
+  const togglePackageExpansion = (category: string, packageName: string) => {
+    setExpandedPackage((prev) => ({
+      ...prev,
+      [category]: prev[category] === packageName ? null : packageName,
+    }))
   }
 
   const packages = [
-    
     {
       name: "Web Development Startup Package",
       price: "249.50",
@@ -289,8 +291,8 @@ const PricingSection = () => {
         "3 months support and updates.",
       ],
     },
-  ];
-  
+  ]
+
   const services = [
     "All",
     "Web Development",
@@ -303,13 +305,13 @@ const PricingSection = () => {
     "SEO",
     "SMM",
   ]
- 
+
   const filteredPackages = activeTab === "All" ? packages : packages.filter((pkg) => pkg.name.includes(activeTab))
 
   return (
     <div className="bg-gray-50 text-black p-8 lg:p-20">
-      <h2 className="text-center text-lg font-bold mb-2 text-red-600">Our Pricing</h2>
-      <h3 className="text-center text-xl md:text-3xl lg:text-4xl mb-4 md:mb-5">
+      <h2 className=" text-lg font-bold mb-2 text-red-600">Our Pricing</h2>
+      <h3 className=" text-xl md:text-3xl lg:text-4xl mb-4 md:mb-5">
         You can find a{" "}
         <span className="bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent italic">
           cheap plan
@@ -342,41 +344,50 @@ const PricingSection = () => {
           transition={{ duration: 0.2 }}
           className="grid gap-6 md:gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 border "
         >
-          {filteredPackages.map((pkg, index) => (
-            <motion.div key={index} className="rounded-lg p-6 flex flex-col items-start py-12 shadow-lg border border-red-600" layout>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">{pkg.name}</h3>
-              <p className="text-4xl md:text-5xl font-semibold mb-4">${pkg.price}</p>
-              <button
-                className="hover:text-white py-3 underline px-4 rounded-md mb-4 hover:bg-red-500 text-red-500 transition duration-300 border "
-                onClick={() => togglePackageExpansion(pkg.name)}
-              >
-                {expandedPackage === pkg.name ? "Show less" : "Read more"}
-              </button>
+          {filteredPackages.map((pkg, index) => {
+            const category = pkg.name.split(" ")[0] + " " + pkg.name.split(" ")[1] // Extract category (e.g., "Web Development")
+            const isExpanded = expandedPackage[category] === pkg.name
 
-              <AnimatePresence>
-                {expandedPackage === pkg.name && (
-                  <motion.ul
-                    initial={{ height: 0, opacity: 0, marginBottom: 0 }}
-                    animate={{ height: "auto", opacity: 1, marginBottom: 16 }}
-                    exit={{ height: 0, opacity: 0, marginBottom: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-left w-full"
-                    style={{ overflow: "hidden" }}
-                  >
-                    {pkg.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-600 mb-2">
-                        <span className="text-red-500 mr-2">✔</span>
-                        {feature}
-                      </li>
-                    ))}
-              <button className="hover:text-white py-3 w-full border border-red-500 px-4 rounded-md mt-auto hover:bg-red-500 text-black transition duration-300">
-                Get Started
-              </button>
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+            return (
+              <motion.div
+                key={index}
+                className="rounded-lg p-6 flex flex-col  py-12 shadow-lg border border-red-600"
+                layout
+              >
+                <h3 className="text-lg md:text-xl font-semibold mb-2">{pkg.name}</h3>
+                <p className="text-4xl md:text-5xl font-semibold mb-4">${pkg.price}</p>
+                <button
+                  className="hover:text-white py-3 underline px-4 rounded-md mb-4 hover:bg-red-500 text-red-500 transition duration-300 border"
+                  onClick={() => togglePackageExpansion(category, pkg.name)}
+                >
+                  {isExpanded ? "Show less" : "Read more"}
+                </button>
+
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.ul
+                      initial={{ height: 0, opacity: 0, marginBottom: 0 }}
+                      animate={{ height: "auto", opacity: 1, marginBottom: 16 }}
+                      exit={{ height: 0, opacity: 0, marginBottom: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="text-left w-full"
+                      style={{ overflow: "hidden" }}
+                    >
+                      {pkg.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex  text-gray-600 mb-2">
+                          <span className="text-red-500 mr-2">✔</span>
+                          {feature}
+                        </li>
+                      ))}
+                      <button className="hover:text-white py-3 w-full border border-red-500 px-4 rounded-md mt-auto hover:bg-red-500 text-black transition duration-300">
+                        Get Started
+                      </button>
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
         </motion.div>
       </AnimatePresence>
     </div>
@@ -384,3 +395,4 @@ const PricingSection = () => {
 }
 
 export default PricingSection
+

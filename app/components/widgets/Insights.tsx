@@ -71,7 +71,7 @@ const Insights = () => {
     >
       <div className="max-w-7xl mx-auto px-4" ref={ref}>
         <h2 className="lg:text-5xl text-3xl font-bold text-center text-white mb-5">Latest Insights.</h2>
-        <p className="text-center text-white mb-10 lg:text-xl text-sm">
+        <p className=" text-white mb-10 lg:text-xl text-sm">
           Hot Off the Press: Your First Choice for the Most Recent Technology Trends and Best Practices.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -20,13 +20,13 @@ export default function Footer() {
       }}
     >
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center text-center">
+        <div className="flex flex-wrap justify-center text-start">
           {/* Logo and Description */}
           <div className="w-full md:w-1/2 lg:w-1/4 mb-8 px-4">
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-start mb-4">
               <Image src="/whitelogo.png" width={100} height={100} alt="Logo" />
             </div>
-            <div className="flex justify-center space-x-4 items-center mb-4">
+            <div className="flex justify-start space-x-4 items-start mb-4">
               <span>
              
                 <Link href={""}><FaFacebookF size={20} /></Link>
