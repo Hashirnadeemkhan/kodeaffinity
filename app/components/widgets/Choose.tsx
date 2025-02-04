@@ -93,7 +93,7 @@ const Choose = () => {
             <h2 className="md:text-5xl text-3xl font-bold leading-tigh ">
               Why{" "}
               <span className="bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent">
-                KodeAffinity
+                KodeAffinity <br />
               </span>{" "}
               Stands Out?
             </h2>
