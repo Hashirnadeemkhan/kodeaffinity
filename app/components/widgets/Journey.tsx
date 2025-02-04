@@ -62,11 +62,11 @@ const About = () => {
     <div>
       <Wrapper>
         <div
-          className="flex flex-col md:flex-row items-center justify-center mt-10 bg-white overflow-hidden"
+          className="flex flex-col md:flex-row items-center md:gap-x-10  justify-center mt-10 bg-white overflow-hidden"
           ref={ref}
         >
           <motion.div
-            className="flex-1"
+           
             initial="hidden"
             animate={imageControls}
             variants={imageAnimation}
@@ -74,8 +74,9 @@ const About = () => {
             <Image
               src="/assets/about.png"
               alt="about"
-              height={450}
-              width={450}
+              height={500}
+              width={500}
+              className="md:w-[300px] md:h-[300px] lg:h-[400px] lg:w-[400px]"
             />
           </motion.div>
 
@@ -89,7 +90,7 @@ const About = () => {
              Our Journey
             </motion.h4>
 
-            <motion.h2 className="md:text-5xl text-3xl  leading-tight">
+            <motion.h2 className="md:text-4xl text-3xl  leading-tight">
               Empowering your <br />
               Business Through <br />
               Innovation
