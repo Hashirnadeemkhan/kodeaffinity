@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -35,6 +36,10 @@ const FAQSection = () => {
     setOpenFAQ(openFAQ === id ? null : id)
   }
 
+  // Split FAQs into two arrays for two columns
+  const leftColumnFaqs = faqs.filter((_, index) => index % 2 === 0)
+  const rightColumnFaqs = faqs.filter((_, index) => index % 2 === 1)
+
   return (
     <div
       className="bg-gradient-to-r from-red-900 via-purple-800 to-blue-900 py-20 px-10 text-white"
@@ -58,32 +63,67 @@ const FAQSection = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-        {faqs.map((faq) => (
-          <div
-            key={faq.id}
-            className="border-b border-gray-400 pb-4 cursor-pointer hover:text-gray-300 transition duration-300"
-            onClick={() => toggleFAQ(faq.id)}
-          >
-            <div className="flex justify-between items-center">
-              <h4 className="text-xl">{faq.question}</h4>
-              <span className="text-xl font-bold">{openFAQ === faq.id ? "-" : "+"}</span>
-            </div>
+        {/* Left Column */}
+        <div className="space-y-6">
+          {leftColumnFaqs.map((faq) => (
+            <motion.div
+              key={faq.id}
+              layout
+              className="border-b border-gray-400 pb-4 cursor-pointer hover:text-gray-300 transition duration-300"
+              onClick={() => toggleFAQ(faq.id)}
+            >
+              <div className="flex justify-between items-center">
+                <h4 className="text-xl">{faq.question}</h4>
+                <span className="text-xl font-bold">{openFAQ === faq.id ? "-" : "+"}</span>
+              </div>
 
-            <AnimatePresence>
-              {openFAQ === faq.id && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden mt-2"
-                >
-                  <p className="text-sm transition duration-300 whitespace-pre-line">{faq.answer}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
+              <AnimatePresence>
+                {openFAQ === faq.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden mt-2"
+                  >
+                    <p className="text-sm transition duration-300 whitespace-pre-line">{faq.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Right Column */}
+        <div className="space-y-6">
+          {rightColumnFaqs.map((faq) => (
+            <motion.div
+              key={faq.id}
+              layout
+              className="border-b border-gray-400 pb-4 cursor-pointer hover:text-gray-300 transition duration-300"
+              onClick={() => toggleFAQ(faq.id)}
+            >
+              <div className="flex justify-between items-center">
+                <h4 className="text-xl">{faq.question}</h4>
+                <span className="text-xl font-bold">{openFAQ === faq.id ? "-" : "+"}</span>
+              </div>
+
+              <AnimatePresence>
+                {openFAQ === faq.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden mt-2"
+                  >
+                    <p className="text-sm transition duration-300 whitespace-pre-line">{faq.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   )

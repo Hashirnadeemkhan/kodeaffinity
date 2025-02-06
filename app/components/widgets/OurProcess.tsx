@@ -61,7 +61,7 @@ const OurProcess = () => {
         {/* Image Section */}
         <div className="flex-1">
           <Image 
-            src="/assets/process.webp" 
+            src="/assets/abouts-02.png" 
             alt="Streamlined Approach" 
             width={600}
             height={400}
