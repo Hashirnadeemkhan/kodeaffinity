@@ -62,23 +62,10 @@ const About = () => {
     <div>
       <Wrapper>
         <div
-          className="flex flex-col md:flex-row items-center md:gap-x-10  justify-center mt-10 bg-white overflow-hidden"
+          className="flex flex-col-reverse md:flex-row items-center md:gap-x-10  justify-center mt-10 bg-white overflow-hidden"
           ref={ref}
         >
-          <motion.div
-           
-            initial="hidden"
-            animate={imageControls}
-            variants={imageAnimation}
-          >
-            <Image
-              src="/assets/about.png"
-              alt="about"
-              height={500}
-              width={500}
-              className="md:w-[300px] md:h-[300px] lg:h-[400px] lg:w-[400px]"
-            />
-          </motion.div>
+      
 
           <motion.div
             className="mt-8 md:mt-0 flex-1"
@@ -90,7 +77,7 @@ const About = () => {
              Our Journey
             </motion.h4>
 
-            <motion.h2 className="md:text-4xl text-3xl  leading-tight">
+            <motion.h2 className="md:text-4xl lg:text-5xl text-3xl  leading-tight">
               Empowering your <br />
               Business Through <br />
               Innovation
@@ -100,6 +87,21 @@ const About = () => {
               At Intact One Solution, our journey began with a passion for digital transformation and a commitment to delivering cutting-edge solutions. Since our inception, we’ve embraced innovation and AI-driven technology, helping businesses across industries thrive in the ever-evolving digital landscape. Our mission is to bridge the gap between businesses and technological advancements, crafting solutions that are both forward-thinking and impactful.
             </motion.p>
           </motion.div>
+
+          <motion.div
+           
+           initial="hidden"
+           animate={imageControls}
+           variants={imageAnimation}
+         >
+           <Image
+             src="/assets/about4.png"
+             alt="about"
+             height={500}
+             width={500}
+          className="lg:w-[600px]  md:w-[300px]"
+           />
+         </motion.div>
         </div>
       </Wrapper>
     </div>

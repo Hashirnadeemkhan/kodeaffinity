@@ -8,6 +8,16 @@ const Contact = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // State for form fields
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    serviceType: "",
+    message: "",
+  });
+
   const formVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -33,6 +43,52 @@ const Contact = () => {
     };
   }, [controls]);
 
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      // Send form data to your API route
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Reset the form after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          serviceType: "",
+          message: "",
+        });
+
+        alert("Thank you for your submission!"); // Confirmation for the user
+      } else {
+        const errorData = await response.json();
+        console.error("Error sending email:", errorData);
+        alert("Sorry, something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Sorry, something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="flex items-center justify-center bg-white mt-10 mb-10" ref={ref}>
       <motion.form
@@ -40,6 +96,7 @@ const Contact = () => {
         initial="hidden"
         animate={controls}
         variants={formVariants}
+        onSubmit={handleSubmit}
       >
         <h2 className="lg:text-6xl text-4xl font-semibold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-red-700 to-blue-900">
           Get in Touch
@@ -50,6 +107,9 @@ const Contact = () => {
             <input
               className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
               type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Your Name"
             />
           </motion.div>
@@ -58,6 +118,9 @@ const Contact = () => {
             <input
               className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Email Address"
             />
           </motion.div>
@@ -68,6 +131,9 @@ const Contact = () => {
             <input
               className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
               type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
               placeholder="Phone No"
             />
           </motion.div>
@@ -76,19 +142,21 @@ const Contact = () => {
             <input
               className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
               type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
               placeholder="Company"
             />
           </motion.div>
         </div>
 
-      
         <motion.div className="relative mb-4 px-3" variants={formVariants}>
           <button
             type="button"
             className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 flex justify-between items-center"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            {"Type Service"}
+            {formData.serviceType || "Type Service"}
             <FaChevronDown className={`transition-transform ${dropdownOpen ? "rotate-180" : "rotate-0"}`} />
           </button>
           {dropdownOpen && (
@@ -96,13 +164,13 @@ const Contact = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute left-0 w-full mt-2 bg-white border border-red-800 rounded-lg shadow-lg"
+              className="absolute left-0 w-full mt-2 bg-white border border-red-800 rounded-lg shadow-lg z-10"
             >
-              {["Web Development", "Mobile App Development", "Digital Marketing", "IT Consulting"].map((service) => (
+              {["Web Design & Development", "Mobile App Development", "Animation", "Logo & Illustration", "Social Media Marketing", "Branding & Graphic Design", "SEO & Content Writing", "SaaS"].map((service) => (
                 <li
                   key={service}
                   className="px-4 py-2 hover:bg-red-700 hover:text-white cursor-pointer"
-                  onClick={() => { setDropdownOpen(false); }}
+                  onClick={() => { setDropdownOpen(false); setFormData(prev => ({ ...prev, serviceType: service })); }}
                 >
                   {service}
                 </li>
@@ -114,6 +182,9 @@ const Contact = () => {
         <motion.div className="mb-4 px-3" variants={formVariants}>
           <textarea
             className="w-full px-4 py-3 border rounded-3xl border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             placeholder="Type Message"
           ></textarea>
         </motion.div>

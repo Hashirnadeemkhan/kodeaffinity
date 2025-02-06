@@ -16,7 +16,7 @@ export const services: Service[] = [
         image: "/assets/web.png",
         slug: "web-design-development",
         information:
-            "Intact One Solution offers state-of-the-art web design and development services customized to meet the needs of businesses in Pakistan and the Middle East. We create SEO-optimized, visually stunning, and user-friendly websites that enhance brand visibility and drive business growth. Our expertise in responsive web design ensures that your website delivers a seamless experience across both desktop and mobile devices, helping you connect with your audience effortlessly.",
+            "At KodeAffinity, we specialize in creating responsive, visually appealing, and high-performing websites tailored to your business needs. Whether you need a simple landing page or a complex e-commerce platform, our team ensures seamless functionality and an exceptional user experience. From custom web design to full-stack development, we bring your vision to life."
     },
     {
         id: "2",
@@ -24,9 +24,7 @@ export const services: Service[] = [
         description: "Native and cross-platform mobile apps",
         slug: "mobile-development",
         image: "/assets/mobile.png",
-        information:
-            "Our mobile application development services offer tailored solutions for both native and cross-platform applications. Whether for iOS or Android, we build high-performance, scalable, and user-friendly apps to enhance your business presence on mobile devices.",
-    },
+        information:"In today’s mobile-first world, having a robust app is essential. KodeAffinity offers custom mobile app development services for iOS, Android, and cross-platform solutions. We focus on creating intuitive, feature-rich apps that engage users and drive business growth."    },
     {
         id: "3",
         title: "SEO & Content Writing",
@@ -34,8 +32,7 @@ export const services: Service[] = [
         image: "/assets/seo.png", // Added missing comma
         slug: "seo-content",
         information:
-            "Boost your website's visibility with our expert SEO and content writing services. We craft keyword-optimized, high-quality content that improves search engine rankings and engages your target audience, driving organic traffic and business growth.",
-    },
+"Our SEO and content writing services are designed to help your business rank higher on search engines and connect with your target audience. From keyword research to content creation and technical SEO, we ensure your website is optimized for maximum visibility and engagement."    },
     {
         id: "4",
         title: "Logo & Illustration",
@@ -43,8 +40,7 @@ export const services: Service[] = [
         slug: "logo-illustration",
         image: "/assets/illustration.png",
         information:
-            "Stand out with our unique and creative logo and illustration services. We design compelling visual identities that align with your brand's vision, ensuring a memorable impression on your audience.",
-    },
+"Your logo is the face of your brand. At KodeAffinity, we craft custom logos and illustrations that capture your brand’s essence and leave a lasting impression. Whether you need a minimalist logo or intricate illustrations, we’ve got you covered."    },
     {
         id: "5",
         title: "Branding & Graphic Design",
@@ -61,7 +57,7 @@ export const services: Service[] = [
         image: "/assets/animation.png",
         slug: "animation",
         information:
-            "Engage your audience with our animation services. We create visually stunning animations, explainer videos, and motion graphics that bring your ideas to life and enhance storytelling.",
+"Animation is a powerful tool to tell your story and captivate your audience. KodeAffinity offers custom animation services for explainer videos, advertisements, and social media content. Our animations are designed to grab attention and leave a lasting impression."    
     },
     {
         id: "7",
@@ -70,8 +66,7 @@ export const services: Service[] = [
         image: "/assets/SMM.png",
         slug: "social-media",
         information:
-            "Leverage the power of social media with our marketing services. We create data-driven campaigns, engaging content, and targeted strategies to increase your brand's online reach and customer engagement.",
-    },
+"Social media is a powerful platform to connect with your audience. KodeAffinity offers comprehensive social media marketing services, including content creation, strategy development, and performance tracking. We help you build a strong online presence and achieve your business goals."    },
     {
         id: "8",
         title: "SaaS",
@@ -79,6 +74,5 @@ export const services: Service[] = [
         slug: "saas",
         image: "/assets/saas.png",
         information:
-            "Our SaaS solutions offer cloud-based software tailored to your business needs. We develop scalable, secure, and user-friendly applications that streamline operations and improve efficiency.",
-    },
+"KodeAffinity specializes in SaaS development, creating scalable, secure, and user-friendly software solutions tailored to your business needs. From concept to deployment, we ensure your SaaS platform delivers exceptional performance and value."    },
 ];

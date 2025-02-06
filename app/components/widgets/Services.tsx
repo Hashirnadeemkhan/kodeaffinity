@@ -26,7 +26,7 @@ const services = [
   {
     title: 'Animation',
     description: 'Bring your ideas to life with professional animations that grab attention. From explainer videos to motion graphics, our animations add a dynamic flair to your brand messaging, making your content more engaging and memorable.',
-    image: '/assets/brand.png',
+    image: '/assets/animation-service.png',
   },
   {
     title: 'Social Media Marketing',
@@ -53,7 +53,7 @@ const ServicesSection = () => {
           <h2 className="md:text-3xl  text-lg font-bold mb-4">WHAT WE DO</h2>
           <h3 className="lg:text-5xl text-4xl font-bold mb-4  text-start ">Our Expertise at a Glance</h3>
           <p className="text-lg mb-4 ">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the {`industry's`} standard dummy text ever since the 1500s,
+          Partner with Kode Affinity and take your digital journey to the next level. Whether you need a website, app, or full-scale digital strategy, we’re here to help.
           </p>
          
           <button className="bg-white    text-red-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105">

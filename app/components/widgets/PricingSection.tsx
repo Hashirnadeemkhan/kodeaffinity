@@ -310,8 +310,8 @@ const PricingSection = () => {
 
   return (
     <div className="bg-gray-50 text-black p-8 lg:p-20">
-      <h2 className=" text-lg font-bold mb-2 text-red-600">Our Pricing</h2>
-      <h3 className=" text-xl md:text-3xl lg:text-4xl mb-4 md:mb-5">
+      <h2 className=" text-lg font-bold mb-2 text-red-600 md:text-center text-start ">Our Pricing</h2>
+      <h3 className=" text-xl md:text-3xl lg:text-4xl mb-4 md:mb-5 md:text-center text-start ">
         You can find a{" "}
         <span className="bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent italic">
           cheap plan

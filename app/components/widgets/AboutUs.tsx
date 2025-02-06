@@ -61,25 +61,10 @@ const AboutUs = () => {
     <div>
       <Wrapper>
         <div
-          className="flex flex-col md:flex-row items-center justify-center p-10   md:gap-x-10  bg-white overflow-hidden"
+          className="flex flex-col-reverse md:flex-row items-center justify-center p-10 gap-y-10  md:gap-x-10  bg-white overflow-hidden"
           ref={ref}
         >
-          <motion.div
-          
-            initial="hidden"
-            animate={imageControls}
-            variants={imageAnimation}
-          >
-            <Image
-              src="/assets/about.png"
-              alt="about"
-              height={500}
-              width={500}
-           className="md:w-[300px] md:h-[300px] lg:h-[400px] lg:w-[400px]"
-              // layout="responsive" // Make the image responsive
-              // objectFit="contain" // Scale the image properly
-            />
-          </motion.div>
+      
 
           <motion.div
             className="mt-8 md:mt-0 flex-1"
@@ -106,6 +91,21 @@ const AboutUs = () => {
             <Button text={'Learn More'} />
       
           </motion.div>
+          <motion.div
+          
+          initial="hidden"
+          animate={imageControls}
+          variants={imageAnimation}
+        >
+          <Image
+            src="/assets/about2.png"
+            alt="about"
+            height={500}
+            width={500}
+         className="lg:w-[600px]  md:w-[300px]"
+
+          />
+        </motion.div>
         </div>
       </Wrapper>
     </div>

@@ -15,7 +15,7 @@ const CoreValue = () => {
         <div className=" md:space-y-6 space-y-2 md:mt-10 lg:mt-20 ">
           {/* Title Section */}
           <motion.h3
-            className="text-red-600 font-semibold tracking-wider text-lg mt-10 text-start md:text-xl"
+            className="text-red-600 font-semibold tracking-wider text-lg mt-10 md:text-center text-start md:text-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
@@ -23,7 +23,7 @@ const CoreValue = () => {
             Our Mission
           </motion.h3>
           <motion.h2
-            className="text-black md:text-5xl text-3xl"
+            className="text-black md:text-5xl text-3xl md:text-center text-start "
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
