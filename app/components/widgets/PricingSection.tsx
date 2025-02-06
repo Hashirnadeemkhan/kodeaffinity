@@ -29,23 +29,13 @@ const PricingSection = () => {
 
   const packages: Package[] = pricingData().map((pkg) => ({
     ...pkg,
-    category: pkg.name.split(" ")[0] + " " + pkg.name.split(" ")[1],
+    category: pkg.name.split(" ")[0],
   }))
 
-  const services = [
-    "All",
-    "Web Development",
-    "App Development",
-    "Logo Design",
-    "Animation",
-    "Illustration",
-    "Branding",
-    "SaaS",
-    "SEO",
-    "SMM",
-  ]
+  const services = ["All", "Web", "App", "Logo", "Animation", "Illustration", "Branding", "SaaS", "SEO", "SMM"]
 
-  const filteredPackages = activeTab === "All" ? packages : packages.filter((pkg) => pkg.category === activeTab)
+  const filteredPackages =
+    activeTab === "All" ? packages : packages.filter((pkg) => pkg.category.toLowerCase() === activeTab.toLowerCase())
 
   // Split packages into columns
   const columns = [
