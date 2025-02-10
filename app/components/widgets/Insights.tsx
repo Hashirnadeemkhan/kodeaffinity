@@ -104,7 +104,7 @@ const Insights = () => {
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                 Lorem Ipsum has been the {`industry's`} standard dummy text ever since the 1500s.
               </p>
-              <Link href="#" className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg">Read More</Link>
+              <Link href="/blog" className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg">Read More</Link>
             </div>
           </div>
 
@@ -137,7 +137,7 @@ const Insights = () => {
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                 Lorem Ipsum has been the {`industry's`} standard dummy text ever since the 1500s.
               </p>
-              <Link href="#" className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg">Read More</Link>
+              <Link href="/blog" className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg">Read More</Link>
             </div>
           </div>
         </div>
