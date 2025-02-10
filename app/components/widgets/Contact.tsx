@@ -5,6 +5,7 @@ import { FaChevronDown } from "react-icons/fa"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
+import { Toaster, toast } from "react-hot-toast"
 
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -70,15 +71,45 @@ const Contact = () => {
       })
 
       if (response.ok) {
-        alert("Thank you for your submission!")
+        toast.success("Thank you for your submission!", {
+          style: {
+            border: "1px solid #4ade80",
+            padding: "16px",
+            color: "#4ade80",
+          },
+          iconTheme: {
+            primary: "#4ade80",
+            secondary: "#FFFAEE",
+          },
+        })
       } else {
         const errorData = await response.json()
         console.error("Error sending email:", errorData)
-        alert("Sorry, something went wrong. Please try again.")
+        toast.error("Sorry, something went wrong. Please try again.", {
+          style: {
+            border: "1px solid #ef4444",
+            padding: "16px",
+            color: "#ef4444",
+          },
+          iconTheme: {
+            primary: "#ef4444",
+            secondary: "#FFFAEE",
+          },
+        })
       }
     } catch (error) {
       console.error("Error sending email:", error)
-      alert("Sorry, something went wrong. Please try again.")
+      toast.error("Sorry, something went wrong. Please try again.", {
+        style: {
+          border: "1px solid #ef4444",
+          padding: "16px",
+          color: "#ef4444",
+        },
+        iconTheme: {
+          primary: "#ef4444",
+          secondary: "#FFFAEE",
+        },
+      })
     }
   }
 
@@ -199,6 +230,7 @@ const Contact = () => {
           </button>
         </motion.div>
       </motion.form>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   )
 }

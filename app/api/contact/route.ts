@@ -17,11 +17,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: "Invalid email format" }, { status: 400 })
     }
 
-    if (!name || !phone || !serviceType) {
+    if (!name || !email || !phone || !serviceType) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 })
     }
 
-    console.log("Sending thank-you email to:", email)
+    // Send email to the admin
+    try {
+      const adminResult = await resend.emails.send({
+        from: "Your Company <onboarding@resend.dev>",
+        to: "khashir657@gmail.com", // Replace with your admin email
+        subject: "New Form Submission",
+        html: `
+          <h3>New Form Submission Details:</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Company:</strong> ${company || "N/A"}</p>
+          <p><strong>Service Type:</strong> ${serviceType}</p>
+          <p><strong>Message:</strong> ${message || "No message provided"}</p>
+        `,
+      })
+      console.log("Admin notification email sent successfully:", adminResult)
+    } catch (error) {
+      console.error("Error sending admin notification email:", error)
+      // We don't throw here to ensure the user still gets a success response and thank you email
+    }
 
     // Send thank-you email to the user who submitted the form
     try {
@@ -47,34 +67,10 @@ export async function POST(request: Request) {
       console.log("Thank-you email sent successfully:", thankYouResult)
     } catch (error) {
       console.error("Error sending thank-you email:", error)
-      throw error
-    }
-
-    console.log("Sending admin notification email")
-
-    // Send email to the admin
-    try {
-      const adminResult = await resend.emails.send({
-        from: "Your Company <onboarding@resend.dev>",
-        to: "admin@yourcompany.com", // Replace with your admin email
-        subject: "New Form Submission",
-        html: `
-          <h3>New Form Submission Details:</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Company:</strong> ${company || "N/A"}</p>
-          <p><strong>Service Type:</strong> ${serviceType}</p>
-          <p><strong>Message:</strong> ${message || "No message provided"}</p>
-        `,
-      })
-      console.log("Admin notification email sent successfully:", adminResult)
-    } catch (error) {
-      console.error("Error sending admin notification email:", error)
       // We don't throw here to ensure the user still gets a success response
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, message: "Form submitted successfully. Thank you!" })
   } catch (error) {
     console.error("Error in contact form submission:", error)
     return NextResponse.json({ success: false, error: "Internal Server Error" }, { status: 500 })
