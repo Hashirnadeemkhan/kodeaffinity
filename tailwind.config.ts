@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
   	extend: {
 		fontFamily:{
-			sans: ["Poppins", "sans-serif"], // Headings ke liye
-			poppins: ["Poppins", "sans-serif"], // Paragraphs ke liye
+			sans: ["Montserrat", "sans-serif"], // Headings ke liye
+			montserrat: ["Montserrat", "sans-serif"], // Paragraphs ke liye
 		    
 		},
   		backgroundImage: {

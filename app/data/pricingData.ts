@@ -4,7 +4,7 @@ const pricingData = () => {
     return [
         {
           name: "Web Development Startup Package",
-          price: "249.50",
+          price: "319.50",
           features: [
             "5-page website.",
             "5 stock photos.",
@@ -15,7 +15,7 @@ const pricingData = () => {
         },
         {
           name: "Web Development Silver Package",
-          price: "374.50",
+          price: "449.50",
           features: [
             "10-page website.",
             "CMS (Content Management System).",
@@ -26,7 +26,7 @@ const pricingData = () => {
         },
         {
           name: "Web Development Gold Package",
-          price: "699.50",
+          price: "769.50",
           features: [
             "15-page custom website.",
             "Custom forms and payment integration.",
@@ -36,12 +36,12 @@ const pricingData = () => {
         },
         {
           name: "App Development Startup Package",
-          price: "499.50",
+          price: "819.50",
           features: ["Basic app functionality.", "Up to 5 screens.", "Basic UI/UX design.", "1-month support."],
         },
         {
           name: "App Development Silver Package",
-          price: "749.50",
+          price: "819.50",
           features: [
             "Advanced app functionality.",
             "Up to 10 screens.",
@@ -51,7 +51,7 @@ const pricingData = () => {
         },
         {
           name: "App Development Gold Package",
-          price: "1299.50",
+          price: "2,669.50",
           features: [
             "Complex app functionality.",
             "Unlimited screens.",
@@ -62,17 +62,17 @@ const pricingData = () => {
         },
         {
           name: "Logo Design Startup Package",
-          price: "99.50",
+          price: "39.50",
           features: ["2 initial concepts.", "2 revisions.", "Final files in various formats."],
         },
         {
           name: "Logo Design Silver Package",
-          price: "199.50",
+          price: "69.50",
           features: ["4 initial concepts.", "3 revisions.", "Final files in various formats.", "Basic brand guidelines."],
         },
         {
           name: "Logo Design Gold Package",
-          price: "349.50",
+          price: "109.50",
           features: [
             "6 initial concepts.",
             "Unlimited revisions.",
@@ -83,7 +83,7 @@ const pricingData = () => {
         },
         {
           name: "Animation Startup Package",
-          price: "249.50",
+          price: "409.50",
           features: [
             "5-page website.",
             "5 stock photos.",
@@ -94,7 +94,7 @@ const pricingData = () => {
         },
         {
           name: "Animation Silver Package",
-          price: "374.50",
+          price: "749.50",
           features: [
             "10-page website.",
             "CMS (Content Management System).",
@@ -105,7 +105,7 @@ const pricingData = () => {
         },
         {
           name: "Animation Gold Package",
-          price: "699.50",
+          price: "1,169.50",
           features: [
             "15-page custom website.",
             "Custom forms and payment integration.",
@@ -115,7 +115,7 @@ const pricingData = () => {
         },
         {
           name: "Illustration Startup Package",
-          price: "249.50",
+          price: "219.50",
           features: [
             "5-page website.",
             "5 stock photos.",
@@ -126,7 +126,7 @@ const pricingData = () => {
         },
         {
           name: "Illustration Silver Package",
-          price: "374.50",
+          price: "249.50",
           features: [
             "10-page website.",
             "CMS (Content Management System).",
@@ -137,7 +137,7 @@ const pricingData = () => {
         },
         {
           name: "Illustration Gold Package",
-          price: "699.50",
+          price: "369.50",
           features: [
             "15-page custom website.",
             "Custom forms and payment integration.",
@@ -158,7 +158,7 @@ const pricingData = () => {
         },
         {
           name: "Branding Silver Package",
-          price: "374.50",
+          price: "179.50",
           features: [
             "10-page website.",
             "CMS (Content Management System).",
@@ -169,7 +169,7 @@ const pricingData = () => {
         },
         {
           name: "Branding Gold Package",
-          price: "699.50",
+          price: "299.50",
           features: [
             "15-page custom website.",
             "Custom forms and payment integration.",
@@ -179,7 +179,7 @@ const pricingData = () => {
         },
         {
           name: "SaaS Startup Package",
-          price: "249.50",
+          price: "969.50",
           features: [
             "5-page website.",
             "5 stock photos.",
@@ -190,7 +190,7 @@ const pricingData = () => {
         },
         {
           name: "SaaS Silver Package",
-          price: "374.50",
+          price: "1,569.50",
           features: [
             "10-page website.",
             "CMS (Content Management System).",
@@ -201,7 +201,7 @@ const pricingData = () => {
         },
         {
           name: "SaaS Gold Package",
-          price: "699.50",
+          price: "3,069.50",
           features: [
             "15-page custom website.",
             "Custom forms and payment integration.",
@@ -211,7 +211,7 @@ const pricingData = () => {
         },
         {
           name: "SEO Startup Package",
-          price: "249.50",
+          price: "269.50",
           features: [
             "5-page website.",
             "5 stock photos.",
@@ -222,7 +222,7 @@ const pricingData = () => {
         },
         {
           name: "SEO Silver Package",
-          price: "374.50",
+          price: "369.50",
           features: [
             "10-page website.",
             "CMS (Content Management System).",
@@ -234,7 +234,7 @@ const pricingData = () => {
     
         {
           name: "SEO Gold Package",
-          price: "699.50",
+          price: "419.50",
           features: [
             "15-page custom website.",
             "Custom forms and payment integration.",
@@ -244,7 +244,7 @@ const pricingData = () => {
         },
         {
           name: "SMM Startup Package",
-          price: "249.50",
+          price: "195",
           features: [
             "5-page website.",
             "5 stock photos.",
@@ -255,7 +255,7 @@ const pricingData = () => {
         },
         {
           name: "SMM Silver Package",
-          price: "374.50",
+          price: "319",
           features: [
             "10-page website.",
             "CMS (Content Management System).",
@@ -266,7 +266,7 @@ const pricingData = () => {
         },
         {
           name: "SMM Gold Package",
-          price: "699.50",
+          price: "649.50",
           features: [
             "15-page custom website.",
             "Custom forms and payment integration.",

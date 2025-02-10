@@ -24,11 +24,11 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="hidden md:flex lg:space-x-16 md:space-x-3">
-          <Link href="/" className="text-gray-800 hover:text-gray-600 ">
+        <div className="hidden lg:flex lg:space-x-16">
+          <Link href="/" className="text-black hover:text-gray-800 ">
             Home
           </Link>
-          <Link href="/about" className="text-gray-800 hover:text-gray-600">
+          <Link href="/about" className="text-black hover:text-gray-600">
             About us
           </Link>
 
@@ -39,7 +39,7 @@ const Navbar = () => {
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={() => setOpen(false)}
         >
-          <DropdownMenuTrigger className="text-gray-800 hover:text-gray-600 flex items-center cursor-pointer gap-x-1">
+          <DropdownMenuTrigger className="text-black hover:text-gray-800 flex items-center cursor-pointer gap-x-1">
             Services <IoIosArrowDown />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
@@ -55,47 +55,50 @@ const Navbar = () => {
       </DropdownMenu>
           </div>
 
-          <Link href="/pricing" className="text-gray-800 hover:text-gray-600">
+          <Link href="/pricing" className="text-black hover:text-gray-600">
             Pricing
           </Link>
-          <Link href="/contact" className="text-gray-800 hover:text-gray-600">
+          <Link href="/blog" className="text-black hover:text-gray-600">
+         Blogs
+          </Link>
+          <Link href="/contact" className="text-black hover:text-gray-600">
             Contact us
           </Link>
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Link
             href="/calendly"
-            className="bg-transparent border border-red-500 text-black hover:text-white py-2 md:text-sm  md:px-5 lg:px-6 mx-1 rounded-full hover:bg-red-700 transition-all duration-300"
+            className="bg-transparent border border-red-500 text-black hover:text-white py-2  lg:px-6 mx-1 rounded-full hover:bg-red-700 transition-all duration-300"
           >
             Calendly
           </Link>
           <Link
             href="/contact"
-            className="bg-red-700 text-white py-2 px-7 mx-1 rounded-full hover:bg-red-600 transition-all md:text-sm  duration-300"
+            className="bg-red-700 text-white py-2 px-7 mx-1 rounded-full hover:bg-red-600 transition-all  duration-300"
           >
             Call us
           </Link>
         </div>
 
-        <button className="md:hidden text-3xl" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+        <button className="lg:hidden text-3xl" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
           &#9776;
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white shadow-lg px-6 py-4 text-center ">
-          <Link href="/" className="block  text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
+        <div className="lg:hidden bg-white shadow-lg px-6 py-4 text-center ">
+          <Link href="/" className="block  text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
             Home
           </Link>
-          <Link href="/about" className="block f text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
+          <Link href="/about" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
             About us
           </Link>
 
           <div className="flex justify-center mb-2">
             <DropdownMenu>
-              <DropdownMenuTrigger className="text-gray-800 hover:text-gray-600 flex items-center ">
+              <DropdownMenuTrigger className="text-black hover:text-gray-800 flex items-center ">
                 Services <IoIosArrowDown />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -110,10 +113,13 @@ const Navbar = () => {
             </DropdownMenu>
           </div>
 
-          <Link href="/pricing" className="block text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
+          <Link href="/pricing" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
             Pricing
           </Link>
-          <Link href="/contact" className="block text-gray-800 hover:text-gray-600 mb-2" onClick={handleLinkClick}>
+          <Link href="/blog" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
+        Blogs
+          </Link>
+          <Link href="/contact" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
             Contact us
           </Link>
 

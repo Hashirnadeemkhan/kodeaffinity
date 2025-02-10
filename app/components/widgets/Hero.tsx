@@ -66,10 +66,10 @@ const Hero: React.FC<HeroProps> = ({ isAboutOnly, isPricingOnly }) => {
             }`}
           >
             <h4 className="font-normal text-black">Hello there!</h4>
-            <h1 className="text-4xl md:text-6xl  font-normal text-gray-800 leading-tight ">
+            <h1 className="text-4xl md:text-6xl  font-semibold text-gray-800 leading-tight ">
             Empowering Businesses with Cutting-Edge IT Solutions
             </h1>
-            <p className="mt-6 text-lg text-gray-600 ">
+            <p className="mt-6 text-lg text-black ">
             At Kode Affinity, we turn your vision into reality with innovative, scalable, and tailored IT solutions. From stunning websites to dynamic mobile apps and strategic branding, we’re here to help your business thrive in a digital-first world.
             </p>
             <div className="mt-5 transition-opacity duration-1000 delay-500 mb-10">

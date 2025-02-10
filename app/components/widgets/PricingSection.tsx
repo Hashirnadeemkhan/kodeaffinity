@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import pricingData from "@/app/data/pricingData"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -14,10 +14,11 @@ interface Package {
 const PricingSection = () => {
   const [activeTab, setActiveTab] = useState("All")
   const [expandedPackage, setExpandedPackage] = useState<Record<string, string | null>>({})
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab)
-    setExpandedPackage({}) // Reset expanded states when changing tabs
+    setExpandedPackage({})
   }
 
   const togglePackageExpansion = (category: string, packageName: string) => {
@@ -37,12 +38,38 @@ const PricingSection = () => {
   const filteredPackages =
     activeTab === "All" ? packages : packages.filter((pkg) => pkg.category.toLowerCase() === activeTab.toLowerCase())
 
-  // Split packages into columns
   const columns = [
     filteredPackages.filter((_, index) => index % 3 === 0),
     filteredPackages.filter((_, index) => index % 3 === 1),
     filteredPackages.filter((_, index) => index % 3 === 2),
   ]
+
+  let isDragging = false
+  let startX = 0
+  let scrollLeft = 0
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!scrollRef.current) return
+    isDragging = true
+    startX = e.pageX - scrollRef.current.offsetLeft
+    scrollLeft = scrollRef.current.scrollLeft
+    scrollRef.current.style.cursor = "grabbing"
+  }
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return
+    e.preventDefault()
+    const x = e.pageX - scrollRef.current.offsetLeft
+    const walk = (x - startX) * 1.5 // Speed factor
+    scrollRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleMouseUp = () => {
+    isDragging = false
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = "grab"
+    }
+  }
 
   return (
     <div className="bg-gray-50 text-black p-8 lg:p-20">
@@ -55,19 +82,28 @@ const PricingSection = () => {
         that works for your business
       </h3>
 
-      {/* Tab Navigation */}
-      <div className="flex flex-wrap justify-center mb-8 md:mb-10 border border-red-700 rounded-xl py-2">
-        {services.map((service) => (
-          <button
-            key={service}
-            className={`px-3 md:px-5 py-2 m-1 rounded-lg ${
-              activeTab === service ? "bg-red-500 text-white" : "text-black"
-            } hover:bg-red-700 hover:text-white transition duration-300`}
-            onClick={() => handleTabClick(service)}
-          >
-            {service}
-          </button>
-        ))}
+      {/* Draggable Horizontal Scroll for Service Tabs */}
+      <div
+        ref={scrollRef}
+        className="overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 mb-8 md:mb-10 border border-red-700 rounded-xl py-2 px-2 scroll-smooth cursor-grab select-none"
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseUp}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove as unknown as React.MouseEventHandler<HTMLDivElement>}
+      >
+        <div className="flex w-max lg:w-full space-x-2 items-center justify-center">
+          {services.map((service) => (
+            <button
+              key={service}
+              className={`px-3 md:px-5 py-2 rounded-lg flex items-center justify-center ${
+                activeTab === service ? "bg-red-500 text-white" : "text-black"
+              } hover:bg-red-700 hover:text-white transition duration-300`}
+              onClick={() => handleTabClick(service)}
+            >
+              {service}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Pricing Cards */}
@@ -134,4 +170,3 @@ const PricingSection = () => {
 }
 
 export default PricingSection
-

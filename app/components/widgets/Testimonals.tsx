@@ -10,28 +10,28 @@ import Autoplay from "embla-carousel-autoplay"
 
 const testimonialsData = [
   {
-    text: "Lorem dsfsdcx is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.",
-    author: "CEO - Digitil AGENCY",
+    text: "Kode Affinity delivered an exceptional website for our business! Their team exceeded expectations and provided top-notch customer.",
+    author: "– Sarah J., Founder of GreenScape Solutions",
     stars: 5,
   },
   {
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries.",
-    author: "CTO - Tech Solutions",
+    text: "The logo designs we received were beyond what we envisioned. Highly recommend Kode Affinity for their creativity and professionalism.",
+    author: " – Ali M., CEO of TechVibe",
     stars: 5,
   },
   {
-    text: "Lorem Ipsum is simply dummy text of the industry standard dummy text ever since the 1500s.",
-    author: "CEO - Alpha Corp",
+    text: "Our app development project was a huge success thanks to Kode Affinity's expertise. We are thrilled with the results!",
+    author: "– James L., Product Manager at AppX",
     stars: 5,
   },
   {
-    text: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. It is a long-established fact.",
-    author: "COO - Beta Agency",
+    text: "The branding services from Kode Affinity helped us create a strong and consistent brand identity. Excellent service!" ,
+    author: "– Amir K., Creative Director at UrbanFlare",
     stars: 5,
   },
   {
-    text: "Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley.",
-    author: "CFO - Gamma Ltd",
+    text: "Kode Affinity's animation work added a creative touch to our marketing campaign. Truly impressive and professional.",
+    author: "– Sophia R., Marketing Lead at Bright Horizons",
     stars: 5,
   },
   {
@@ -69,7 +69,7 @@ const Testimonials = () => {
   )
 
   return (
-    <div className="mt-20">
+    <div className="mt-20 ">
       <h1 className="text-center font-semibold lg:text-5xl text-3xl">TESTIMONIALS</h1>
       <hr className="border-red-700 mb-10 w-52 mx-auto mt-2" />
 
@@ -88,11 +88,11 @@ const Testimonials = () => {
       >
         <CarouselContent className="-ml-2 md:-ml-4">
           {testimonialsData.map((testimonial, index) => (
-            <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2">
+            <CarouselItem key={index} className="pl-2  md:pl-4 md:basis-1/2">
               <div className="p-1">
                 <Card className="rounded-2xl overflow-hidden">
                   <CardContent
-                    className="flex flex-col justify-between p-6 h-[200px]"
+                    className="flex flex-col justify-between p-6 lg:h-[200px] md:h-[250px]"
                     style={{
                       backgroundImage: 'linear-gradient(to right, #7f1d1d, #6b21a8, #1e3a8a), url("/assets/bg.png")',
                       backgroundSize: "cover",

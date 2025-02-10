@@ -59,7 +59,7 @@ const Creativity = () => {
               {/* Main Image */}
               <div className="relative w-full h-[350px] md:h-[280px] lg:h-[300px] lg:-mt-20 lg:-mb-12 md:-mb-20 md:-mt-28 rounded-xl z-20 overflow-hidden">
                 <Image
-                  src="/assets/creativity-img.webp"
+                  src="/assets/creativity-img.png"
                   alt="Digital Expert at Work"
                   fill
                   className="object-contain absolute rounded-xl z-10 lg:pl-52 mt-8 md:mt-0"
