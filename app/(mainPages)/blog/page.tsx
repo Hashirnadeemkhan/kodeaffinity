@@ -24,7 +24,7 @@ const Blog = () => {
  <BlogLayout>
   <></>
  </BlogLayout>
-    <div className="container max-w-6xl mx-auto p-4">
+    <div className="container max-w-7xl mx-auto p-4">
       {/* Main heading for the blog section */}
       <h1 className="text-4xl font-bold mb-8 text-center">Blog</h1>
       
@@ -48,15 +48,15 @@ const Blog = () => {
               <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
               
               {/* Blog post description */}
-              <p className=" mb-4">{blog.description}</p>
+              <p className=" mb-4 text-red-500 font-semibold">{blog.description}</p>
               
               {/* Blog post author and date */}
               <div className="text-sm  mb-4">
-                <span>By {blog.author}</span> | <span>{new Date(blog.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+                <span className='font-semibold'>By {blog.author}</span> | <span className='font-semibold'>{new Date(blog.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
               </div>
               
               {/* Link to the full blog post */}
-              <Link href={`/blogpost/${blog.slug}`} className={buttonVariants({ variant: "outline" })}>Click here</Link>
+             <button className='hover:text-black text-red-400 font-semibold'><Link href={`/blogpost/${blog.slug}`}>Read More</Link></button>
             </div>
           </div>
         ))}
