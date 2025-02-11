@@ -69,7 +69,7 @@ const AnimatedServiceSection = ({ service }: { service: Service }) => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <motion.div className="max-w-2xl space-y-5" initial="hidden" animate={textControls} variants={textAnimation}>
           <p className="text-red-500 text-sm uppercase tracking-widest font-semibold">{service.title}</p>
-          <h1 className="lg:text-5xl md:text-3xl text-2xl mt-2 ">
+          <h1 className="lg:text-5xl md:text-3xl text-2xl mt-2 w-full">
             Cutting-Edge{" "}
             <span className="bg-gradient-to-r font-bold from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent ">
               {service.description}
@@ -83,9 +83,10 @@ const AnimatedServiceSection = ({ service }: { service: Service }) => {
             <Image
               src={service.image || "/placeholder.svg"}
               alt={service.title}
-              width={500}
               height={500}
-              className="rounded-lg"
+              width={500}
+           className="lg:w-[600px]  md:w-[350px]"
+            
             />
           )}
         </motion.div>
