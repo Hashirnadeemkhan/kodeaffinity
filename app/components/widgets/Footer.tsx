@@ -24,7 +24,7 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="w-full md:w-1/2 lg:w-1/4 mb-8 px-4">
             <div className="flex justify-start mb-4">
-              <Image src="/whitelogo.png" width={100} height={100} alt="Logo" />
+              <Image src="/whitelogo.png" width={100} height={100} alt="Logo"   style={{ width: "auto", height: "auto" }} />
             </div>
             <div className="flex justify-start space-x-4 items-start mb-4">
               <span>
@@ -53,27 +53,27 @@ export default function Footer() {
             <h3 className="font-bold mb-4 text-xl lg:text-2xl">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="hover:underline">
+                <Link href="/" className="hover:underline">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:underline">
+                <Link href="/about" className="hover:underline">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:underline">
+                <Link href="/pricing" className="hover:underline">
                   Pricings
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:underline">
+                <Link href="/services" className="hover:underline">
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:underline">
+                <Link href="/contact" className="hover:underline">
                   Contact
                 </Link>
               </li>
@@ -90,7 +90,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:underline">
+                <Link href="/blogs" className="hover:underline">
                   Blogs
                 </Link>
               </li>

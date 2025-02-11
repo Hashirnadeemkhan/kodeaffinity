@@ -29,7 +29,7 @@ const CoreValue = () => {
             Our Mission
           </motion.h3>
           <motion.h2
-            className="text-black md:text-5xl text-3xl md:text-center text-start"
+            className="text-black md:text-5xl text-2xl md:text-center text-start"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
@@ -46,7 +46,7 @@ const CoreValue = () => {
           <div className="flex flex-col md:flex-row text-white gap-x-8 gap-y-8">
             {/* Box 1 */}
             <motion.div
-              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 flex flex-col md:items-center md:justify-center items-start justify-start"
+              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 flex flex-col items-center justify-center "
               variants={fadeUpVariants}
               initial="hidden"
               whileInView="visible"
@@ -66,7 +66,7 @@ const CoreValue = () => {
 
             {/* Box 2 */}
             <motion.div
-              className="shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 flex flex-col md:items-center md:justify-center items-start justify-start"
+              className="shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 flex flex-col items-center justify-center "
               style={{
                 backgroundImage:
                   "linear-gradient(to right, rgba(127, 29, 29, 0.8), rgba(107, 33, 168, 0.8), rgba(30, 58, 138, 0.8))",
@@ -91,7 +91,7 @@ const CoreValue = () => {
 
             {/* Box 3 */}
             <motion.div
-              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 flex flex-col md:items-center md:justify-center items-start justify-start"
+              className="bg-white shadow-md hover:shadow-md p-8 rounded-lg w-full md:w-1/3 flex flex-col items-center justify-center "
               variants={fadeUpVariants}
               initial="hidden"
               whileInView="visible"
