@@ -11,17 +11,19 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [open, setOpen] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
 
   const handleLinkClick = () => {
     setIsOpen(false)
+    setMobileServicesOpen(false)
   }
 
   useEffect(() => {
     const handleScroll = () => {
       if (navRef.current) {
         const navTop = navRef.current.getBoundingClientRect().top
-        setIsSticky(window.scrollY > 40) // Adjust this value to match your desired scroll threshold
+        setIsSticky(window.scrollY > 40)
       }
     }
 
@@ -32,7 +34,10 @@ const Navbar = () => {
   }, [])
 
   return (
-    <div ref={navRef} className={`${isSticky ? "fixed top-0 pt-5 left-0 right-0" : ""} z-50 transition-all duration-300`}>
+    <div
+      ref={navRef}
+      className={`${isSticky ? "fixed top-0 pt-5 left-0 right-0" : ""} z-50 transition-all duration-300`}
+    >
       <nav
         className={`bg-white shadow-md mx-auto ${
           isSticky ? "top-0" : ""
@@ -105,29 +110,38 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden bg-white shadow-lg px-6 py-4 text-center ">
-            <Link href="/" className="block  text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
+          <div className="lg:hidden bg-white shadow-lg px-6  text-center">
+            <Link href="/" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
               Home
             </Link>
             <Link href="/about" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
               About us
             </Link>
 
-            <div className="flex justify-center mb-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger className="text-black hover:text-gray-800 flex items-center ">
-                  Services <IoIosArrowDown />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {services.map((service) => (
-                    <DropdownMenuItem key={service.id}>
-                      <Link href={`/services/${service.slug}`} className="w-full" onClick={handleLinkClick}>
-                        {service.title}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <div className="mb-2">
+              <button
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                className="w-full text-black hover:text-gray-800 flex items-center justify-center"
+              >
+                Services{" "}
+                <IoIosArrowDown
+                  className={`ml-1 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileServicesOpen ? "max-h-96" : "max-h-0"}`}
+              >
+                {services.map((service) => (
+                  <Link
+                    key={service.id}
+                    href={`/services/${service.slug}`}
+                    className="block py-2 px-4 text-black hover:bg-gray-100"
+                    onClick={handleLinkClick}
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <Link href="/pricing" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
