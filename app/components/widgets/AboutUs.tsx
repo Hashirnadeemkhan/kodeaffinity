@@ -4,6 +4,7 @@ import Wrapper from "../shared/Wrapper";
 import Image from "next/image";
 import Button from "../shared/Button";
 import { motion, useAnimation } from "framer-motion";
+import Link from "next/link";
 
 const imageAnimation = {
   hidden: { x: -100, opacity: 0 },
@@ -88,7 +89,7 @@ const AboutUs = () => {
             </motion.p>
       
 
-            <Button text={'Learn More'} />
+           <Link href={"/about"}> <Button text={'Learn More'} /></Link>
       
           </motion.div>
           <motion.div

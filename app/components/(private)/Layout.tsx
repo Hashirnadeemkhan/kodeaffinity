@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ isAboutOnly, isPricingOnly, isReducedHe
     <div
       className="bg-cover bg-center"
       style={{
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9)),url("/mainbg.png")',
+        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)),url("/mainbg.png")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

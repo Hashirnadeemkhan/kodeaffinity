@@ -20,14 +20,14 @@ const PricingSection = () => {
     setActiveTab(tab)
     setExpandedPackages([]) // Clear expanded packages when switching tabs
   }
-const togglePackageExpansion = (packageName: string) => {
-  setExpandedPackages((prev) =>
-    prev.includes(packageName)
-      ? prev.filter((name) => name !== packageName) // Collapse if already expanded
-      : [...prev, packageName] // Add to the expanded list
-  )
-}
 
+  const togglePackageExpansion = (packageName: string) => {
+    setExpandedPackages((prev) =>
+      prev.includes(packageName)
+        ? prev.filter((name) => name !== packageName) // Remove if already expanded
+        : [...prev, packageName] // Add if not expanded
+    )
+  }
 
   const packages: Package[] = pricingData().map((pkg) => ({
     ...pkg,
@@ -39,11 +39,10 @@ const togglePackageExpansion = (packageName: string) => {
   const filteredPackages =
     activeTab === "All" ? packages : packages.filter((pkg) => pkg.category.toLowerCase() === activeTab.toLowerCase())
 
-  const columns = [
-    filteredPackages.filter((_, index) => index % 3 === 0),
-    filteredPackages.filter((_, index) => index % 3 === 1),
-    filteredPackages.filter((_, index) => index % 3 === 2),
-  ]
+  // Hardcoded columns for large screens (3 columns) and medium screens (2 columns)
+  const column1 = filteredPackages.filter((_, index) => index % 3 === 0)
+  const column2 = filteredPackages.filter((_, index) => index % 3 === 1)
+  const column3 = filteredPackages.filter((_, index) => index % 3 === 2)
 
   let isDragging = false
   let startX = 0
@@ -115,58 +114,93 @@ const togglePackageExpansion = (packageName: string) => {
           animate={{ rotateY: 0, opacity: 1 }}
           exit={{ rotateY: -90, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="grid gap-6 md:gap-8 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1"
+          className="grid gap-6 md:gap-8 lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1"
         >
-          {columns.map((column, columnIndex) => (
-            <div key={columnIndex} className="space-y-6">
-              {column.map((pkg) => {
-                const isExpanded = expandedPackages.includes(pkg.name)
+          {/* Column 1 */}
+          <div className="space-y-6">
+            {column1.map((pkg) => (
+              <PackageCard
+                key={pkg.name}
+                pkg={pkg}
+                isExpanded={expandedPackages.includes(pkg.name)}
+                togglePackageExpansion={togglePackageExpansion}
+              />
+            ))}
+          </div>
 
-                return (
-                  <motion.div
-                    key={pkg.name}
-                    className="rounded-lg p-6 flex flex-col py-12 shadow-lg border border-red-600"
-                    layout
-                  >
-                    <h3 className="text-lg md:text-xl font-semibold mb-2">{pkg.name}</h3>
-                    <p className="text-4xl md:text-5xl font-semibold mb-4">${pkg.price}</p>
-                    <button
-                      className="hover:text-white py-3 underline px-4 rounded-md mb-4 hover:bg-red-500 text-red-500 transition duration-300 border"
-                      onClick={() => togglePackageExpansion(pkg.name)}
-                    >
-                      {isExpanded ? "Show less" : "Read more"}
-                    </button>
+          {/* Column 2 */}
+          <div className="space-y-6">
+            {column2.map((pkg) => (
+              <PackageCard
+                key={pkg.name}
+                pkg={pkg}
+                isExpanded={expandedPackages.includes(pkg.name)}
+                togglePackageExpansion={togglePackageExpansion}
+              />
+            ))}
+          </div>
 
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.ul
-                          initial={{ height: 0, opacity: 0, marginBottom: 0 }}
-                          animate={{ height: "auto", opacity: 1, marginBottom: 16 }}
-                          exit={{ height: 0, opacity: 0, marginBottom: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="text-left w-full"
-                          style={{ overflow: "hidden" }}
-                        >
-                          {pkg.features.map((feature, index) => (
-                            <li key={index} className="flex text-gray-600 mb-2">
-                              <span className="text-red-500 mr-2">✔</span>
-                              {feature}
-                            </li>
-                          ))}
-                          <button className="hover:text-white py-3 w-full border border-red-500 px-4 rounded-md mt-auto hover:bg-red-500 text-black transition duration-300">
-                            Get Started
-                          </button>
-                        </motion.ul>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                )
-              })}
-            </div>
-          ))}
+          {/* Column 3 */}
+          <div className="space-y-6">
+            {column3.map((pkg) => (
+              <PackageCard
+                key={pkg.name}
+                pkg={pkg}
+                isExpanded={expandedPackages.includes(pkg.name)}
+                togglePackageExpansion={togglePackageExpansion}
+              />
+            ))}
+          </div>
         </motion.div>
       </AnimatePresence>
     </div>
+  )
+}
+
+// PackageCard Component
+const PackageCard = ({
+  pkg,
+  isExpanded,
+  togglePackageExpansion,
+}: {
+  pkg: Package
+  isExpanded: boolean
+  togglePackageExpansion: (packageName: string) => void
+}) => {
+  return (
+    <motion.div className="rounded-lg p-6 flex flex-col py-12 shadow-lg border border-red-600" layout>
+      <h3 className="text-lg md:text-xl font-semibold mb-2">{pkg.name}</h3>
+      <p className="text-4xl md:text-5xl font-semibold mb-4">${pkg.price}</p>
+      <button
+        className="hover:text-white py-3 underline px-4 rounded-md mb-4 hover:bg-red-500 text-red-500 transition duration-300 border"
+        onClick={() => togglePackageExpansion(pkg.name)}
+      >
+        {isExpanded ? "Show less" : "Read more"}
+      </button>
+
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.ul
+            initial={{ height: 0, opacity: 0, marginBottom: 0 }}
+            animate={{ height: "auto", opacity: 1, marginBottom: 16 }}
+            exit={{ height: 0, opacity: 0, marginBottom: 0 }}
+            transition={{ duration: 0.2 }}
+            className="text-left w-full"
+            style={{ overflow: "hidden" }}
+          >
+            {pkg.features.map((feature, index) => (
+              <li key={index} className="flex text-gray-600 mb-2">
+                <span className="text-red-500 mr-2">✔</span>
+                {feature}
+              </li>
+            ))}
+            <button className="hover:text-white py-3 w-full border border-red-500 px-4 rounded-md mt-auto hover:bg-red-500 text-black transition duration-300">
+              Get Started
+            </button>
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </motion.div>
   )
 }
 

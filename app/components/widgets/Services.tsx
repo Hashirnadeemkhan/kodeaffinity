@@ -14,7 +14,7 @@ const ServicesSection = () => {
     title: 'Mobile Application Development',
     description: 'In a mobile-first world, having a robust app is essential for engaging customers on the go. We create intuitive, feature-rich mobile applications for iOS and Android that boost user interaction and drive business growth. Our apps are built to scale, ensuring long-term performance for your business needs.',
     image: '/assets/mobileapp.png',
-    slug: 'web-design-development',
+    slug: 'mobile-development',
   },
   {
     title: 'Search Engine Optimization',
@@ -50,7 +50,7 @@ const ServicesSection = () => {
     title: 'Logo & Illustration',
     description: "Your logo is the face of your brand. At Kode Affinity, we design unique, memorable, and impactful logos and illustrations that reflect your brand's identity. Whether it’s a modern logo or custom illustrations for your marketing, we ensure your business stands out.",
     image: '/assets/logoservice.png',
-    slug: 'social-media',
+    slug: 'logo-illustration',
   },
  
 ];
