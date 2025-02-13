@@ -36,8 +36,8 @@ const Navbar = () => {
     <>
       <div ref={navRef} className="h-[100px]">
         <nav
-          className={`bg-white shadow-md mx-auto w-[90%] lg:w-[85%] rounded-lg transition-all duration-300 ease-in-out ${
-            isSticky ? "fixed top-0 left-0 mt-1 right-0 z-50" : ""
+          className={`bg-white shadow-md mx-auto w-[90%] lg:w-[85%] rounded-lg  transition-all duration-300 ease-in-out ${
+            isSticky ? "fixed top-0 left-0 mt-1 right-0 z-50 " : ""
           }`}
         >
           <div className="lg:px-16 px-10 flex justify-between items-center">
@@ -106,7 +106,7 @@ const Navbar = () => {
           {/* Mobile Menu */}
           {isOpen && (
             <div
-              className="lg:hidden bg-white shadow-lg px-6 py-4 text-center fixed top-[100px] left-0 right-0 z-[1000] w-[90%] mx-auto  "
+              className="lg:hidden bg-white shadow-lg px-6 py-4 text-center fixed  left-0 right-0  w-[90%] mx-auto  "
               style={{ zIndex: 1000 }} // Ensure the mobile menu is on top
             >
               <Link href="/" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
