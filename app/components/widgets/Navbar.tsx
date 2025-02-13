@@ -5,13 +5,15 @@ import Link from "next/link"
 import Image from "next/image"
 import { IoIosArrowDown } from "react-icons/io"
 import { services } from "@/app/data/services"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { motion, AnimatePresence } from "framer-motion"
+import { useMediaQuery } from "../hooks/use-media-query"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
   const [isSticky, setIsSticky] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
+  const isTablet = useMediaQuery("(max-width: 1024px)")
 
   const handleLinkClick = () => {
     setIsOpen(false)
@@ -32,140 +34,167 @@ const Navbar = () => {
     }
   }, [])
 
+  const menuVariants = {
+    open: { opacity: 1, y: 0 },
+    closed: { opacity: 0, y: "-100%" },
+  }
+
+  const linkVariants = {
+    hover: { scale: 1.05, color: "#EF4444" },
+  }
+
   return (
     <>
       <div ref={navRef} className="h-[100px]">
         <nav
-          className={`bg-white shadow-md mx-auto w-[90%]   rounded-lg  transition-all duration-300 ease-in-out ${
-            isSticky ? "fixed top-0 left-0 mt-1 right-0 z-50 " : ""
+          className={`bg-white shadow-md mx-auto w-full md:w-[90%] rounded-lg transition-all duration-300 ease-in-out ${
+            isSticky ? "fixed top-0 left-0 right-0 z-50 mt-1" : ""
           }`}
         >
-          <div className="px-10 flex justify-between items-center">
-            <div className="flex items-center ">
+          <div className="px-4 md:px-10 flex justify-between items-center h-20">
+            <div className="flex items-center">
               <Link href="/">
-                <Image src="/logo.png" alt="Logo" height={100} width={100} priority className="md:w-20 md:h-20" />
+                <Image src="/logo.png" alt="Logo" height={80} width={80} priority className="md:w-20 md:h-20" />
               </Link>
             </div>
 
-            <div className="hidden lg:flex lg:space-x-16">
-              <Link href="/" className="text-black hover:text-gray-800 ">
-                Home
-              </Link>
-              <Link href="/about" className="text-black hover:text-gray-600">
-                About us
-              </Link>
-
-              <div className="relative inline-block">
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="text-black hover:text-gray-800 flex items-center cursor-pointer gap-x-1">
-                    Services <IoIosArrowDown />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
-                    {services.map((service) => (
-                      <DropdownMenuItem key={service.id}>
-                        <Link href={`/services/${service.slug}`} className="w-full">
-                          {service.title}
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-
-              <Link href="/pricing" className="text-black hover:text-gray-600">
-                Pricing
-              </Link>
-              <Link href="/blog" className="text-black hover:text-gray-600">
-                Blogs
-              </Link>
-              <Link href="/contact" className="text-black hover:text-gray-600">
-                Contact us
-              </Link>
+            <div className="hidden lg:flex lg:space-x-8">
+              {["Home", "About us", "Services", "Pricing", "Blogs", "Contact us"].map((item) => (
+                <motion.div key={item} whileHover="hover" variants={linkVariants}>
+                  {item === "Services" ? (
+                    <div className="relative group">
+                      <button className="text-black hover:text-red-500 flex items-center gap-x-1 cursor-pointer">
+                        {item} <IoIosArrowDown className="transition-transform group-hover:rotate-180" />
+                      </button>
+                      <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div className="py-1">
+                          {services.map((service) => (
+                            <Link
+                              key={service.id}
+                              href={`/services/${service.slug}`}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
+                            >
+                              {service.title}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="text-black hover:text-red-500"
+                    >
+                      {item}
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
             </div>
 
-            <div className="hidden lg:block">
+            <div className="hidden lg:block space-x-2">
               <Link
                 href="/calendly"
-                className="bg-transparent border border-red-500 text-black hover:text-white py-2  lg:px-6 mx-1 rounded-full hover:bg-red-700 transition-all duration-300"
+                className="bg-transparent border-2 border-red-500 text-black hover:text-white py-2 px-6 rounded-full hover:bg-red-500 transition-all duration-300"
               >
                 Calendly
               </Link>
               <Link
                 href="/contact"
-                className="bg-red-700 text-white py-2 px-7 mx-1 rounded-full hover:bg-red-600 transition-all  duration-300"
+                className="bg-red-500 text-white py-2 px-7 rounded-full hover:bg-red-600 transition-all duration-300"
               >
                 Call us
               </Link>
             </div>
 
-            <button className="lg:hidden text-3xl" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
-              &#9776;
+            <button
+              className="lg:hidden text-3xl text-red-500 focus:outline-none"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? "×" : "☰"}
             </button>
           </div>
 
-          {/* Mobile Menu */}
-          {isOpen && (
-            <div
-              className="lg:hidden bg-white shadow-lg px-6 py-4 text-center fixed  left-0 right-0  w-[90%] mx-auto  "
-              style={{ zIndex: 1000 }} // Ensure the mobile menu is on top
-            >
-              <Link href="/" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
-                Home
-              </Link>
-              <Link href="/about" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
-                About us
-              </Link>
-
-              <div className="mb-2">
-                <button
-                  className="text-black hover:text-gray-800 flex items-center justify-center w-full"
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                >
-                  Services <IoIosArrowDown className="ml-1" />
-                </button>
-         {isServicesOpen && (
-  <div className="mt-2 space-y-2">
-    {services.map((service) => (
-      <Link
-        key={service.id}
-        href={`/services/${service.slug}`}
-        className="block text-black hover:text-gray-800 border-b border-gray-300 pb-2"
-        onClick={handleLinkClick}
-      >
-        {service.title}
-      </Link>
-    ))}
-  </div>
-)}
-
-              </div>
-
-              <Link href="/pricing" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
-                Pricing
-              </Link>
-              <Link href="/blog" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
-                Blogs
-              </Link>
-              <Link href="/contact" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
-                Contact us
-              </Link>
-
-              <Link
-                href="/contact"
-                className="block bg-red-600 text-white py-2 px-4 rounded-full mt-4 hover:bg-red-700 transition-all duration-300"
-                onClick={handleLinkClick}
+          <AnimatePresence>
+            {isOpen && isTablet && (
+              <motion.div
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={menuVariants}
+                transition={{ duration: 0.3 }}
+                className="lg:hidden bg-white shadow-lg px-6 py-4 text-left fixed left-0 right-0 w-full mx-auto"
+                style={{ zIndex: 1000 }}
               >
-                Call us
-              </Link>
-              <Link
-                href="/calendly"
-                className="block bg-transparent border border-red-500 text-black hover:text-white py-2 px-4 rounded-full mt-4 hover:bg-red-700 transition-all duration-300"
-                onClick={handleLinkClick}
-              >
-                Calendly
-              </Link>
-            </div>
-          )}
+                {["Home", "About us", "Services", "Pricing", "Blogs", "Contact us"].map((item) => (
+                  <motion.div key={item} whileHover="hover" variants={linkVariants}>
+                    {item === "Services" ? (
+                      <div className="mb-2">
+                        <button
+                          className="text-black hover:text-red-500 flex items-center justify-between w-full py-2"
+                          onClick={() => setIsServicesOpen(!isServicesOpen)}
+                        >
+                          Services{" "}
+                          <IoIosArrowDown
+                            className={`transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`}
+                          />
+                        </button>
+                        <AnimatePresence>
+                          {isServicesOpen && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="mt-2 space-y-2 text-left items-start pl-4 "
+                            >
+                              {services.map((service) => (
+                                <motion.div key={service.id} whileHover="hover" variants={linkVariants}>
+                                  <Link
+                                    href={`/services/${service.slug}`}
+                                    className="block text-black hover:text-red-500 py-2 border-b border-gray-300 "
+                                    onClick={handleLinkClick}
+                                  >
+                                    {service.title}
+                                  </Link>
+                                </motion.div>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link
+                        href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                        className="block text-black hover:text-red-500 py-2"
+                        onClick={handleLinkClick}
+                      >
+                        {item}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
+
+                <div className="mt-4 space-y-2">
+                  <Link
+                    href="/contact"
+                    className="block bg-red-500 text-white py-2 px-4 rounded-full text-center hover:bg-red-600 transition-all duration-300"
+                    onClick={handleLinkClick}
+                  >
+                    Call us
+                  </Link>
+                  <Link
+                    href="/calendly"
+                    className="block bg-transparent border-2 border-red-500 text-black hover:text-white py-2 px-4 rounded-full text-center hover:bg-red-500 transition-all duration-300"
+                    onClick={handleLinkClick}
+                  >
+                    Calendly
+                  </Link>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
       </div>
     </>
@@ -173,3 +202,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+
