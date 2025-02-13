@@ -36,11 +36,11 @@ const Navbar = () => {
     <>
       <div ref={navRef} className="h-[100px]">
         <nav
-          className={`bg-white shadow-md mx-auto w-[90%] lg:w-[85%] rounded-lg  transition-all duration-300 ease-in-out ${
+          className={`bg-white shadow-md mx-auto w-[90%]   rounded-lg  transition-all duration-300 ease-in-out ${
             isSticky ? "fixed top-0 left-0 mt-1 right-0 z-50 " : ""
           }`}
         >
-          <div className="lg:px-16 px-10 flex justify-between items-center">
+          <div className="px-10 flex justify-between items-center">
             <div className="flex items-center ">
               <Link href="/">
                 <Image src="/logo.png" alt="Logo" height={100} width={100} priority className="md:w-20 md:h-20" />
@@ -123,20 +123,21 @@ const Navbar = () => {
                 >
                   Services <IoIosArrowDown className="ml-1" />
                 </button>
-                {isServicesOpen && (
-                  <div className="mt-2 space-y-2">
-                    {services.map((service) => (
-                      <Link
-                        key={service.id}
-                        href={`/services/${service.slug}`}
-                        className="block text-black hover:text-gray-800"
-                        onClick={handleLinkClick}
-                      >
-                        {service.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+         {isServicesOpen && (
+  <div className="mt-2 space-y-2">
+    {services.map((service) => (
+      <Link
+        key={service.id}
+        href={`/services/${service.slug}`}
+        className="block text-black hover:text-gray-800 border-b border-gray-300 pb-2"
+        onClick={handleLinkClick}
+      >
+        {service.title}
+      </Link>
+    ))}
+  </div>
+)}
+
               </div>
 
               <Link href="/pricing" className="block text-black hover:text-gray-800 mb-2" onClick={handleLinkClick}>
