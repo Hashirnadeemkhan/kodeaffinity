@@ -6,6 +6,7 @@ import Image from "next/image"
 import { IoIosArrowDown } from "react-icons/io"
 import { services } from "@/app/data/services"
 import { motion, AnimatePresence } from "framer-motion"
+
 import { useMediaQuery } from "../hooks/use-media-query"
 
 const Navbar = () => {
@@ -43,6 +44,15 @@ const Navbar = () => {
     hover: { scale: 1.05, color: "#EF4444" },
   }
 
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "About us", path: "/about" },
+    { name: "Services", path: "#", isDropdown: true },
+    { name: "Pricing", path: "/pricing" },
+    { name: "Blogs", path: "/blog" },
+    { name: "Contact us", path: "/contact" },
+  ]
+
   return (
     <>
       <div ref={navRef} className="h-[100px]">
@@ -59,12 +69,12 @@ const Navbar = () => {
             </div>
 
             <div className="hidden lg:flex lg:space-x-8">
-              {["Home", "About us", "Services", "Pricing", "Blogs", "Contact us"].map((item) => (
-                <motion.div key={item} whileHover="hover" variants={linkVariants}>
-                  {item === "Services" ? (
+              {navItems.map((item) => (
+                <motion.div key={item.name} whileHover="hover" variants={linkVariants}>
+                  {item.isDropdown ? (
                     <div className="relative group">
                       <button className="text-black hover:text-red-500 flex items-center gap-x-1 cursor-pointer">
-                        {item} <IoIosArrowDown className="transition-transform group-hover:rotate-180" />
+                        {item.name} <IoIosArrowDown className="transition-transform group-hover:rotate-180" />
                       </button>
                       <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                         <div className="py-1">
@@ -81,11 +91,8 @@ const Navbar = () => {
                       </div>
                     </div>
                   ) : (
-                    <Link
-                      href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="text-black hover:text-red-500"
-                    >
-                      {item}
+                    <Link href={item.path} className="text-black hover:text-red-500">
+                      {item.name}
                     </Link>
                   )}
                 </motion.div>
@@ -127,15 +134,15 @@ const Navbar = () => {
                 className="lg:hidden bg-white shadow-lg px-6 py-4 text-left fixed left-0 right-0 w-full mx-auto"
                 style={{ zIndex: 1000 }}
               >
-                {["Home", "About us", "Services", "Pricing", "Blogs", "Contact us"].map((item) => (
-                  <motion.div key={item} whileHover="hover" variants={linkVariants}>
-                    {item === "Services" ? (
+                {navItems.map((item) => (
+                  <motion.div key={item.name} whileHover="hover" variants={linkVariants}>
+                    {item.isDropdown ? (
                       <div className="mb-2">
                         <button
                           className="text-black hover:text-red-500 flex items-center justify-between w-full py-2"
                           onClick={() => setIsServicesOpen(!isServicesOpen)}
                         >
-                          Services{" "}
+                          {item.name}{" "}
                           <IoIosArrowDown
                             className={`transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`}
                           />
@@ -147,13 +154,13 @@ const Navbar = () => {
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.3 }}
-                              className="mt-2 space-y-2 text-left items-start pl-4 "
+                              className="mt-2 space-y-2 text-left items-start pl-4"
                             >
                               {services.map((service) => (
                                 <motion.div key={service.id} whileHover="hover" variants={linkVariants}>
                                   <Link
                                     href={`/services/${service.slug}`}
-                                    className="block text-black hover:text-red-500 py-2 border-b border-gray-300 "
+                                    className="block text-black hover:text-red-500 py-2"
                                     onClick={handleLinkClick}
                                   >
                                     {service.title}
@@ -166,11 +173,11 @@ const Navbar = () => {
                       </div>
                     ) : (
                       <Link
-                        href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                        href={item.path}
                         className="block text-black hover:text-red-500 py-2"
                         onClick={handleLinkClick}
                       >
-                        {item}
+                        {item.name}
                       </Link>
                     )}
                   </motion.div>
