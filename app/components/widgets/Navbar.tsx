@@ -47,7 +47,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About us", path: "/about" },
-    { name: "Services", path: "#", isDropdown: true },
+    { name: "Services", path: "/service", isDropdown: true },
     { name: "Pricing", path: "/pricing" },
     { name: "Blogs", path: "/blog" },
     { name: "Contact us", path: "/contact" },
@@ -69,35 +69,43 @@ const Navbar = () => {
             </div>
 
             <div className="hidden lg:flex lg:space-x-8">
-              {navItems.map((item) => (
-                <motion.div key={item.name} whileHover="hover" variants={linkVariants}>
-                  {item.isDropdown ? (
-                    <div className="relative group">
-                      <button className="text-black hover:text-red-500 flex items-center gap-x-1 cursor-pointer">
-                        {item.name} <IoIosArrowDown className="transition-transform group-hover:rotate-180" />
-                      </button>
-                      <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                        <div className="py-1">
-                          {services.map((service) => (
-                            <Link
-                              key={service.id}
-                              href={`/services/${service.slug}`}
-                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
-                            >
-                              {service.title}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <Link href={item.path} className="text-black hover:text-red-500">
-                      {item.name}
-                    </Link>
-                  )}
-                </motion.div>
+  {navItems.map((item) => (
+    <motion.div key={item.name} whileHover="hover" variants={linkVariants}>
+      {item.isDropdown ? (
+        <div className="relative group">
+          <Link
+            href={item.path} // Navigate to /service on click
+            className="text-black hover:text-red-500 flex items-center gap-x-1 cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault(); // Prevent default navigation
+              window.location.href = item.path; // Manually navigate to /service
+            }}
+          >
+            {item.name}{" "}
+            <IoIosArrowDown className="transition-transform group-hover:rotate-180" />
+          </Link>
+          <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+            <div className="py-1">
+              {services.map((service) => (
+                <Link
+                  key={service.id}
+                  href={`/services/${service.slug}`}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
+                >
+                  {service.title}
+                </Link>
               ))}
             </div>
+          </div>
+        </div>
+      ) : (
+        <Link href={item.path} className="text-black hover:text-red-500">
+          {item.name}
+        </Link>
+      )}
+    </motion.div>
+  ))}
+</div>
 
             <div className="hidden lg:block space-x-2">
               <Link
@@ -155,6 +163,7 @@ const Navbar = () => {
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.3 }}
                               className="mt-2 space-y-2 text-center"
+                        
                             >
                               {services.map((service) => (
                                 <motion.div key={service.id} whileHover="hover" variants={linkVariants}>

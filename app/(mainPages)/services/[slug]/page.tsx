@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { services } from "@/app/data/services";
 import FAQSection from "@/app/components/widgets/Faqs";
 import Creativity from "@/app/components/widgets/Creativity-service";
-import ServiceLayout from "@/app/components/(private)/ServiceLayout";
+import ServiceLayout from "@/app/components/(private)/ServiceSlugLayout";
 import Companies from "@/app/components/widgets/Companies";
 import AnimatedServiceSection from "@/app/components/widgets/AnimatedServiceSection";
 

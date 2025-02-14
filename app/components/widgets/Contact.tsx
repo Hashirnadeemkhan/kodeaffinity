@@ -1,4 +1,5 @@
 "use client"
+
 import { useEffect, useRef, useState } from "react"
 import { motion, useAnimation } from "framer-motion"
 import { FaChevronDown } from "react-icons/fa"
@@ -7,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Toaster, toast } from "react-hot-toast"
 
+// Form validation schema
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
@@ -22,6 +24,7 @@ const Contact = () => {
   const controls = useAnimation()
   const ref = useRef<HTMLDivElement | null>(null)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
 
   const {
     register,
@@ -41,24 +44,22 @@ const Contact = () => {
   }
 
   useEffect(() => {
+    if (!ref.current) return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          controls.start("visible")
-        } else {
-          controls.start("hidden")
+        if (entry.isIntersecting && !hasAnimated) {
+          controls.start("visible").then(() => {
+            setHasAnimated(true)
+          })
         }
       },
       { threshold: 0.1 },
     )
 
-    const currentRef = ref.current
-    if (currentRef) observer.observe(currentRef)
-
-    return () => {
-      if (currentRef) observer.unobserve(currentRef)
-    }
-  }, [controls])
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [controls, hasAnimated])
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -77,39 +78,13 @@ const Contact = () => {
             padding: "16px",
             color: "#4ade80",
           },
-          iconTheme: {
-            primary: "#4ade80",
-            secondary: "#FFFAEE",
-          },
         })
       } else {
-        const errorData = await response.json()
-        console.error("Error sending email:", errorData)
-        toast.error("Sorry, something went wrong. Please try again.", {
-          style: {
-            border: "1px solid #ef4444",
-            padding: "16px",
-            color: "#ef4444",
-          },
-          iconTheme: {
-            primary: "#ef4444",
-            secondary: "#FFFAEE",
-          },
-        })
+        toast.error("Sorry, something went wrong. Please try again.")
       }
     } catch (error) {
       console.error("Error sending email:", error)
-      toast.error("Sorry, something went wrong. Please try again.", {
-        style: {
-          border: "1px solid #ef4444",
-          padding: "16px",
-          color: "#ef4444",
-        },
-        iconTheme: {
-          primary: "#ef4444",
-          secondary: "#FFFAEE",
-        },
-      })
+      toast.error("Sorry, something went wrong. Please try again.")
     }
   }
 
@@ -173,7 +148,7 @@ const Contact = () => {
         <motion.div className="relative mb-4 px-3" variants={formVariants}>
           <button
             type="button"
-            className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500 flex justify-between items-center"
+            className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
             {serviceType || "Type Service"}

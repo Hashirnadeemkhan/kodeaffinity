@@ -50,7 +50,7 @@ export default function Footer() {
             <li><Link href="/" className="hover:underline">Home</Link></li>
             <li><Link href="/about" className="hover:underline">About Us</Link></li>
             <li><Link href="/pricing" className="hover:underline">Pricings</Link></li>
-            <li><Link href="/services" className="hover:underline">Services</Link></li>
+            <li><Link href="/service" className="hover:underline">Services</Link></li>
             <li><Link href="/contact" className="hover:underline">Contact</Link></li>
           </ul>
         </div>
@@ -60,9 +60,9 @@ export default function Footer() {
           <h3 className="font-bold mb-4 text-lg">Resources</h3>
           <ul className="space-y-2">
             <li><Link href="#" className="hover:underline">Portfolio</Link></li>
-            <li><Link href="/blogs" className="hover:underline">Blogs</Link></li>
-            <li><Link href="#" className="hover:underline">Privacy Policy</Link></li>
-            <li><Link href="#" className="hover:underline">Terms & Conditions</Link></li>
+            <li><Link href="/blog" className="hover:underline">Blogs</Link></li>
+            <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
+            <li><Link href="/terms" className="hover:underline">Terms & Conditions</Link></li>
           </ul>
         </div>
 

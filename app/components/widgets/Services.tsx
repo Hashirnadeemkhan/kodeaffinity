@@ -65,9 +65,9 @@ const ServicesSection = () => {
           <p className="text-lg mb-4">
             Partner with Kode Affinity and take your digital journey to the next level. Whether you need a website, app, or full-scale digital strategy, we’re here to help.
           </p>
-          <button className="bg-white text-red-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105">
+         <Link href={"/service"}><button className="bg-white text-red-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105">
             Learn More
-          </button>
+          </button></Link> 
         </div>
 
         {/* Services Cards */}
