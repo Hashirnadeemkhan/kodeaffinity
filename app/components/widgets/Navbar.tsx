@@ -57,7 +57,7 @@ const Navbar = () => {
     <>
       <div ref={navRef} className="h-[100px]">
         <nav
-          className={`bg-white shadow-md mx-auto w-full md:w-[90%] rounded-lg transition-all duration-300 ease-in-out ${
+          className={`bg-white shadow-md mx-auto w-[90%] rounded-lg transition-all duration-300 ease-in-out ${
             isSticky ? "fixed top-0 left-0 right-0 z-50 mt-1" : ""
           }`}
         >
@@ -131,7 +131,7 @@ const Navbar = () => {
                 exit="closed"
                 variants={menuVariants}
                 transition={{ duration: 0.3 }}
-                className="lg:hidden bg-white shadow-lg px-6 py-4 text-left fixed left-0 right-0 w-full mx-auto"
+                className="lg:hidden bg-white shadow-lg px-6 py-4 text-center fixed left-0 right-0 w-[90%] mx-auto"
                 style={{ zIndex: 1000 }}
               >
                 {navItems.map((item) => (
@@ -139,7 +139,7 @@ const Navbar = () => {
                     {item.isDropdown ? (
                       <div className="mb-2">
                         <button
-                          className="text-black hover:text-red-500 flex items-center justify-between w-full py-2"
+                          className="text-black hover:text-red-500 flex items-center justify-center gap-x-1 w-full py-2"
                           onClick={() => setIsServicesOpen(!isServicesOpen)}
                         >
                           {item.name}{" "}
@@ -154,7 +154,7 @@ const Navbar = () => {
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.3 }}
-                              className="mt-2 space-y-2 text-left items-start pl-4"
+                              className="mt-2 space-y-2 text-center"
                             >
                               {services.map((service) => (
                                 <motion.div key={service.id} whileHover="hover" variants={linkVariants}>
@@ -186,14 +186,14 @@ const Navbar = () => {
                 <div className="mt-4 space-y-2">
                   <Link
                     href="/contact"
-                    className="block bg-red-500 text-white py-2 px-4 rounded-full text-center hover:bg-red-600 transition-all duration-300"
+                    className="block bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600 transition-all duration-300"
                     onClick={handleLinkClick}
                   >
                     Call us
                   </Link>
                   <Link
                     href="/calendly"
-                    className="block bg-transparent border-2 border-red-500 text-black hover:text-white py-2 px-4 rounded-full text-center hover:bg-red-500 transition-all duration-300"
+                    className="block bg-transparent border-2 border-red-500 text-black hover:text-white py-2 px-4 rounded-full hover:bg-red-500 transition-all duration-300"
                     onClick={handleLinkClick}
                   >
                     Calendly
@@ -209,4 +209,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
