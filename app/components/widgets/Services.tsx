@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Button from '../shared/Button';
 import Image from 'next/image';
 
-const ServicesSection = () => {
+const ServicesSection = ({ showLearnMore = true }) => {
   const services = [
   {
     title: 'Website Development',
@@ -65,9 +65,13 @@ const ServicesSection = () => {
           <p className="text-lg mb-4">
             Partner with Kode Affinity and take your digital journey to the next level. Whether you need a website, app, or full-scale digital strategy, we’re here to help.
           </p>
-         <Link href={"/service"}><button className="bg-white text-red-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105">
-            Learn More
-          </button></Link> 
+          {showLearnMore && (
+            <Link href={"/service"}>
+              <button className="bg-white text-red-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105">
+                Learn More
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Services Cards */}

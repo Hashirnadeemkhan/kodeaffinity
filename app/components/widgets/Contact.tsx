@@ -32,6 +32,7 @@ const Contact = () => {
     formState: { errors },
     setValue,
     watch,
+    reset, // Destructure reset
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   })
@@ -79,6 +80,9 @@ const Contact = () => {
             color: "#4ade80",
           },
         })
+
+        // Reset the form fields after successful submission
+        reset()
       } else {
         toast.error("Sorry, something went wrong. Please try again.")
       }
@@ -211,4 +215,3 @@ const Contact = () => {
 }
 
 export default Contact
-

@@ -4,7 +4,7 @@ import styles from './Companies.module.css'; // Create a CSS module for custom s
 
 const Companies = () => {
   return (
-    <div className='mt-14 mb-10'>
+    <div className='mt-20 mb-10'>
       <h1 className='text-center lg:text-5xl text-3xl font-semibold'>WE WORKED WITH</h1>
       <hr className='border-red-700 mb-10 w-52 mx-auto mt-2' />
       

@@ -34,7 +34,7 @@ const PricingSection = () => {
     category: pkg.name.split(" ")[0],
   }))
 
-  const services = ["All", "Web", "App", "Logo", "Animation", "Illustration", "Branding", "SaaS", "SEO", "SMM"]
+  const services = ["All", "Web Design $ Development", "Mobile Application Development", "Logo", "Animation", "Illustration", "Branding", "SaaS", "SEO", "SMM"]
 
   const filteredPackages =
     activeTab === "All" ? packages : packages.filter((pkg) => pkg.category.toLowerCase() === activeTab.toLowerCase())
@@ -95,7 +95,7 @@ const PricingSection = () => {
           {services.map((service) => (
             <button
               key={service}
-              className={`px-3 md:px-5 py-2 rounded-lg flex items-center justify-center ${
+              className={`px-3 text-sm font-semibold md:px-5 py-2 rounded-lg flex items-center justify-center ${
                 activeTab === service ? "bg-red-500 text-white" : "text-black"
               } hover:bg-red-700 hover:text-white transition duration-300`}
               onClick={() => handleTabClick(service)}

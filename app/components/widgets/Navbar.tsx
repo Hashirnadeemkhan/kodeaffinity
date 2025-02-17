@@ -6,7 +6,7 @@ import Image from "next/image"
 import { IoIosArrowDown } from "react-icons/io"
 import { services } from "@/app/data/services"
 import { motion, AnimatePresence } from "framer-motion"
-
+import { useRouter, usePathname } from "next/navigation"
 import { useMediaQuery } from "../hooks/use-media-query"
 
 const Navbar = () => {
@@ -15,6 +15,8 @@ const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
   const isTablet = useMediaQuery("(max-width: 1024px)")
+  const router = useRouter()
+  const pathname = usePathname()
 
   const handleLinkClick = () => {
     setIsOpen(false)
@@ -44,6 +46,13 @@ const Navbar = () => {
     hover: { scale: 1.05, color: "#EF4444" },
   }
 
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return pathname === path
+    }
+    return pathname.startsWith(path)
+  }
+
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About us", path: "/about" },
@@ -69,43 +78,54 @@ const Navbar = () => {
             </div>
 
             <div className="hidden lg:flex lg:space-x-8">
-  {navItems.map((item) => (
-    <motion.div key={item.name} whileHover="hover" variants={linkVariants}>
-      {item.isDropdown ? (
-        <div className="relative group">
-          <Link
-            href={item.path} // Navigate to /service on click
-            className="text-black hover:text-red-500 flex items-center gap-x-1 cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault(); // Prevent default navigation
-              window.location.href = item.path; // Manually navigate to /service
-            }}
-          >
-            {item.name}{" "}
-            <IoIosArrowDown className="transition-transform group-hover:rotate-180" />
-          </Link>
-          <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-            <div className="py-1">
-              {services.map((service) => (
-                <Link
-                  key={service.id}
-                  href={`/services/${service.slug}`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500"
-                >
-                  {service.title}
-                </Link>
+              {navItems.map((item) => (
+                <motion.div key={item.name} whileHover="hover" variants={linkVariants}>
+                  {item.isDropdown ? (
+                    <div className="relative group">
+                      <Link
+                        href={item.path}
+                        className={`text-black hover:text-red-500 flex items-center gap-x-1 cursor-pointer ${
+                          isActive(item.path) ? "text-red-500 " : ""
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          window.location.href = item.path
+                        }}
+                        aria-current={isActive(item.path) ? "page" : undefined}
+                      >
+                        {item.name} <IoIosArrowDown className="transition-transform group-hover:rotate-180" />
+                      </Link>
+                      <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div className="py-1">
+                          {services.map((service) => (
+                            <Link
+                              key={service.id}
+                              href={`/services/${service.slug}`}
+                              className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-500 ${
+                                isActive(`/services/${service.slug}`) ? "text-red-500" : ""
+                              }`}
+                              aria-current={isActive(`/services/${service.slug}`) ? "page" : undefined}
+                            >
+                              {service.title}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.path}
+                      className={`text-black hover:text-red-500   focus:ring-opacity-50 ${
+                        isActive(item.path) ? "text-red-500 " : ""
+                      }`}
+                      aria-current={isActive(item.path) ? "page" : undefined}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      ) : (
-        <Link href={item.path} className="text-black hover:text-red-500">
-          {item.name}
-        </Link>
-      )}
-    </motion.div>
-  ))}
-</div>
 
             <div className="hidden lg:block space-x-2">
               <Link
@@ -147,7 +167,9 @@ const Navbar = () => {
                     {item.isDropdown ? (
                       <div className="mb-2">
                         <button
-                          className="text-black hover:text-red-500 flex items-center justify-center gap-x-1 w-full py-2"
+                          className={`text-black hover:text-red-500 flex items-center justify-center gap-x-1 w-full py-2 ${
+                            isActive(item.path) ? "text-red-500" : ""
+                          }`}
                           onClick={() => setIsServicesOpen(!isServicesOpen)}
                         >
                           {item.name}{" "}
@@ -163,14 +185,16 @@ const Navbar = () => {
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.3 }}
                               className="mt-2 space-y-2 text-center"
-                        
                             >
                               {services.map((service) => (
                                 <motion.div key={service.id} whileHover="hover" variants={linkVariants}>
                                   <Link
                                     href={`/services/${service.slug}`}
-                                    className="block text-black hover:text-red-500 py-2"
+                                    className={`block text-black hover:text-red-500 py-2   ${
+                                      isActive(`/services/${service.slug}`) ? "text-red-500 " : ""
+                                    }`}
                                     onClick={handleLinkClick}
+                                    aria-current={isActive(`/services/${service.slug}`) ? "page" : undefined}
                                   >
                                     {service.title}
                                   </Link>
@@ -183,8 +207,11 @@ const Navbar = () => {
                     ) : (
                       <Link
                         href={item.path}
-                        className="block text-black hover:text-red-500 py-2"
+                        className={`block text-black hover:text-red-500 py-2 focus:outline-none focus:ring-2  focus:ring-opacity-50 ${
+                          isActive(item.path) ? "text-red-500" : ""
+                        }`}
                         onClick={handleLinkClick}
+                        aria-current={isActive(item.path) ? "page" : undefined}
                       >
                         {item.name}
                       </Link>
@@ -218,3 +245,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+

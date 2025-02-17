@@ -1,68 +1,58 @@
+import { collection, getDocs } from "firebase/firestore"
+import Image from "next/image"
+import { db } from "@/firebase"
+import Link from "next/link"
+import BlogLayout from "@/app/components/(private)/BlogLayout"
 
-import React from 'react';  
-import { buttonVariants } from '@/components/ui/button';
-import Link from 'next/link';
-import fs from "fs";
-import matter from 'gray-matter';
-import Image from 'next/image';
-import BlogLayout from "@/app/components/(private)/BlogLayout";
+async function getBlogs() {
+  const querySnapshot = await getDocs(collection(db, "posts"))
+  return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+}
 
+export default async function Blog() {
+  const blogs = await getBlogs()
 
-
-
-const dirContent = fs.readdirSync("app/content", "utf-8") //Ye directory ke andar ki saari files ke names ko ek array ke form me return karta hai:
-
-const blogs = dirContent.map(file=>{  
-    const fileContent = fs.readFileSync(`app/content/${file}`, "utf-8") //Har file name ke liye, aap fs.readFileSync ko call karte hain aur uska content read karte hain.
-    const {data} = matter(fileContent)  // Metadata extract kiya
-    return data  // Data ko return kiya
-})
-
-const Blog = () => {
   return (
     <div>
- <BlogLayout>
-  <></>
- </BlogLayout>
-    <div className="container max-w-7xl mx-auto p-4">
-      {/* Main heading for the blog section */}
-      <h1 className="text-4xl font-bold mb-8 text-center">Blog</h1>
-      
-      {/* Grid layout for blog posts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogs.map((blog, index) => (
-          <div key={index} className="rounded-lg shadow-md overflow-hidden  dark:border-2">
-            {/* Blog post image */}
-         
-             <Image
-              height={300}
-              width={300}
-              priority
-              src={blog.image}
-              alt={blog.title}
-              className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
-            />
-            {/* Blog post content */}
-            <div className="p-4">
-              {/* Blog post title */}
-              <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
-              
-              {/* Blog post description */}
-              <p className=" mb-4 text-red-500 font-semibold">{blog.description}</p>
-              
-              {/* Blog post author and date */}
-              <div className="text-sm  mb-4">
-                <span className='font-semibold'>By {blog.author}</span> | <span className='font-semibold'>{new Date(blog.date).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+      <BlogLayout>
+        <></>
+      </BlogLayout>
+      <div className="container max-w-7xl mx-auto p-4">
+        <h1 className="text-4xl font-bold mb-8 text-center">Blog</h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.map((blog: any) => (
+            <div key={blog.id} className="rounded-lg shadow-md overflow-hidden dark:border-2">
+              <Image
+                height={300}
+                width={300}
+                priority
+                src={blog.image || "/placeholder.svg"}
+                alt={blog.title}
+                className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
+              />
+              <div className="p-4">
+                <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
+                <p className="mb-4 text-red-500 font-semibold">{blog.description}</p>
+                <div className="text-sm mb-4">
+                  <span className="font-semibold">By {blog.author}</span> |{" "}
+                  <span className="font-semibold">
+                    {new Date(blog.date).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                </div>
+                <button className="hover:text-black text-red-400 font-semibold">
+                  <Link href={`/blogpost/${blog.slug}`}>Read More</Link>
+                </button>
               </div>
-              
-              {/* Link to the full blog post */}
-             <button className='hover:text-black text-red-400 font-semibold'><Link href={`/blogpost/${blog.slug}`}>Read More</Link></button>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
-    </div>
-  );
-};
-export default Blog;
+  )
+}
+

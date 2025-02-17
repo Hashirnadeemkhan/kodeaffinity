@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -39,13 +40,13 @@ const Creativity = () => {
               <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 ">
                 Craft creativity with our <span className="italic">Digital Experts.</span>
               </h1>
-              <motion.button 
+              <Link href={"/contact"}><motion.button 
                 className="text-lg px-8 py-3 rounded-xl bg-white text-black hover:bg-red-50"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Get started free
-              </motion.button>
+              </motion.button></Link>
             </motion.div>
 
             {/* Right Content */}

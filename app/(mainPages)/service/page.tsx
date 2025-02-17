@@ -21,7 +21,7 @@ const Service = () => {
       <ServiceLayout title={"Services"} breadcrumb={breadcrumbItems} />
 
       {/* Service section rendered separately */}
-      <ServicesSection />
+      <ServicesSection showLearnMore={false}/>
       <Companies />
       <Creativity />
     </div>
