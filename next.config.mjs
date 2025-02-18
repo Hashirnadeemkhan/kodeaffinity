@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
     images: {
-      domains: ["res.cloudinary.com"],
+      domains: [
+        "res.cloudinary.com", // For Cloudinary images
+        "firebasestorage.googleapis.com", // For Firebase Storage images if needed
+      ],
     },
   };
   
+  // Use `export default` for ES modules
   export default nextConfig;
-  
