@@ -85,10 +85,10 @@ export default async function Page({ params }: PageProps) {
           </div>
         </header>
 
-        {data.image && (
+        {data.imageUrl && (
           <div className="mb-12">
             <Image
-              src={data.image || "/placeholder.svg"}
+              src={data.imageUrl || "/placeholder.svg"}
               alt={data.title}
               width={1200}
               height={630}

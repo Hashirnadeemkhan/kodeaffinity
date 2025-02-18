@@ -23,14 +23,16 @@ export default async function Blog() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.map((blog: any) => (
             <div key={blog.id} className="rounded-lg shadow-md overflow-hidden dark:border-2">
-              <Image
-                height={300}
-                width={300}
-                priority
-                src={blog.image || "/placeholder.svg"}
-                alt={blog.title}
-                className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
-              />
+              <div className="relative h-56">
+                <Image
+                  src={blog.imageUrl || "/placeholder.svg"}
+                  alt={blog.title}
+              
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-500 hover:scale-105"
+                />
+              </div>
               <div className="p-4">
                 <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
                 <p className="mb-4 text-red-500 font-semibold">{blog.description}</p>

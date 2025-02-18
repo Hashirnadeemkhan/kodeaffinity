@@ -19,53 +19,136 @@ const Privacy = () => {
       {/* Privacy layout for header and breadcrumb */}
       <PrivacyLayout title="Privacy Policy" breadcrumb={breadcrumbItems} />
 
-      {/* Section: Introduction */}
-      <section className="max-w-screen-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
-        <h2 className="text-2xl font-semibold text-purple-800 mb-4">
-          Your Privacy Matters to Us
-        </h2>
-        <p className="text-gray-700 mb-6">
-          At [Your Company Name], we are committed to protecting your personal
-          information. This Privacy Policy outlines how we collect, use, and
-          safeguard your data while providing our services.
-        </p>
+      {/* Main Privacy Policy Section */}
+      <section className="max-w-screen-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-8 space-y-8">
+        {/* Introduction */}
+        <div>
+          <h2 className="text-2xl font-bold text-red-700 mb-4">
+            Your Privacy Matters to Us
+          </h2>
+          <p className="text-black">
+            At Kode Affinity, we value your privacy and are committed to safeguarding the personal data of our clients and website visitors. This Privacy Policy explains how we collect, use, and protect your information, in accordance with industry standards and regulations.
+          </p>
+        </div>
 
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          1. Information We Collect
-        </h3>
-        <p className="text-gray-700 mb-4">
-          We collect personal information that you provide to us when you use
-          our website, such as your name, email address, and any messages you
-          send to us. We may also collect technical data like your IP address,
-          browser type, and device information.
-        </p>
+        {/* Section 1: Information We Collect */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-700 mb-2">
+            1. Information We Collect
+          </h3>
+          <p className="text-black">
+            We gather personal information when you interact with our website or use our IT services. The data we may collect includes:
+          </p>
+          <ul className="list-disc list-inside pl-4 text-black space-y-2">
+            <li>
+              <strong>Personal Information:</strong> Name, email address, phone number, company name, and other contact details.
+            </li>
+            <li>
+              <strong>Usage Data:</strong> Information about how you use our website and services, such as pages visited, links clicked, and time spent on specific sections.
+            </li>
+            <li>
+              <strong>Cookies and Tracking Technologies:</strong> To improve your experience and analyze website traffic, we may use cookies and other tracking technologies.
+            </li>
+          </ul>
+        </div>
 
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          2. How We Use Your Information
-        </h3>
-        <p className="text-gray-700 mb-4">
-          Your information is used to improve our services, communicate with
-          you, and enhance your overall experience on our platform. We also use
-          it to ensure security and prevent fraud.
-        </p>
+        {/* Section 2: How We Use Your Information */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-700 mb-2">
+            2. How We Use Your Information
+          </h3>
+          <p className="text-black">
+            We use your personal data for the following purposes:
+          </p>
+          <ul className="list-disc list-inside pl-4 text-black space-y-2">
+            <li>
+              <strong>Customer Support:</strong> To provide assistance and respond to inquiries regarding our IT services.
+            </li>
+            <li>
+              <strong>Service Improvement:</strong> To enhance our services, products, and website content to meet your needs and preferences.
+            </li>
+            <li>
+              <strong>Marketing Communications:</strong> With your consent, we may send promotional materials or newsletters related to our IT solutions.
+            </li>
+          </ul>
+        </div>
 
-        {/* Add more dummy sections as needed */}
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          3. Sharing Your Information
-        </h3>
-        <p className="text-gray-700 mb-4">
-          We do not sell or share your information with third parties without
-          your consent, except for legal or regulatory reasons.
-        </p>
+        {/* Section 3: Data Protection and Security */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-700 mb-2">
+            3. Data Protection and Security
+          </h3>
+          <p className="text-black">
+            We implement advanced security measures to protect your personal data against unauthorized access or misuse. Our infrastructure is regularly updated to comply with industry standards and ensure the safety of your data.
+          </p>
+        </div>
 
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          4. Your Rights
-        </h3>
-        <p className="text-gray-700 mb-4">
-          You have the right to access, modify, or delete your personal
-          information at any time. To exercise these rights, contact our
-          support team.
-        </p>
+        {/* Section 4: Sharing Your Data */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-700 mb-2">
+            4. Sharing Your Data
+          </h3>
+          <p className="text-black">
+            At Kode Affinity, we respect your privacy. We do not sell, lease, or trade your personal information. However, we may share your data with trusted third-party partners and service providers who assist in providing our IT services, subject to strict confidentiality agreements.
+          </p>
+        </div>
+
+        {/* Section 5: Cookies and Tracking Technologies */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-700 mb-2">
+            5. Cookies and Tracking Technologies
+          </h3>
+          <p className="text-black">
+            We use cookies to improve your browsing experience, analyze usage, and optimize our {`website's`} performance. Cookies also help us deliver personalized content. You have the option to manage your cookie preferences via your browser settings.
+          </p>
+        </div>
+
+        {/* Section 6: Your Data Rights */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-700 mb-2">
+            6. Your Data Rights
+          </h3>
+          <p className="text-black">
+            Under data protection laws, you have the right to:
+          </p>
+          <ul className="list-disc list-inside pl-4 text-black space-y-2">
+            <li>Access and obtain a copy of your personal data.</li>
+            <li>Request corrections to inaccurate or incomplete data.</li>
+            <li>Request the deletion of your personal information.</li>
+            <li>
+              Object to the processing of your data in certain circumstances.
+            </li>
+          </ul>
+          <p className="text-black">
+            To exercise these rights, please contact us using the details below.
+          </p>
+        </div>
+
+        {/* Section 7: Updates to This Privacy Policy */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-700 mb-2">
+            7. Updates to This Privacy Policy
+          </h3>
+          <p className="text-black">
+            We may update this Privacy Policy from time to time to reflect changes in our practices or due to regulatory requirements. The {`Last Updated`} date will be displayed at the bottom of this page to reflect any changes.
+          </p>
+        </div>
+
+        {/* Section 8: Contact Us */}
+        <div>
+          <h3 className="text-xl font-semibold text-red-600 mb-2">
+            8. Contact Us
+          </h3>
+          <p className="text-black">
+            If you have any questions or concerns about this Privacy Policy or how we handle your personal data, please reach out to us:
+          </p>
+          <ul className="list-disc list-inside pl-4 text-black">
+            <li><strong>Kode Affinity</strong></li>
+            <li>Email: [Your Email Address]</li>
+            <li>Phone: [Your Contact Number]</li>
+            <li>Address: [Your Business Address]</li>
+          </ul>
+        </div>
       </section>
 
       {/* Render other components */}

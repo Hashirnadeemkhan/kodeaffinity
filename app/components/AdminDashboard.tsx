@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore"
 import { db } from "@/firebase"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Trash2, Edit, Eye } from "lucide-react"
 
@@ -12,6 +13,7 @@ interface BlogPost {
   title: string
   description: string
   slug: string
+  imageUrl: string
 }
 
 export default function AdminDashboard() {
@@ -45,9 +47,18 @@ export default function AdminDashboard() {
       <div className="grid gap-4">
         {posts.map((post) => (
           <div key={post.id} className="border p-4 rounded-lg flex justify-between items-center">
-            <div>
-              <h2 className="text-xl font-semibold">{post.title}</h2>
-              <p className="text-gray-600">{post.description}</p>
+            <div className="flex items-center space-x-4">
+              <Image
+                src={post.imageUrl || "/placeholder.svg"}
+                alt={post.title}
+                width={100}
+                height={100}
+                className="rounded-md object-cover"
+              />
+              <div>
+                <h2 className="text-xl font-semibold">{post.title}</h2>
+                <p className="text-gray-600">{post.description}</p>
+              </div>
             </div>
             <div className="flex gap-2">
               <Link href={`/blogpost/${post.slug}`}>

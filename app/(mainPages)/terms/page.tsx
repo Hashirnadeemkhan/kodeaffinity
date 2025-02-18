@@ -19,50 +19,110 @@ const Terms = () => {
       {/* Layout for header and breadcrumb */}
       <TermLayout title="Terms and Services" breadcrumb={breadcrumbItems} />
       <section className="max-w-screen-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
-        <h2 className="text-2xl font-semibold text-purple-800 mb-4">
-          Your Privacy Matters to Us
+        <h2 className="text-2xl font-semibold text-red-700 mb-4">
+          Terms of Service
         </h2>
-        <p className="text-gray-700 mb-6">
-          At [Your Company Name], we are committed to protecting your personal
-          information. This Privacy Policy outlines how we collect, use, and
-          safeguard your data while providing our services.
+        <p className="text-black mb-6">
+          These Terms of Service {`("Terms")`} govern the use of the services provided by Kode Affinity {`("we," "us," "our").`} By accessing or using our IT services, you agree to comply with these Terms.
         </p>
 
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          1. Information We Collect
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          1. Acceptance of Terms
         </h3>
-        <p className="text-gray-700 mb-4">
-          We collect personal information that you provide to us when you use
-          our website, such as your name, email address, and any messages you
-          send to us. We may also collect technical data like your IP address,
-          browser type, and device information.
+        <p className="text-black mb-4">
+          By using Kode {`Affinity's`} website or services, you accept and agree to be bound by these Terms. If you do not agree to these Terms, you must not use our services.
         </p>
 
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          2. How We Use Your Information
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          2. Services Provided
         </h3>
-        <p className="text-gray-700 mb-4">
-          Your information is used to improve our services, communicate with
-          you, and enhance your overall experience on our platform. We also use
-          it to ensure security and prevent fraud.
+        <p className="text-black mb-4">
+          Kode Affinity offers a range of IT solutions, including software development, IT consulting, website design, and digital marketing services. These services are described in detail on our website. We reserve the right to modify or discontinue any of our services at any time.
         </p>
 
-        {/* Add more dummy sections as needed */}
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          3. Sharing Your Information
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          3. Account Responsibilities
         </h3>
-        <p className="text-gray-700 mb-4">
-          We do not sell or share your information with third parties without
-          your consent, except for legal or regulatory reasons.
+        <p className="text-black mb-4">
+          If you create an account with us, you agree to provide accurate and up-to-date information. You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.
         </p>
 
-        <h3 className="text-xl font-semibold text-purple-700 mb-2">
-          4. Your Rights
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          4. Service Fees and Payments
         </h3>
-        <p className="text-gray-700 mb-4">
-          You have the right to access, modify, or delete your personal
-          information at any time. To exercise these rights, contact our
-          support team.
+        <p className="text-black mb-4">
+          For certain services, you may be required to pay fees. Payment terms, including pricing and billing schedules, will be outlined in the contract or service agreement for the services you choose. By accepting these Terms, you agree to pay the fees associated with the services provided.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          5. Client Responsibilities
+        </h3>
+        <p className="text-black mb-4">
+          You agree to use Kode Affinity’s services in accordance with all applicable laws and regulations. You must not use our services for any unlawful or prohibited activities, including but not limited to, infringing intellectual property rights, spreading malware, or engaging in fraudulent activities.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          6. Intellectual Property
+        </h3>
+        <p className="text-black mb-4">
+          All intellectual property rights in any content, software, designs, or materials provided by Kode Affinity remain the property of Kode Affinity or its licensors. You may not use, copy, modify, or distribute any of our intellectual property without our explicit permission.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          7. Privacy and Data Protection
+        </h3>
+        <p className="text-black mb-4">
+          Your use of our services is subject to our Privacy Policy, which governs the collection, use, and protection of your personal data. Please review our Privacy Policy for more details.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          8. Termination
+        </h3>
+        <p className="text-black mb-4">
+          We may suspend or terminate your access to our services at any time if we believe you are in breach of these Terms. You may also terminate your account by notifying us in writing.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          9. Limitation of Liability
+        </h3>
+        <p className="text-black mb-4">
+          To the maximum extent permitted by law, Kode Affinity shall not be liable for any indirect, incidental, or consequential damages arising out of or in connection with your use of our services. Our liability is limited to the amount paid for the services in question.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          10. Indemnification
+        </h3>
+        <p className="text-black mb-4">
+          You agree to indemnify and hold harmless Kode Affinity, its employees, and affiliates from any claims, losses, or damages arising from your use of our services or your breach of these Terms.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          11. Governing Law
+        </h3>
+        <p className="text-black mb-4">
+          These Terms are governed by and construed in accordance with the laws of [Your Jurisdiction]. Any disputes will be resolved in the courts located in [Your Jurisdiction].
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          12. Changes to These Terms
+        </h3>
+        <p className="text-black mb-4">
+          We reserve the right to update or modify these Terms at any time. Any changes will be posted on this page with an updated {`"Last Revised"`} date. Your continued use of our services after such changes indicates your acceptance of the new Terms.
+        </p>
+
+        <h3 className="text-xl font-semibold text-red-600 mb-2">
+          13. Contact Us
+        </h3>
+        <p className="text-black mb-4">
+          If you have any questions or concerns regarding these Terms, please contact us at:
+          <br />
+         Kode Affinity
+          <br />
+          Email: [Your Email Address]
+          <br />
+          Phone: [Your Contact Number]
+          <br />
+          Address: [Your Business Address]
         </p>
       </section>
       {/* Render other components */}

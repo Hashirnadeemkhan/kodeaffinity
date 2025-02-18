@@ -21,6 +21,7 @@
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.74.1",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
     "countup.js": "^2.8.0",
     "disqus-react": "^1.1.5",
