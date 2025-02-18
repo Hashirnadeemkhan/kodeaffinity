@@ -53,7 +53,7 @@ export default async function Blog() {
                   <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
                   <p className="mb-4 text-red-500 font-semibold">{blog.description}</p>
                   <div className="text-sm mb-4">
-                    <span className="font-semibold">By {blog.author || "Anonymous"}</span> |{" "}
+              
                     <span className="font-semibold">
                       {new Date(blog.date).toLocaleDateString("en-GB", {
                         day: "2-digit",
