@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useRef } from "react"
 import pricingData from "@/app/data/pricingData"
 import { motion, AnimatePresence } from "framer-motion"
@@ -22,22 +24,36 @@ const PricingSection = () => {
   }
 
   const togglePackageExpansion = (packageName: string) => {
-    setExpandedPackages((prev) =>
-      prev.includes(packageName)
-        ? prev.filter((name) => name !== packageName) // Remove if already expanded
-        : [...prev, packageName] // Add if not expanded
+    setExpandedPackages(
+      (prev) =>
+        prev.includes(packageName)
+          ? prev.filter((name) => name !== packageName) // Remove if already expanded
+          : [...prev, packageName], // Add if not expanded
     )
   }
 
   const packages: Package[] = pricingData().map((pkg) => ({
     ...pkg,
-    category: pkg.name.split(" ")[0],
+    category: pkg.name.split(" ").slice(0, 2).join(" ").toLowerCase(),
   }))
 
-  const services = ["All", "Web Design $ Development", "Mobile Application Development", "Logo", "Animation", "Illustration", "Branding", "SaaS", "SEO", "SMM"]
+  const services = [
+    "All",
+    "Web Design & Development",
+    "Mobile Application Development",
+    "Logo",
+    "Animation",
+    "Illustration",
+    "Branding",
+    "SaaS",
+    "SEO",
+    "SMM",
+  ]
 
   const filteredPackages =
-    activeTab === "All" ? packages : packages.filter((pkg) => pkg.category.toLowerCase() === activeTab.toLowerCase())
+    activeTab === "All"
+      ? packages
+      : packages.filter((pkg) => pkg.category.includes(activeTab.toLowerCase().split(" ")[0]))
 
   // Hardcoded columns for large screens (3 columns) and medium screens (2 columns)
   const column1 = filteredPackages.filter((_, index) => index % 3 === 0)
@@ -205,3 +221,4 @@ const PackageCard = ({
 }
 
 export default PricingSection
+

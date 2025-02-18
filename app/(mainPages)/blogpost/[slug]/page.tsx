@@ -104,7 +104,8 @@ export default async function Page({ params }: PageProps) {
 
         <hr className="my-12 border-gray-200 dark:border-gray-700" />
 
-        <CommentsSection />
+      
+<CommentsSection blogId={params.slug} />
       </article>
     </div>
   )

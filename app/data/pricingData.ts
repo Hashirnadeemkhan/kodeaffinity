@@ -35,12 +35,12 @@ const pricingData = () => {
           ],
         },
         {
-          name: "App Development Startup Package",
+          name: "Mobile App Development Startup Package",
           price: "819.50",
           features: ["Basic app functionality.", "Up to 5 screens.", "Basic UI/UX design.", "1-month support."],
         },
         {
-          name: "App Development Silver Package",
+          name: "Mobile App Development Silver Package",
           price: "819.50",
           features: [
             "Advanced app functionality.",
@@ -50,7 +50,7 @@ const pricingData = () => {
           ],
         },
         {
-          name: "App Development Gold Package",
+          name: "Mobile App Development Gold Package",
           price: "2,669.50",
           features: [
             "Complex app functionality.",
