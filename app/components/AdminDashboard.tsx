@@ -8,6 +8,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Trash2, Edit, Eye } from "lucide-react"
 
+
 interface BlogPost {
   id: string
   title: string
@@ -40,6 +41,8 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   }
 
   return (
+    <div>
+    
     <div>
       <Link href="/admin/create">
         <Button className="mb-4">Create New Post</Button>
@@ -85,6 +88,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         Logout
       </button>
   
+    </div>
     </div>
   )
 }

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { FaUser, FaLock } from "react-icons/fa"
+import Navbar from "./widgets/Navbar"
 
 export default function Login({ onLogin }: { onLogin: () => void }) {
   const [email, setEmail] = useState("")
@@ -24,6 +25,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
   }
 
   return (
+  
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
@@ -79,7 +81,7 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.4 }}
             >
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg shadow-md transition-all">
+              <Button type="submit" className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg shadow-md transition-all">
                 Login
               </Button>
             </motion.div>
