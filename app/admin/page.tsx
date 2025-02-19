@@ -1,17 +1,35 @@
+"use client"
 
+import { useState, useEffect } from "react"
 import AdminDashboard from "../components/AdminDashboard"
-import type { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "Admin Dashboard",
-  description: "Manage your blog posts",
-}
+import Login from "../components/Login"
+import { usePersistedAuth } from "../components/hooks/useAuth"
 
 export default function AdminPage() {
+  const { isLoggedIn, login, logout } = usePersistedAuth()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(false)
+  }, [])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-6">Admin Login</h1>
+        <Login onLogin={login} />
+      </div>
+    )
+  }
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
-      <AdminDashboard />
+      <AdminDashboard onLogout={logout} />
     </div>
   )
 }

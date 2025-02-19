@@ -10,6 +10,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.12.0",
     "@emailjs/browser": "^4.4.1",
     "@hookform/resolvers": "^3.10.0",
     "@next/font": "^14.2.15",

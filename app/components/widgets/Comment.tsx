@@ -5,9 +5,9 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, query, orderBy } from "firebase/firestore"
 import { db } from "@/firebase"
-import { useAuth } from "@/app/context/AuthContext"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { Heart, Reply, Trash2, Send } from "lucide-react"
@@ -16,10 +16,8 @@ import { formatDistanceToNow } from "date-fns"
 interface Comment {
   id: string
   name: string
-  email: string
   comment: string
   timestamp: any
-  userId: string
   likes: string[]
   parentId?: string
   blogId: string
@@ -31,9 +29,8 @@ interface CommentsSectionProps {
 
 const CommentsSection = ({ blogId }: CommentsSectionProps) => {
   const [comments, setComments] = useState<Comment[]>([])
-  const [formData, setFormData] = useState({ name: "", email: "", comment: "" })
+  const [formData, setFormData] = useState({ name: "", comment: "" })
   const [replyTo, setReplyTo] = useState<string | null>(null)
-  const { user } = useAuth() // You'll need to implement authentication context
 
   useEffect(() => {
     // Subscribe to comments in real-time
@@ -59,63 +56,47 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
 
   const handleSubmit = async (e: React.FormEvent, parentId?: string) => {
     e.preventDefault()
-    // if (!user) {
-    //   alert("Please sign in to comment")
-    //   return
-    // }
 
     if (formData.comment.trim()) {
       try {
         await addDoc(collection(db, "comments"), {
-          name: formData.name || "Anonymous", // Use formData.name or default to "Anonymous"
-          email: formData.email || "no-email@example.com", // Use formData.email or a default
+          name: formData.name || "Anonymous",
           comment: formData.comment,
           timestamp: new Date(),
-          userId: "anonymous-user", // Use a placeholder for userId
           likes: [],
           parentId: parentId || null,
           blogId,
-        });
-  
-        setFormData({ ...formData, comment: "" }); // Clear the comment field
-        setReplyTo(null); // Reset replyTo state
+        })
+
+        setFormData({ ...formData, comment: "" })
+        setReplyTo(null)
       } catch (error) {
-        console.error("Error adding comment:", error);
+        console.error("Error adding comment:", error)
       }
     }
-  };
-  const handleLike = async (commentId: string) => {
-    if (!user) {
-      alert("Please sign in to like comments")
-      return
-    }
+  }
 
+  const handleLike = async (commentId: string) => {
     const commentRef = doc(db, "comments", commentId)
     const comment = comments.find((c) => c.id === commentId)
 
     if (comment) {
-      const newLikes = comment.likes.includes(user.uid)
-        ? comment.likes.filter((id) => id !== user.uid)
-        : [...comment.likes, user.uid]
+      const newLikes = comment.likes.includes(commentId)
+        ? comment.likes.filter((id) => id !== commentId)
+        : [...comment.likes, commentId]
 
       await updateDoc(commentRef, { likes: newLikes })
     }
   }
 
   const handleDelete = async (commentId: string) => {
-    if (!user) return
-
-    const comment = comments.find((c) => c.id === commentId)
-    if (comment?.userId === user.uid) {
-      if (window.confirm("Are you sure you want to delete this comment?")) {
-        await deleteDoc(doc(db, "comments", commentId))
-      }
+    if (window.confirm("Are you sure you want to delete this comment?")) {
+      await deleteDoc(doc(db, "comments", commentId))
     }
   }
 
   const CommentItem = ({ comment, isReply = false }: { comment: Comment; isReply?: boolean }) => {
-    const isAuthor = user?.uid === comment.userId
-    const hasLiked = user && comment.likes.includes(user.uid)
+    const hasLiked = comment.likes.includes(comment.id)
 
     return (
       <motion.div
@@ -159,17 +140,15 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
                   <span>Reply</span>
                 </Button>
               )}
-              {isAuthor && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center space-x-1 text-red-500"
-                  onClick={() => handleDelete(comment.id)}
-                >
-                  <Trash2 className="w-4 h-4" />
-                  <span>Delete</span>
-                </Button>
-              )}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center space-x-1 text-red-500"
+                onClick={() => handleDelete(comment.id)}
+              >
+                <Trash2 className="w-4 h-4" />
+                <span>Delete</span>
+              </Button>
             </div>
           </div>
         </div>
@@ -186,6 +165,7 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
 
       {/* Comment Form */}
       <form onSubmit={(e) => handleSubmit(e)} className="space-y-4">
+        <Input name="name" placeholder="Your name (optional)" value={formData.name} onChange={handleInputChange} />
         <Textarea
           name="comment"
           placeholder={replyTo ? "Write a reply..." : "Write a comment..."}
@@ -194,7 +174,7 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
           className="min-h-[100px]"
         />
         <div className="flex justify-end">
-          <Button type="submit" className="flex items-center space-x-2">
+          <Button type="submit" className="flex items-center space-x-2 bg-red-500 hover:bg-red-600 text-white">
             <Send className="w-4 h-4" />
             <span>{replyTo ? "Reply" : "Comment"}</span>
           </Button>
@@ -222,6 +202,12 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
                   className="ml-8"
                 >
                   <form onSubmit={(e) => handleSubmit(e, comment.id)} className="space-y-4">
+                    <Input
+                      name="name"
+                      placeholder="Your name (optional)"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
                     <Textarea
                       name="comment"
                       placeholder="Write your reply..."
@@ -230,10 +216,17 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
                       className="min-h-[100px]"
                     />
                     <div className="flex justify-end space-x-2">
-                      <Button type="button" variant="outline" onClick={() => setReplyTo(null)}>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setReplyTo(null)}
+                        className="bg-red-500 hover:bg-red-600 text-white"
+                      >
                         Cancel
                       </Button>
-                      <Button type="submit">Reply</Button>
+                      <Button type="submit" className="bg-red-500 hover:bg-red-600 text-white">
+                        Reply
+                      </Button>
                     </div>
                   </form>
                 </motion.div>

@@ -73,8 +73,6 @@ export default async function Page({ params }: PageProps) {
           <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900 dark:text-gray-100">{data.title}</h1>
           <p className="text-lg mb-6 text-gray-600 dark:text-gray-400 italic">&quot;{data.description}&quot;</p>
           <div className="flex items-center justify-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
-            <p>By {data.author}</p>
-            <span>•</span>
             <time dateTime={data.date}>
               {new Date(data.date).toLocaleDateString("en-US", {
                 year: "numeric",

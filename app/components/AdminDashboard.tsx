@@ -16,7 +16,7 @@ interface BlogPost {
   imageUrl: string
 }
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const [posts, setPosts] = useState<BlogPost[]>([])
 
   useEffect(() => {
@@ -78,6 +78,13 @@ export default function AdminDashboard() {
           </div>
         ))}
       </div>
+      <button
+        onClick={onLogout}
+        className="bg-red-500 text-white px-4 py-2 rounded mt-4 hover:bg-red-600 transition-colors"
+      >
+        Logout
+      </button>
+  
     </div>
   )
 }

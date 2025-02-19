@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import Link from "next/link"
 import { useState, useRef } from "react"
 import pricingData from "@/app/data/pricingData"
 import { motion, AnimatePresence } from "framer-motion"
@@ -210,9 +210,10 @@ const PackageCard = ({
                 {feature}
               </li>
             ))}
+            <Link href={"/contact"}>
             <button className="hover:text-white py-3 w-full border border-red-500 px-4 rounded-md mt-auto hover:bg-red-500 text-black transition duration-300">
               Get Started
-            </button>
+            </button></Link>
           </motion.ul>
         )}
       </AnimatePresence>
