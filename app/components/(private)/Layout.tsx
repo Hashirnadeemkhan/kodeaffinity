@@ -26,7 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ isAboutOnly, isPricingOnly, isReducedHe
       <div className={`min-h-[50vh] md:min-h-[30vh] ${isReducedHeight ? "lg:min-h-[50vh]" : "lg:min-h-screen"}`}>
         <div className="pt-6">
           <Navbar />
-        </div>
+        </div >
         <Hero isAboutOnly={isAboutOnly} isPricingOnly={isPricingOnly} />
       </div>
     </div>

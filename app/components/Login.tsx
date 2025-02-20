@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { FaUser, FaLock } from "react-icons/fa"
-import Navbar from "./widgets/Navbar"
+
 
 export default function Login({ onLogin }: { onLogin: () => void }) {
   const [email, setEmail] = useState("")
@@ -30,17 +30,17 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="flex items-center justify-center min-h-screen bg-gray-100"
+      className="flex items-center justify-center min-h-fit m-20 "
     >
-      <Card className="w-full max-w-md shadow-xl rounded-2xl p-6 bg-white">
+      <Card className="w-full max-w-xl shadow-xl rounded-2xl p-6 bg-white">
         <CardContent>
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-2xl font-semibold text-center text-gray-800 mb-6"
+            className="text-lg font-semibold text-center text-gray-800 mb-6"
           >
-            Admin Login
+            Enter Your Credentials
           </motion.h2>
           <form onSubmit={handleLogin} className="space-y-4">
             <motion.div

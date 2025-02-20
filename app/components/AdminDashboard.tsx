@@ -42,7 +42,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
   return (
     <div>
-    
+  
     <div>
       <Link href="/admin/create">
         <Button className="mb-4">Create New Post</Button>
