@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import type React from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { doc, setDoc, getDoc } from "firebase/firestore"
 import { db } from "@/firebase"
@@ -9,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image"
 import { Textarea } from "@/components/ui/textarea"
 import { slugify } from "../utils/slugify"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 interface BlogPostFormProps {
   postId?: string
@@ -21,6 +23,7 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
   const [slug, setSlug] = useState("")
   const [image, setImage] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState("")
+  const [error, setError] = useState("")
   const router = useRouter()
 
   useEffect(() => {
@@ -41,7 +44,6 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
     }
   }, [postId])
 
-  // Automatically generate slug when title changes
   useEffect(() => {
     if (title) {
       setSlug(slugify(title))
@@ -54,8 +56,34 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
     }
   }
 
+  const checkSlugExists = async (slug: string) => {
+    const docRef = doc(db, "posts", slug)
+    const docSnap = await getDoc(docRef)
+    return docSnap.exists()
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
+
+    if (postId && postId !== slug) {
+      // If we're editing a post and the slug has changed, check if the new slug exists
+      const exists = await checkSlugExists(slug)
+      if (exists) {
+        setError("A post with this slug already exists. Please choose a different title or modify the slug.")
+        return
+      }
+    } else if (!postId) {
+      // If we're creating a new post, check if the slug exists
+      const exists = await checkSlugExists(slug)
+      if (exists) {
+        setError("A post with this slug already exists. Please choose a different title or modify the slug.")
+        return
+      }
+    }
+
+   
+
     let uploadedImageUrl = imageUrl
 
     if (image) {
@@ -89,21 +117,14 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-        required
-      />
-      <Input
-        type="text"
-        value={slug}
-        onChange={(e) => setSlug(e.target.value)}
-        placeholder="Slug"
-        required
-      />
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-5xl mx-auto mt-10 mb-10">
+      {error && (
+        <Alert variant="destructive">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
+      <Input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="Slug" required />
       <Input
         type="text"
         value={description}
@@ -118,17 +139,21 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
         required
         rows={10}
       />
-      <Input type="file" onChange={handleImageChange} accept="image/*" />
+      <Input  required type="file" onChange={handleImageChange} accept="image/*" />
       {imageUrl && (
         <Image
           src={imageUrl || "/placeholder.svg"}
           width={400}
           height={400}
+       
           alt="Current blog image"
           className="w-full max-w-md mt-4"
         />
       )}
-      <Button type="submit">{postId ? "Update" : "Create"} Post</Button>
+      <Button className="bg-red-600 hover:bg-red-700" type="submit">
+        {postId ? "Update" : "Create"} Post
+      </Button>
     </form>
   )
 }
+

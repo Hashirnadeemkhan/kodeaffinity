@@ -8,7 +8,6 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Trash2, Edit, Eye } from "lucide-react"
 
-
 interface BlogPost {
   id: string
   title: string
@@ -41,12 +40,21 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   }
 
   return (
-    <div>
-  
-    <div>
-      <Link href="/admin/create">
-        <Button className="mb-4">Create New Post</Button>
-      </Link>
+    <div className="container mx-auto p-6">
+      {/* Buttons Section */}
+      <div className="flex justify-between items-center mb-6">
+        <Link href="/admin/create">
+          <Button className="bg-red-600 hover:bg-red-700">Create New Post</Button>
+        </Link>
+        <button
+          onClick={onLogout}
+          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+        >
+          Logout
+        </button>
+      </div>
+
+      {/* Blog Posts Grid */}
       <div className="grid gap-4">
         {posts.map((post) => (
           <div key={post.id} className="border p-4 rounded-lg flex justify-between items-center">
@@ -81,15 +89,6 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
           </div>
         ))}
       </div>
-      <button
-        onClick={onLogout}
-        className="bg-red-500 text-white px-4 py-2 rounded mt-4 hover:bg-red-600 transition-colors"
-      >
-        Logout
-      </button>
-  
-    </div>
     </div>
   )
 }
-

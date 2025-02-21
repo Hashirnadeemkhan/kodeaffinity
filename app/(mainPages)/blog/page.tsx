@@ -29,8 +29,8 @@ export default async function Blog() {
       <BlogLayout>
         <></>
       </BlogLayout>
-      <div className="container max-w-7xl mx-auto p-4">
-        <h1 className="text-4xl font-bold mb-8 text-center">Blog</h1>
+      <div className="container max-w-7xl mx-auto p-4 mb-10">
+        <h1 className="text-4xl font-bold  text-center mt-10 mb-8">Blog</h1>
 
         {blogs.length === 0 ? (
           <div className="text-center text-gray-500">

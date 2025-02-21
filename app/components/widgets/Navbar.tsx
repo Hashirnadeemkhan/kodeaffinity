@@ -84,7 +84,7 @@ const Navbar = () => {
                     <div className="relative group">
                       <Link
                         href={item.path}
-                        className={`text-black hover:text-red-500 flex items-center gap-x-1  cursor-pointer ${
+                        className={`text-black hover:text-red-500 flex items-center gap-x-1 cursor-pointer ${
                           isActive(item.path) ? "text-red-500 " : ""
                         }`}
                         onClick={(e) => {

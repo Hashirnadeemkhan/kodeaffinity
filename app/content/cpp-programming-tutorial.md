@@ -7,7 +7,7 @@ author: Hashir
 image: /assets/animation.png
 ---
 
-In the ever-evolving digital landscape, web design continues to adapt to the changing needs of users and businesses. As we step into 2024, several groundbreaking trends are set to redefine the future of web design. Whether you're a business owner, web designer, or digital strategist, staying ahead of these trends will help you deliver exceptional user experiences and maintain a competitive edge.
+ the ever-evolving digital landscape, web design continues to adapt to the changing needs of users and businesses. As we step into 2024, several groundbreaking trends are set to redefine the future of web design. Whether you're a business owner, web designer, or digital strategist, staying ahead of these trends will help you deliver exceptional user experiences and maintain a competitive edge.
 
 ## 1. Introduction to Web Design in 2024
 Web design has always been at the forefront of technological innovation, pushing the boundaries of what’s possible online. In 2024, the field is poised to become even more dynamic, with advancements in AI, immersive technologies, and a stronger focus on accessibility and sustainability. Let’s explore the trends that will dominate the web design landscape this year.
@@ -67,7 +67,7 @@ Page load speed remains a critical factor for user retention and SEO. In 2024, w
 ### Mobile-First Design
 With mobile browsing continuing to dominate, adopting a mobile-first design approach is essential. Websites must be fully responsive, ensuring seamless performance across all devices, from smartphones to tablets. A mobile-first strategy guarantees that users have a consistent and enjoyable experience, regardless of the device they use.
 
----
+---In
 
 ## 8. Sustainable Web Design
 
