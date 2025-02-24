@@ -21,13 +21,21 @@ interface Comment {
   likes: string[]
   parentId?: string
   blogId: string
+  userId: string
+}
+
+interface User {
+  id: string
+  name: string
+  isAdmin: boolean
 }
 
 interface CommentsSectionProps {
   blogId: string
+  currentUser?: User
 }
 
-const CommentsSection = ({ blogId }: CommentsSectionProps) => {
+const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
   const [comments, setComments] = useState<Comment[]>([])
   const [formData, setFormData] = useState({ name: "", comment: "" })
   const [replyTo, setReplyTo] = useState<string | null>(null)
@@ -66,6 +74,7 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
           likes: [],
           parentId: parentId || null,
           blogId,
+          userId: currentUser?.id || "anonymous",
         })
 
         setFormData({ ...formData, comment: "" })
@@ -89,9 +98,22 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
     }
   }
 
-  const handleDelete = async (commentId: string) => {
+  const handleDelete = async (commentId: string, commentUserId: string) => {
+    // Check if user has permission to delete
+    const canDelete = currentUser?.isAdmin || commentUserId === currentUser?.id
+
+    if (!canDelete) {
+      alert("You don't have permission to delete this comment")
+      return
+    }
+
     if (window.confirm("Are you sure you want to delete this comment?")) {
-      await deleteDoc(doc(db, "comments", commentId))
+      try {
+        await deleteDoc(doc(db, "comments", commentId))
+      } catch (error) {
+        console.error("Error deleting comment:", error)
+        alert("Failed to delete comment")
+      }
     }
   }
 
@@ -140,15 +162,17 @@ const CommentsSection = ({ blogId }: CommentsSectionProps) => {
                   <span>Reply</span>
                 </Button>
               )}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center space-x-1 text-red-500"
-                onClick={() => handleDelete(comment.id)}
-              >
-                <Trash2 className="w-4 h-4" />
-                <span>Delete</span>
-              </Button>
+              {(currentUser?.isAdmin || comment.userId === currentUser?.id) && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-1 text-red-500"
+                  onClick={() => handleDelete(comment.id, comment.userId)}
+                >
+                  <Trash2 className="w-4 h-4" />
+                  <span>Delete</span>
+                </Button>
+              )}
             </div>
           </div>
         </div>

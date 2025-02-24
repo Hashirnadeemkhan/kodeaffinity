@@ -33,22 +33,22 @@ const Reviews = () => {
       <div className='flex flex-col md:flex-row px-5 gap-10  justify-around w-full bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] text-white text-center py-10'>
         {/* <!-- On Time Delivery --> */}
         <div className='flex flex-col justify-center items-center'>
-          <h2 className="text-5xl font-bold">{onTimeDelivery}%</h2>
-          <p className="lg:text-lg md:text-xl mt-2 font-semibold">ON TIME DELIVERY</p>
+          <h2 className="lg:text-5xl text-4xl font-bold">{onTimeDelivery}%</h2>
+          <p className="lg:text-lg md:text-sm  mt-2 font-semibold">ON TIME DELIVERY</p>
           <p className="text-sm mt-1 max-w-sm text-center">We meet deadlines consistently with precision and efficiency.</p>
         </div>
 
         {/* <!-- Customer Satisfaction --> */}
-        <div className="flex flex-col justify-center items-cente">
-          <h2 className="text-5xl font-bold">{customerSatisfaction}%</h2>
-          <p className="text-lg mt-2 font-semibold">CUSTOMER SATISFACTION</p>
-          <p className="text-sm mt-1 max-w-sm">Our tailored IT solutions exceed client expectations, ensuring a high satisfaction rate.</p>
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="lg:text-5xl text-4xl font-bold">{customerSatisfaction}%</h2>
+          <p className="lg:text-lg md:text-sm  mt-2 font-semibold">CUSTOMER SATISFACTION</p>
+          <p className="text-xs mt-1 max-w-sm">Our tailored IT solutions exceed client expectations, ensuring a high satisfaction rate.</p>
         </div>
 
         {/* <!-- Repeat Business --> */}
         <div className="flex flex-col justify-center items-center">
-          <h2 className="text-5xl font-bold">{repeatBusiness}%</h2>
-          <p className="lg:text-lg md:text-xl mt-2 font-semibold">REPEAT BUSINESS</p>
+          <h2 className="lg:text-5xl text-4xl font-bold">{repeatBusiness}%</h2>
+          <p className="lg:text-lg md:text-sm  mt-2 font-semibold">REPEAT BUSINESS</p>
           <p className="text-sm mt-1 max-w-sm">Our clients trust us for ongoing success, leading to 100% repeat business.</p>
         </div>
       </div>

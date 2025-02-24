@@ -70,13 +70,14 @@ const PricingSection = () => {
     startX = e.pageX - scrollRef.current.offsetLeft
     scrollLeft = scrollRef.current.scrollLeft
     scrollRef.current.style.cursor = "grabbing"
+    scrollRef.current.style.userSelect = "none"
   }
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging || !scrollRef.current) return
     e.preventDefault()
     const x = e.pageX - scrollRef.current.offsetLeft
-    const walk = (x - startX) * 1.5 // Speed factor
+    const walk = (x - startX) * 2 // Increased speed factor
     scrollRef.current.scrollLeft = scrollLeft - walk
   }
 
@@ -85,6 +86,24 @@ const PricingSection = () => {
     if (scrollRef.current) {
       scrollRef.current.style.cursor = "grab"
     }
+  }
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!scrollRef.current) return
+    isDragging = true
+    startX = e.touches[0].pageX - scrollRef.current.offsetLeft
+    scrollLeft = scrollRef.current.scrollLeft
+  }
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDragging || !scrollRef.current) return
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft
+    const walk = (x - startX) * 2
+    scrollRef.current.scrollLeft = scrollLeft - walk
+  }
+
+  const handleTouchEnd = () => {
+    isDragging = false
   }
 
   return (
@@ -101,13 +120,16 @@ const PricingSection = () => {
       {/* Draggable Horizontal Scroll for Service Tabs */}
       <div
         ref={scrollRef}
-        className="overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 mb-8 md:mb-10 border border-red-700 rounded-xl py-2 px-2 scroll-smooth cursor-grab select-none"
+        className="overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 mb-8 md:mb-10 border border-red-700 rounded-xl py-2 px-4 scroll-smooth cursor-grab select-none"
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseUp}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove as unknown as React.MouseEventHandler<HTMLDivElement>}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        <div className="flex w-max lg:w-full space-x-2 items-center justify-center">
+        <div className="flex w-max space-x-4 items-center justify-start px-2">
           {services.map((service) => (
             <button
               key={service}
@@ -211,9 +233,10 @@ const PackageCard = ({
               </li>
             ))}
             <Link href={"/contact"}>
-            <button className="hover:text-white py-3 w-full border border-red-500 px-4 rounded-md mt-auto hover:bg-red-500 text-black transition duration-300">
-              Get Started
-            </button></Link>
+              <button className="hover:text-white py-3 w-full border border-red-500 px-4 rounded-md mt-auto hover:bg-red-500 text-black transition duration-300">
+                Get Started
+              </button>
+            </Link>
           </motion.ul>
         )}
       </AnimatePresence>

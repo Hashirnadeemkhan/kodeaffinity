@@ -12,7 +12,7 @@ interface PrivacyLayoutProps {
 }
 
 const PrivacyLayout: React.FC<PrivacyLayoutProps> = ({ title, breadcrumb }) => {
-  return <ServiceLayout title={title} breadcrumb={breadcrumb} />
+  return <ServiceLayout  title={title} breadcrumb={breadcrumb} />
 }
 
 export default PrivacyLayout

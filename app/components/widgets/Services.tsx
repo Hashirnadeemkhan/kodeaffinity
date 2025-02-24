@@ -11,11 +11,12 @@ const ServicesSection = ({ showLearnMore = true }) => {
     slug: 'web-design-development',
   },
   {
-    title: 'Mobile Application Development',
-    description: 'In a mobile-first world, having a robust app is essential for engaging customers on the go. We create intuitive, feature-rich mobile applications for iOS and Android that boost user interaction and drive business growth. Our apps are built to scale, ensuring long-term performance for your business needs.',
-    image: '/assets/mobileapp.png',
-    slug: 'mobile-development',
+    title: 'Software as a Service (SaaS)',
+    description: 'Looking to streamline your business processes? Our SaaS solutions are designed to help businesses operate more efficiently and scale effortlessly. From CRM platforms to cloud-based solutions, we deliver software that simplifies your workflows and empowers growth.',
+    image: '/assets/ppc.png',
+    slug: 'saas',
   },
+  
   {
     title: 'Search Engine Optimization',
     description: 'Struggling to rank on Google? Let us help you! Our SEO experts and content creators craft compelling strategies that increase your visibility and bring organic traffic to your website. From keyword research to high-quality blog posts, we help your business climb search engine rankings and establish authority in your niche.',
@@ -23,17 +24,18 @@ const ServicesSection = ({ showLearnMore = true }) => {
     slug: 'seo-content',
   },
   {
+    title: 'Mobile Application Development',
+    description: 'In a mobile-first world, having a robust app is essential for engaging customers on the go. We create intuitive, feature-rich mobile applications for iOS and Android that boost user interaction and drive business growth. Our apps are built to scale, ensuring long-term performance for your business needs.',
+    image: '/assets/mobileapp.png',
+    slug: 'mobile-development',
+  },
+  {
     title: 'Branding & Graphic Design',
     description: 'Your brand is more than just a logo—it’s your story. We specialize in crafting cohesive branding strategies and eye-catching graphic designs that resonate with your target audience. From packaging design to marketing collateral, we bring your vision to life.',
     image: '/assets/brand.png',
     slug: 'branding-design',
   },
-  {
-    title: 'Software as a Service (SaaS)',
-    description: 'Looking to streamline your business processes? Our SaaS solutions are designed to help businesses operate more efficiently and scale effortlessly. From CRM platforms to cloud-based solutions, we deliver software that simplifies your workflows and empowers growth.',
-    image: '/assets/ppc.png',
-    slug: 'saas',
-  },
+
   {
     title: 'Animation',
     description: 'Bring your ideas to life with professional animations that grab attention. From explainer videos to motion graphics, our animations add a dynamic flair to your brand messaging, making your content more engaging and memorable.',
@@ -88,10 +90,20 @@ const ServicesSection = ({ showLearnMore = true }) => {
                 <h4 className="text-2xl font-bold mb-2 lg:text-start text-center">{service.title}</h4>
                 <p className="text-sm mb-4 text-center lg:text-start">{service.description}</p>
                 <div className="flex lg:justify-start lg:items-start justify-center items-center">
-                  <Link href={`/services/${service.slug}`}>
-                  <Button text="Learn more" />
-                  </Link>
-                </div>
+  <Link href={`/services/${service.slug}`}>
+    {service.title === 'Animation' ? (
+      <div className="mt-12">
+        <Button text="Learn more" />
+      </div>
+    ) : service.title === 'Software as a Service (SaaS)' ? (
+      <div className="mt-2">
+        <Button text="Learn more" />
+      </div>
+    ) : (
+      <Button text="Learn more" />
+    )}
+  </Link>
+</div>
               </div>
             </div>
           ))}

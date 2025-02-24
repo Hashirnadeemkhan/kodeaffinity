@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ isAboutOnly, isPricingOnly }) => {
 
     return (
       <Wrapper>
-        <section className="flex flex-col gap-y-5 justify-center items-center mt-20 ">
+        <section className="flex flex-col gap-y-5 justify-center items-center mt-14 ">
           <h1 className="text-5xl md:text-6xl  font-semibold bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent ">
             {title}
           </h1>

@@ -35,7 +35,7 @@ export const services: Service[] = [
 "Our SEO and content writing services are designed to help your business rank higher on search engines and connect with your target audience. From keyword research to content creation and technical SEO, we ensure your website is optimized for maximum visibility and engagement."    },
     {
         id: "4",
-        title: "Logo & Illustration",
+        title: "Logo and Illustration ",
         description: "Creative design solutions",
         slug: "logo-illustration",
         image: "/assets/illustration.png",

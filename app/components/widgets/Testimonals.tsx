@@ -9,11 +9,7 @@ import stars from "/public/assets/stars.png"
 import Autoplay from "embla-carousel-autoplay"
 
 const testimonialsData = [
-  {
-    text: "Kode Affinity delivered an exceptional website for our business! Their team exceeded expectations and provided top-notch customer.",
-    author: "– Sarah J., Founder of GreenScape Solutions",
-    stars: 5,
-  },
+
   {
     text: "The logo designs we received were beyond what we envisioned. Highly recommend Kode Affinity for their creativity and professionalism.",
     author: " – Ali M., CEO of TechVibe",
@@ -30,15 +26,11 @@ const testimonialsData = [
     stars: 5,
   },
   {
-    text: "Kode Affinity's animation work added a creative touch to our marketing campaign. Truly impressive and professional.",
-    author: "– Sophia R., Marketing Lead at Bright Horizons",
+    text: "Kode Affinity delivered an exceptional website for our business! Their team exceeded expectations and provided top-notch customer.",
+    author: "– Sarah J., Founder of GreenScape Solutions",
     stars: 5,
   },
-  {
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has survived five centuries.",
-    author: "Founder - Delta Innovations",
-    stars: 5,
-  },
+
 ]
 
 const Testimonials = () => {

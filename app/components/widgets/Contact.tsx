@@ -8,13 +8,15 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Toaster, toast } from "react-hot-toast"
 
-// Form validation schema
 const formSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Invalid email address"),
   phone: z.string().min(1, "Phone number is required"),
   company: z.string().optional(),
-  serviceType: z.string().min(1, "Please select a service type"),
+  serviceType: z.string().min(1, "Service is required"), // Changed this line
   message: z.string().min(1, "Message is required"),
 })
 
@@ -32,9 +34,17 @@ const Contact = () => {
     formState: { errors },
     setValue,
     watch,
-    reset, // Destructure reset
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      serviceType: "", // Ensure default empty string
+      message: "",
+    },
   })
 
   const serviceType = watch("serviceType")
@@ -115,16 +125,19 @@ const Contact = () => {
             />
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
           </motion.div>
-
           <motion.div className="w-full md:w-1/2 px-3" variants={formVariants}>
-            <input
-              className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
-              type="email"
-              placeholder="Email Address"
-              {...register("email")}
-            />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-          </motion.div>
+  <input
+    className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+    type="email"
+    placeholder="Email Address"
+    {...register("email")}
+  />
+  {errors.email && (
+    <p className="text-red-500 text-sm mt-1">
+      {errors.email.message}
+    </p>
+  )}
+</motion.div>
         </div>
 
         <div className="flex flex-wrap mb-4">
@@ -150,46 +163,50 @@ const Contact = () => {
         </div>
 
         <motion.div className="relative mb-4 px-3" variants={formVariants}>
-          <button
-            type="button"
-            className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
-            {serviceType || "Type Service"}
-            <FaChevronDown className={`transition-transform ${dropdownOpen ? "rotate-180" : "rotate-0"}`} />
-          </button>
-          {dropdownOpen && (
-            <motion.ul
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="absolute left-0 w-full mt-2 bg-white border border-red-800 rounded-lg shadow-lg z-10"
-            >
-              {[
-                "Web Design & Development",
-                "Mobile App Development",
-                "Animation",
-                "Logo & Illustration",
-                "Social Media Marketing",
-                "Branding & Graphic Design",
-                "SEO & Content Writing",
-                "SaaS",
-              ].map((service) => (
-                <li
-                  key={service}
-                  className="px-4 py-2 hover:bg-red-700 hover:text-white cursor-pointer"
-                  onClick={() => {
-                    setDropdownOpen(false)
-                    setValue("serviceType", service)
-                  }}
-                >
-                  {service}
-                </li>
-              ))}
-            </motion.ul>
-          )}
-          {errors.serviceType && <p className="text-red-500 text-sm mt-1">{errors.serviceType.message}</p>}
-        </motion.div>
+  <button
+    type="button"
+    className="w-full px-4 py-3 border rounded-full border-red-800 outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
+    onClick={() => setDropdownOpen(!dropdownOpen)}
+  >
+    {serviceType || "Type Service"}
+    <FaChevronDown className={`transition-transform ${dropdownOpen ? "rotate-180" : "rotate-0"}`} />
+  </button>
+  {dropdownOpen && (
+    <motion.ul
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      className="absolute left-0 w-full mt-2 bg-white border border-red-800 rounded-lg shadow-lg z-10"
+    >
+      {[
+        "Web Design & Development",
+        "Mobile App Development",
+        "Animation",
+        "Logo & Illustration",
+        "Social Media Marketing",
+        "Branding & Graphic Design",
+        "SEO & Content Writing",
+        "SaaS",
+      ].map((service) => (
+        <li
+          key={service}
+          className="px-4 py-2 hover:bg-red-700 hover:text-white cursor-pointer"
+          onClick={() => {
+            setDropdownOpen(false)
+            setValue("serviceType", service)
+          }}
+        >
+          {service}
+        </li>
+      ))}
+    </motion.ul>
+  )}
+  {errors.serviceType && (
+    <p className="text-red-500 text-sm mt-1">
+      {errors.serviceType.message}
+    </p>
+  )}
+</motion.div>
 
         <motion.div className="mb-4 px-3" variants={formVariants}>
           <textarea

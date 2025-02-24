@@ -73,7 +73,7 @@ const FAQSection = () => {
               onClick={() => toggleFAQ(faq.id)}
             >
               <div className="flex justify-between items-center">
-                <h4 className="text-xl">{faq.question}</h4>
+                <h4 className="lg:text-xl md:text-sm">{faq.question}</h4>
                 <span className="text-xl font-bold">{openFAQ === faq.id ? "-" : "+"}</span>
               </div>
 
@@ -104,7 +104,7 @@ const FAQSection = () => {
               onClick={() => toggleFAQ(faq.id)}
             >
               <div className="flex justify-between items-center">
-                <h4 className="text-xl">{faq.question}</h4>
+                <h4 className="lg:text-xl md:text-sm">{faq.question}</h4>
                 <span className="text-xl font-bold">{openFAQ === faq.id ? "-" : "+"}</span>
               </div>
 

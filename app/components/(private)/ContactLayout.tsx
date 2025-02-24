@@ -40,7 +40,7 @@ const ContactLayout: React.FC<ContactLayoutProps> = ({ children }) => {
           <Navbar />
         </div>
         <Wrapper>
-          <section className="flex flex-col gap-y-5 justify-center items-center md:mt-20 mt-10">
+          <section className="flex flex-col gap-y-5 justify-center items-center md:mt-14 lg:mt-20 mt-14">
             <h1 className="text-4xl md:text-6xl text-center font-semibold bg-gradient-to-r from-[#981127] via-[#652046] to-[#24346D] bg-clip-text text-transparent">
               Contact Us
             </h1>
