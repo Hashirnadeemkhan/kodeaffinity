@@ -22,6 +22,7 @@ interface Comment {
   parentId?: string
   blogId: string
   userId: string
+  approved?: boolean
 }
 
 interface User {
@@ -42,19 +43,20 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
 
   useEffect(() => {
     // Subscribe to comments in real-time
-    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"))
+    const q = query(collection(db, "comments"), orderBy("timestamp", "desc")) // Specific documents ko filter karne ke liye.
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const commentsData = snapshot.docs
+      // Real-time updates lene ke liye
+      const commentsData = snapshot.docs //snapshot.docs → Firestore ka sara data array ke form me aata hai
         .map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }))
         .filter((comment: any) => comment.blogId === blogId) as Comment[]
-      setComments(commentsData)
+      setComments(commentsData) //Jo bhi naye comments aaye unko UI me update kar diya.
     })
 
-    return () => unsubscribe()
+    return () => unsubscribe() //Listener ko stop karne ke liye unsubscribe function return kar diya:
   }, [blogId])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -75,6 +77,7 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
           parentId: parentId || null,
           blogId,
           userId: currentUser?.id || "anonymous",
+          approved: false,
         })
 
         setFormData({ ...formData, comment: "" })
@@ -114,6 +117,15 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
         console.error("Error deleting comment:", error)
         alert("Failed to delete comment")
       }
+    }
+  }
+
+  const handleApprove = async (commentId: string) => {
+    try {
+      const commentRef = doc(db, "comments", commentId)
+      await updateDoc(commentRef, { approved: true })
+    } catch (error) {
+      console.error("Error approving comment:", error)
     }
   }
 
@@ -171,6 +183,16 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
                 >
                   <Trash2 className="w-4 h-4" />
                   <span>Delete</span>
+                </Button>
+              )}
+              {currentUser?.isAdmin && !comment.approved && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-1 text-green-500"
+                  onClick={() => handleApprove(comment.id)}
+                >
+                  <span>Approve</span>
                 </Button>
               )}
             </div>
