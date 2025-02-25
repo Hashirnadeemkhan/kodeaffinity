@@ -137,3 +137,12 @@ h3 {
     @apply rounded-lg shadow-lg my-8;
   }
 }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

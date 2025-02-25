@@ -1,9 +1,10 @@
 "use client"
 
 import type React from "react"
+
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, query, orderBy } from "firebase/firestore"
+import { collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, query, orderBy, where } from "firebase/firestore"
 import { db } from "@/firebase"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -22,6 +23,7 @@ interface Comment {
   parentId?: string
   blogId: string
   userId: string
+  approved: boolean | null
 }
 
 interface User {
@@ -41,16 +43,13 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
   const [replyTo, setReplyTo] = useState<string | null>(null)
 
   useEffect(() => {
-    // Subscribe to comments in real-time
-    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"))
+    const q = query(collection(db, "comments"), where("blogId", "==", blogId), orderBy("timestamp", "desc"))
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const commentsData = snapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-        .filter((comment: any) => comment.blogId === blogId) as Comment[]
+      const commentsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Comment[]
       setComments(commentsData)
     })
 
@@ -75,6 +74,7 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
           parentId: parentId || null,
           blogId,
           userId: currentUser?.id || "anonymous",
+          approved: null,
         })
 
         setFormData({ ...formData, comment: "" })
@@ -99,7 +99,6 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
   }
 
   const handleDelete = async (commentId: string, commentUserId: string) => {
-    // Check if user has permission to delete
     const canDelete = currentUser?.isAdmin || commentUserId === currentUser?.id
 
     if (!canDelete) {
@@ -119,6 +118,11 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
 
   const CommentItem = ({ comment, isReply = false }: { comment: Comment; isReply?: boolean }) => {
     const hasLiked = comment.likes.includes(comment.id)
+    const isOwnComment = comment.userId === currentUser?.id
+    const isPending = comment.approved === null
+    const isApproved = comment.approved === true
+
+    if (!isApproved && !isOwnComment) return null
 
     return (
       <motion.div
@@ -141,6 +145,7 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
               </span>
             </div>
             <p className="mt-1 text-gray-700 dark:text-gray-300">{comment.comment}</p>
+            {isPending && isOwnComment && <div className="text-yellow-500 text-sm mt-2">Pending approval</div>}
             <div className="mt-2 flex items-center space-x-4">
               <Button
                 variant="ghost"
@@ -151,7 +156,7 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
                 <Heart className="w-4 h-4" />
                 <span>{comment.likes.length}</span>
               </Button>
-              {!isReply && (
+              {!isReply && isApproved && (
                 <Button
                   variant="ghost"
                   size="sm"

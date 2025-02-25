@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database"
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
@@ -28,5 +29,6 @@ if (typeof window !== "undefined") {
 const db = getFirestore(app);
 export const auth = getAuth(app)
 
+export const database = getDatabase(app)
 
 export { db}; // Export storage along with db
