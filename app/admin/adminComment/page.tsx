@@ -5,8 +5,14 @@ import { collection, onSnapshot, query, orderBy, updateDoc, doc, deleteDoc } fro
 import { db } from "@/firebase"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { CheckCircle, XCircle, Trash2 } from "lucide-react"
+import { CheckCircle, XCircle, Trash2, ArrowRight, Eye } from "lucide-react"
 import toast from "react-hot-toast"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 interface Comment {
   id: string
@@ -15,6 +21,7 @@ interface Comment {
   timestamp: any
   blogId: string
   approved: boolean | null
+  parentId?: string
 }
 
 export default function ManageComments() {
@@ -68,10 +75,14 @@ export default function ManageComments() {
     }
   }
 
+  const getParentComment = (comment: Comment) => {
+    return comments.find((c) => c.id === comment.parentId)
+  }
+
   return (
-    <div className="container mx-auto p-6 max-w-7xl ">
+    <div className="container mx-auto p-6 max-w-7xl">
       <h1 className="text-2xl font-bold mb-6">Manage Comments</h1>
-      <Table >
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -79,52 +90,86 @@ export default function ManageComments() {
             <TableHead>Blog ID</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead >Actions</TableHead>
+            <TableHead>Reply To</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {comments.map((comment) => (
-            <TableRow key={comment.id}>
-              <TableCell>{comment.name}</TableCell>
-              <TableCell>{comment.comment}</TableCell>
-              <TableCell>{comment.blogId}</TableCell>
-              <TableCell>{comment.timestamp.toDate().toLocaleString()}</TableCell>
-              <TableCell>
-                {comment.approved === true ? "Approved" : comment.approved === false ? "Disapproved" : "Pending"}
-              </TableCell>
-              <TableCell>
-                <div className="flex space-x-2">
-                  <Button
-                  className="bg-red-500 hover:bg-red-600 hover:text-white text-white"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleApprove(comment.id)}
-                    disabled={comment.approved === true}
-                  >
-                    <CheckCircle className="w-4 h-4 mr-1" />
-                    Approve
-                  </Button>
-                  <Button
-                  className="bg-red-500 hover:bg-red-600 hover:text-white text-white"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDisapprove(comment.id)}
-                    disabled={comment.approved === false}
-                  >
-                    <XCircle className="w-4 h-4 mr-1" />
-                    Disapprove
-                  </Button>
-                  <Button className="bg-red-500 hover:bg-red-600 hover:text-white text-white" variant="outline" size="sm" onClick={() => handleDelete(comment.id)}>
-                    <Trash2 className="w-4 h-4 mr-1" />
-                    Delete
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
+          {comments.map((comment) => {
+            const parentComment = getParentComment(comment)
+            return (
+              <TableRow key={comment.id}>
+                <TableCell>{comment.name}</TableCell>
+                <TableCell className="max-w-xs truncate">{comment.comment}</TableCell>
+                <TableCell>{comment.blogId}</TableCell>
+                <TableCell>{comment.timestamp.toDate().toLocaleString()}</TableCell>
+                <TableCell>
+                  {comment.approved === true ? "Approved" : comment.approved === false ? "Disapproved" : "Pending"}
+                </TableCell>
+                <TableCell>
+                  {parentComment ? (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div className="flex items-center cursor-pointer text-blue-600 hover:underline">
+                            <ArrowRight className="w-4 h-4 mr-2" />
+                            <span className="text-sm">
+                              {parentComment.name}: {parentComment.comment.substring(0, 20)}...
+                            </span>
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-md p-2 bg-gray-800 text-white rounded-md">
+                          <p>
+                            <strong>{parentComment.name}:</strong> {parentComment.comment}
+                          </p>
+                          <p className="text-xs text-gray-400 mt-1">
+                            {parentComment.timestamp.toDate().toLocaleString()}
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ) : (
+                    "N/A"
+                  )}
+                </TableCell>
+                <TableCell>
+                  <div className="flex space-x-2">
+                    <Button
+                      className="bg-green-500 hover:bg-green-600 text-white"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleApprove(comment.id)}
+                      disabled={comment.approved === true}
+                    >
+                      <CheckCircle className="w-4 h-4 mr-1" />
+                      Approve
+                    </Button>
+                    <Button
+                      className="bg-yellow-500 hover:bg-yellow-600 text-white"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleDisapprove(comment.id)}
+                      disabled={comment.approved === false}
+                    >
+                      <XCircle className="w-4 h-4 mr-1" />
+                      Disapprove
+                    </Button>
+                    <Button
+                      className="bg-red-500 hover:bg-red-600 text-white"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleDelete(comment.id)}
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" />
+                      Delete
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
     </div>
   )
 }
-

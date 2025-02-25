@@ -42,10 +42,19 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   return (
     <div className="container mx-auto p-6">
       {/* Buttons Section */}
-      <div className="flex justify-between items-center mb-6">
-        <Link href="/admin/create">
-          <Button className="bg-red-600 hover:bg-red-700">Create New Post</Button>
-        </Link>
+      <div className="flex justify-between items-center mb-6 gap-4 flex-wrap">
+        <div className="flex gap-4">
+          <Link href="/admin/create">
+            <Button className="bg-red-600 hover:bg-red-700">
+              Create New Post
+            </Button>
+          </Link>
+          <Link href="/admin/adminComment">
+            <Button className="bg-red-600 hover:bg-red-700 text-white">
+              Manage Comments
+            </Button>
+          </Link>
+        </div>
         <button
           onClick={onLogout}
           className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
