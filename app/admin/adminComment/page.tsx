@@ -69,9 +69,9 @@ export default function ManageComments() {
   }
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 max-w-7xl ">
       <h1 className="text-2xl font-bold mb-6">Manage Comments</h1>
-      <Table>
+      <Table >
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -79,7 +79,7 @@ export default function ManageComments() {
             <TableHead>Blog ID</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead >Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -95,6 +95,7 @@ export default function ManageComments() {
               <TableCell>
                 <div className="flex space-x-2">
                   <Button
+                  className="bg-red-500 hover:bg-red-600 hover:text-white text-white"
                     variant="outline"
                     size="sm"
                     onClick={() => handleApprove(comment.id)}
@@ -104,6 +105,7 @@ export default function ManageComments() {
                     Approve
                   </Button>
                   <Button
+                  className="bg-red-500 hover:bg-red-600 hover:text-white text-white"
                     variant="outline"
                     size="sm"
                     onClick={() => handleDisapprove(comment.id)}
@@ -112,7 +114,7 @@ export default function ManageComments() {
                     <XCircle className="w-4 h-4 mr-1" />
                     Disapprove
                   </Button>
-                  <Button variant="outline" size="sm" onClick={() => handleDelete(comment.id)}>
+                  <Button className="bg-red-500 hover:bg-red-600 hover:text-white text-white" variant="outline" size="sm" onClick={() => handleDelete(comment.id)}>
                     <Trash2 className="w-4 h-4 mr-1" />
                     Delete
                   </Button>
