@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-import { Heart, Reply, Trash2, Send } from "lucide-react"
+import { Heart, Reply, Trash2, Send, CheckCircle } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 
 interface Comment {
@@ -42,22 +42,28 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
   const [replyTo, setReplyTo] = useState<string | null>(null)
 
   useEffect(() => {
-    // Subscribe to comments in real-time
-    const q = query(collection(db, "comments"), orderBy("timestamp", "desc")) // Specific documents ko filter karne ke liye.
+    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"))
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      // Real-time updates lene ke liye
-      const commentsData = snapshot.docs //snapshot.docs → Firestore ka sara data array ke form me aata hai
+      const commentsData = snapshot.docs
         .map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }))
-        .filter((comment: any) => comment.blogId === blogId) as Comment[]
-      setComments(commentsData) //Jo bhi naye comments aaye unko UI me update kar diya.
+        .filter((comment: any) => {
+          if (currentUser?.isAdmin) {
+            // Admins can see all comments for the current blog
+            return comment.blogId === blogId
+          } else {
+            // Regular users can only see approved comments for the current blog
+            return comment.blogId === blogId && comment.approved === true
+          }
+        }) as Comment[]
+      setComments(commentsData)
     })
 
-    return () => unsubscribe() //Listener ko stop karne ke liye unsubscribe function return kar diya:
-  }, [blogId])
+    return () => unsubscribe()
+  }, [blogId, currentUser?.isAdmin])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -77,7 +83,7 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
           parentId: parentId || null,
           blogId,
           userId: currentUser?.id || "anonymous",
-          approved: false,
+          approved: currentUser?.isAdmin ? true : false,
         })
 
         setFormData({ ...formData, comment: "" })
@@ -102,7 +108,6 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
   }
 
   const handleDelete = async (commentId: string, commentUserId: string) => {
-    // Check if user has permission to delete
     const canDelete = currentUser?.isAdmin || commentUserId === currentUser?.id
 
     if (!canDelete) {
@@ -152,6 +157,9 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
                 {formatDistanceToNow(comment.timestamp.toDate(), { addSuffix: true })}
               </span>
             </div>
+            {!comment.approved && currentUser?.isAdmin && (
+              <p className="mt-1 text-yellow-500 font-semibold">Pending Approval</p>
+            )}
             <p className="mt-1 text-gray-700 dark:text-gray-300">{comment.comment}</p>
             <div className="mt-2 flex items-center space-x-4">
               <Button
@@ -192,6 +200,7 @@ const CommentsSection = ({ blogId, currentUser }: CommentsSectionProps) => {
                   className="flex items-center space-x-1 text-green-500"
                   onClick={() => handleApprove(comment.id)}
                 >
+                  <CheckCircle className="w-4 h-4" />
                   <span>Approve</span>
                 </Button>
               )}
