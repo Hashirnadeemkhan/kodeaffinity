@@ -84,7 +84,7 @@ const About = () => {
             </motion.h2>
 
             <motion.p className="mt-4 text-gray-600 lg:text-lg text-sm mb-5">
-              At Intact One Solution, our journey began with a passion for digital transformation and a commitment to delivering cutting-edge solutions. Since our inception, we’ve embraced innovation and AI-driven technology, helping businesses across industries thrive in the ever-evolving digital landscape. Our mission is to bridge the gap between businesses and technological advancements, crafting solutions that are both forward-thinking and impactful.
+            At Kode Affinity, we are committed to transforming businesses through innovative IT solutions. With a deep understanding of the technology landscape and an unwavering focus on customer success, we specialize in offering custom software development, IT consultancy, and digital transformation solutions. Whether you are a startup looking to build a scalable product or an established business aiming to modernize your digital infrastructure, we are here to support your journey.
             </motion.p>
           </motion.div>
 
