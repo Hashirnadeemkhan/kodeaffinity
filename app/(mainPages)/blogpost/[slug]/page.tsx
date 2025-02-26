@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore" //Firestore se ek specific document (post) fetch karne ke liye.
 import { db } from "@/firebase"
 import { notFound } from "next/navigation"
 import { unified } from "unified"
@@ -8,19 +8,18 @@ import rehypeStringify from "rehype-stringify"
 import rehypeSlug from "rehype-slug"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypePrettyCode from "rehype-pretty-code"
-import { transformerCopyButton } from "@rehype-pretty/transformers"
 import type { Metadata } from "next"
 import CommentsSection from "@/app/components/widgets/Comment"
-import Image from "next/image"
 import Navbar from "@/app/components/widgets/Navbar"
+import { transformerCopyButton } from "@rehype-pretty/transformers"
 
 interface PageProps {
   params: { slug: string }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const docRef = doc(db, "posts", params.slug)
-  const docSnap = await getDoc(docRef)
+  const docRef = doc(db, "posts", params.slug)  //blogpost sa data fetch krrha ha or params.slug se document ka reference (docRef) bana raha hai.
+  const docSnap = await getDoc(docRef)  //getDoc(docRef) se document fetch kar raha hai.
 
   if (!docSnap.exists()) {
     return {
@@ -31,9 +30,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const data = docSnap.data()
 
+  // Combine both keywords and metaKeywords arrays, filter out duplicates
+  const allKeywords = Array.from(new Set([...(data.keywords || []), ...(data.metaKeywords || [])]))
+
   return {
-    title: data.title,
+    title: `${data.title} | Kode Affinity Blog`,
     description: data.description,
+    keywords: allKeywords.join(", "), // Convert array to comma-separated string
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      type: "article",
+      // Add other OpenGraph metadata as needed
+    },
+    // You can also add Twitter cards and other metadata here
   }
 }
 
@@ -81,29 +91,25 @@ export default async function Page({ params }: PageProps) {
               })}
             </time>
           </div>
+          {data.keywords && data.keywords.length > 0 && (
+            <div className="mt-4">
+              <p className="text-sm text-gray-500 mb-2">Keywords:</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {data.keywords.map((keyword: string, index: number) => (
+                  <span key={index} className="bg-gray-200 text-gray-800 px-2 py-1 rounded text-sm">
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </header>
 
-        {data.imageUrl && (
-          <div className="mb-12">
-            <Image
-              src={data.imageUrl || "/placeholder.svg"}
-              alt={data.title}
-              width={1200}
-              height={630}
-              className="rounded-lg shadow-lg"
-            />
-          </div>
-        )}
-
         <div
-          dangerouslySetInnerHTML={{ __html: htmlContent.toString() }}
-          className="prose prose-lg dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: htmlContent.value as string }}
+          className="prose dark:prose-invert mx-auto"
         />
-
-        <hr className="my-12 border-gray-200 dark:border-gray-700" />
-
-      
-<CommentsSection blogId={params.slug} />
+        <CommentsSection blogId={params.slug} />
       </article>
     </div>
   )

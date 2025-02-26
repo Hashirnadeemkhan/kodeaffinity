@@ -2,6 +2,13 @@ import React from "react";
 import PrivacyLayout from "@/app/components/(private)/PrivacyLayout";
 import Creativity from "@/app/components/widgets/Creativity-service";
 import Companies from "@/app/components/widgets/Companies";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Kode Affinity",
+  description:
+    "Learn how Kode Affinity protects your personal information. Our Privacy Policy outlines how we collect, use, and secure your data when you use our services.",
+};
 
 // Define the BreadcrumbItem type
 type BreadcrumbItem =

@@ -2,6 +2,13 @@ import React from "react"
 import TermLayout from "@/app/components/(private)/TermLayout"
 import Creativity from "@/app/components/widgets/Creativity-service"
 import Companies from "@/app/components/widgets/Companies"
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service | Kode Affinity",
+  description:
+    "Review the Terms of Service for Kode Affinity. By using our IT services, you agree to the terms and conditions outlined for web development, mobile apps, and more.",
+};
 
 // Define the BreadcrumbItem type
 type BreadcrumbItem = 

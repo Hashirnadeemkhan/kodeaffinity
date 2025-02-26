@@ -1,8 +1,14 @@
 
 import Footer from "./components/widgets/Footer";
-import "./globals.css";
-// import Navbar from "./components/widgets/Navbar";
+
 import { Montserrat } from "next/font/google";
+import { Metadata } from "next";
+import "./globals.css"; // Assuming you have global styles
+
+export const metadata: Metadata = {
+  title: "Kode Affinity", // Default title (optional, overridden by page-specific metadata)
+  description: "Innovative IT Solutions by Kode Affinity", // Default description
+};
 const poppins = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"], // Adjust as needed

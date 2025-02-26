@@ -6,7 +6,7 @@ date: "2025-02-03"
 author: "Hashir"
 image: "/blog.png"
 ---
-![The Future of Web Design](/blog.png)
+
 
 In the ever-evolving digital landscape, web design continues to adapt to the changing needs of users and businesses. As we step into 2024, several groundbreaking trends are set to redefine the future of web design. Whether you're a business owner, web designer, or digital strategist, staying ahead of these trends will help you deliver exceptional user experiences and maintain a competitive edge.
 

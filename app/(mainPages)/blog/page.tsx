@@ -3,9 +3,17 @@ import Image from "next/image"
 import { db } from "@/firebase"
 import Link from "next/link"
 import BlogLayout from "@/app/components/(private)/BlogLayout"
+import { Metadata } from "next"
 
 // Add revalidation to ensure fresh data
 export const revalidate = 0 // Revalidate at every request
+
+// Static metadata for the Blog page
+export const metadata: Metadata = {
+  title: "Kode Affinity Blog | IT, Web Development, SEO & Branding Insights",
+  description:
+    "Stay updated with the latest trends in IT, web development, branding, and SEO. Explore valuable insights, tips, and best practices on the Kode Affinity blog.",
+}
 
 async function getBlogs() {
   try {
@@ -30,7 +38,7 @@ export default async function Blog() {
         <></>
       </BlogLayout>
       <div className="container max-w-7xl mx-auto p-4 mb-10">
-        <h1 className="text-4xl font-bold  text-center mt-10 mb-8">Blog</h1>
+        <h1 className="text-4xl font-bold text-center mt-10 mb-8">Blog</h1>
 
         {blogs.length === 0 ? (
           <div className="text-center text-gray-500">
@@ -53,7 +61,6 @@ export default async function Blog() {
                   <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
                   <p className="mb-4 text-red-500 font-semibold">{blog.description}</p>
                   <div className="text-sm mb-4">
-              
                     <span className="font-semibold">
                       {new Date(blog.date).toLocaleDateString("en-GB", {
                         day: "2-digit",
@@ -74,4 +81,3 @@ export default async function Blog() {
     </div>
   )
 }
-
