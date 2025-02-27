@@ -72,7 +72,7 @@ export default function Footer() {
           <ul className="space-y-2">
             <li><i className="fas fa-phone-alt"></i> +92 123456789</li>
             <li><i className="fas fa-envelope"></i> info@abc.com</li>
-            <li><i className="fas fa-map-marker-alt"></i> Abc Road, Street No 01</li>
+            <li><i className="fas fa-map-marker-alt"></i>ground floor new usman center p and t colony khayaban-e-jami</li>
             <li><i className="fas fa-map-marker-alt"></i> Karachi, Pakistan</li>
           </ul>
         </div>
