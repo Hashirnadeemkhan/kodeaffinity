@@ -6,13 +6,21 @@ import Link from "next/link";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase"; // Adjust the import path to your Firebase config
 
+interface Blog {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  date: string;
+  slug: string;
+}
+
 const Insights = () => {
   const imageControls = useAnimation();
   const textControls = useAnimation();
   const ref = useRef<HTMLDivElement | null>(null);
-  const [blogs, setBlogs] = useState<any[]>([]); // State to hold blog data
+  const [blogs, setBlogs] = useState<Blog[]>([]);
 
-  // Animation variants for the image and text
   const imageAnimation = {
     hidden: { x: -100, opacity: 0 },
     visible: {
@@ -31,19 +39,18 @@ const Insights = () => {
     },
   };
 
-  // Fetch blogs from Firebase
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "posts"));
-        const blogData = querySnapshot.docs.map((doc) => ({
+        const blogData: Blog[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...(doc.data() as Omit<Blog, "id">),
         }));
-        // Sort by date (assuming `date` is a timestamp or ISO string) and take the latest 2
+
         const sortedBlogs = blogData
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-          .slice(0, 2); // Show only the 2 most recent blogs
+          .slice(0, 2);
         setBlogs(sortedBlogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -54,7 +61,6 @@ const Insights = () => {
     fetchBlogs();
   }, []);
 
-  // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -116,7 +122,7 @@ const Insights = () => {
                   className="p-7"
                 >
                   <Image
-                    src={blog.imageUrl || "/blog.png"} // Fallback image if no imageUrl
+                    src={blog.imageUrl ?? "/blog.png"}
                     alt={blog.title}
                     height={200}
                     width={200}
@@ -136,10 +142,10 @@ const Insights = () => {
                     {blog.description}
                   </p>
                   <p className="text-white mb-4 text-center lg:text-lg text-sm">
-                    Posted on: {new Date(blog.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    Posted on: {new Date(blog.date).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
                   </p>
                   <Link
-                    href={`/blogpost/${blog.slug}`} // Assuming your blog has a slug field
+                    href={`/blogpost/${blog.slug}`}
                     className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg"
                   >
                     Read More
