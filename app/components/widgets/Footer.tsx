@@ -71,7 +71,7 @@ export default function Footer() {
           <h3 className="font-bold mb-4 text-lg">Contact</h3>
           <ul className="space-y-2">
             <li><i className="fas fa-phone-alt"></i>+92 317 2379605</li>
-            <li><i className="fas fa-envelope"></i> info@abc.com</li>
+            <li><i className="fas fa-envelope"></i> info@Kodeaffinity.com</li>
             <li><i className="fas fa-map-marker-alt"></i>office # 101 ground floor new usman center p and t colony khayaban-e-jami</li>
             <li><i className="fas fa-map-marker-alt"></i> Karachi, Pakistan</li>
           </ul>
