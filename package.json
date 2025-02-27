@@ -27,6 +27,7 @@
     "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
     "countup.js": "^2.8.0",
+    "date-fns": "^4.1.0",
     "disqus-react": "^1.1.5",
     "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
