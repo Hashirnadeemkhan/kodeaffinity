@@ -1,25 +1,18 @@
-import { doc, getDoc } from "firebase/firestore" //Firestore se ek specific document (post) fetch karne ke liye.
-import { db } from "@/firebase"
-import { notFound } from "next/navigation"
-import { unified } from "unified"
-import remarkParse from "remark-parse"
-import remarkRehype from "remark-rehype"
-import rehypeStringify from "rehype-stringify"
-import rehypeSlug from "rehype-slug"
-import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypePrettyCode from "rehype-pretty-code"
 import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "@/firebase"
 import CommentsSection from "@/app/components/widgets/Comment"
 import Navbar from "@/app/components/widgets/Navbar"
-import { transformerCopyButton } from "@rehype-pretty/transformers"
+import "react-quill/dist/quill.snow.css" // Import Quill styles
 
 interface PageProps {
   params: { slug: string }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const docRef = doc(db, "posts", params.slug)  //blogpost sa data fetch krrha ha or params.slug se document ka reference (docRef) bana raha hai.
-  const docSnap = await getDoc(docRef)  //getDoc(docRef) se document fetch kar raha hai.
+  const docRef = doc(db, "posts", params.slug)
+  const docSnap = await getDoc(docRef)
 
   if (!docSnap.exists()) {
     return {
@@ -57,24 +50,6 @@ export default async function Page({ params }: PageProps) {
 
   const data = docSnap.data()
 
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeStringify)
-    .use(rehypeSlug)
-    .use(rehypeAutolinkHeadings)
-    .use(rehypePrettyCode, {
-      theme: "github-dark",
-      transformers: [
-        transformerCopyButton({
-          visibility: "always",
-          feedbackDuration: 3000,
-        }),
-      ],
-    })
-
-  const htmlContent = await processor.process(data.content)
-
   return (
     <div className="pt-5">
       <Navbar />
@@ -105,10 +80,11 @@ export default async function Page({ params }: PageProps) {
           )}
         </header>
 
-        <div
-          dangerouslySetInnerHTML={{ __html: htmlContent.value as string }}
-          className="prose dark:prose-invert mx-auto"
-        />
+        {/* Quill content container */}
+        <div className="ql-content mx-auto">
+          <div dangerouslySetInnerHTML={{ __html: data.content }} className="prose dark:prose-invert max-w-none" />
+        </div>
+
         <CommentsSection blogId={params.slug} />
       </article>
     </div>

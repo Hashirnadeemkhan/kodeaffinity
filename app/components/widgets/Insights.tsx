@@ -1,34 +1,60 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
-import Image from 'next/image';
+import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
-import Link from 'next/link';
+import Link from "next/link";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/firebase"; // Adjust the import path to your Firebase config
 
 const Insights = () => {
   const imageControls = useAnimation();
   const textControls = useAnimation();
-  const ref = useRef<HTMLDivElement | null>(null); // Specify ref type
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [blogs, setBlogs] = useState<any[]>([]); // State to hold blog data
 
   // Animation variants for the image and text
   const imageAnimation = {
-    hidden: { x: -100, opacity: 0 }, // Image starts from the left
+    hidden: { x: -100, opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.5 }, // Animate to original position
+      transition: { duration: 0.5 },
     },
   };
 
   const textAnimation = {
-    hidden: { x: 100, opacity: 0 }, // Text starts from the right
+    hidden: { x: 100, opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.5 }, // Animate to original position
+      transition: { duration: 0.5 },
     },
   };
 
-  // Observe when the component comes into view
+  // Fetch blogs from Firebase
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "posts"));
+        const blogData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        // Sort by date (assuming `date` is a timestamp or ISO string) and take the latest 2
+        const sortedBlogs = blogData
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, 2); // Show only the 2 most recent blogs
+        setBlogs(sortedBlogs);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+        setBlogs([]);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -40,106 +66,88 @@ const Insights = () => {
           textControls.start("hidden");
         }
       },
-      {
-        threshold: 0.1, // Trigger when 10% of the component is in view
-      }
+      { threshold: 0.1 }
     );
 
-    const currentRef = ref.current; // Copy ref.current to a variable
-
+    const currentRef = ref.current;
     if (currentRef) {
       observer.observe(currentRef);
     }
 
     return () => {
       if (currentRef) {
-        observer.unobserve(currentRef); // Use the variable in cleanup
+        observer.unobserve(currentRef);
       }
     };
   }, [imageControls, textControls]);
 
   return (
-    <div 
+    <div
       className="bg-gradient-to-r from-red-900 via-purple-800 to-blue-900 py-20 px-10 text-white"
       style={{
-        backgroundImage: 'linear-gradient(to right, #7f1d1d, #6b21a8, #1e3a8a), url("/assets/bg.png")', // Gradient and image combined
-        backgroundSize: 'cover', // Make the background image cover the entire section
-        backgroundPosition: 'center', // Center the image
-        backgroundRepeat: 'no-repeat', // Prevent image repetition
-        backgroundBlendMode: 'overlay', // Blend the gradient with the image
+        backgroundImage:
+          'linear-gradient(to right, #7f1d1d, #6b21a8, #1e3a8a), url("/assets/bg.png")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundBlendMode: "overlay",
       }}
     >
       <div className="max-w-7xl mx-auto px-4" ref={ref}>
-        <h2 className="lg:text-5xl text-3xl font-bold text-center text-white mb-5">Latest Insights.</h2>
-        <p className=" text-white mb-10 lg:text-xl text-sm">
+        <h2 className="lg:text-5xl text-3xl font-bold text-center text-white mb-5">
+          Latest Insights.
+        </h2>
+        <p className="text-white mb-10 lg:text-xl text-sm">
           Hot Off the Press: Your First Choice for the Most Recent Technology Trends and Best Practices.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card 1 */}
-          <div className="bg-[#280A15] rounded-lg shadow-lg overflow-hidden max-w-lg">
-            <motion.div
-              initial="hidden"
-              animate={imageControls}
-              variants={imageAnimation}
-              className='p-7'
-            >
-              <Image
-                src="/blog.png" 
-                alt="Insight 1" 
-                height={200}
-                width={200}
-                className="w-full"
-              />
-            </motion.div>
-            <div className="p-4 flex flex-col items-center justify-center">
-              <motion.h3
-                initial="hidden"
-                animate={textControls}
-                variants={textAnimation}
-                className="lg:text-4xl text-2xl font-bold  mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent"
+          {blogs.length === 0 ? (
+            <p className="text-center text-gray-300">No recent blogs available.</p>
+          ) : (
+            blogs.map((blog) => (
+              <div
+                key={blog.id}
+                className="bg-[#280A15] rounded-lg shadow-lg overflow-hidden max-w-lg"
               >
-                Lorem ipsum Lorem
-              </motion.h3>
-              <p className="text-white mb-4 text-center lg:text-lg text-sm">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the {`industry's`} standard dummy text ever since the 1500s.
-              </p>
-              <Link href="/blog" className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg">Read More</Link>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="bg-[#280A15] rounded-lg shadow-lg overflow-hidden max-w-lg">
-            <motion.div
-              initial="hidden"
-              animate={imageControls}
-              variants={imageAnimation}
-              className='p-7'
-            >
-              <Image 
-                src="/blog.png"  // Make sure this path is correct
-                alt="Insight 2" 
-                height={200} // Set the height
-                width={200}  // Set the width
-                className="w-full "
-              />
-            </motion.div>
-            <div className="p-4 flex flex-col items-center justify-center">
-              <motion.h3
-                initial="hidden"
-                animate={textControls}
-                variants={textAnimation}
-                className="lg:text-4xl text-2xl font-bold text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent"
-              >
-                Lorem ipsum Lorem
-              </motion.h3>
-              <p className="mb-4 text-center lg:text-lg text-sm text-gradient">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the {`industry's`} standard dummy text ever since the 1500s.
-              </p>
-              <Link href="/blog" className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg">Read More</Link>
-            </div>
-          </div>
+                <motion.div
+                  initial="hidden"
+                  animate={imageControls}
+                  variants={imageAnimation}
+                  className="p-7"
+                >
+                  <Image
+                    src={blog.imageUrl || "/blog.png"} // Fallback image if no imageUrl
+                    alt={blog.title}
+                    height={200}
+                    width={200}
+                    className="w-full"
+                  />
+                </motion.div>
+                <div className="p-4 flex flex-col items-center justify-center">
+                  <motion.h3
+                    initial="hidden"
+                    animate={textControls}
+                    variants={textAnimation}
+                    className="lg:text-3xl text-2xl font-bold mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent"
+                  >
+                    {blog.title}
+                  </motion.h3>
+                  <p className="text-white mb-4 text-center lg:text-lg text-sm">
+                    {blog.description}
+                  </p>
+                  <p className="text-white mb-4 text-center lg:text-lg text-sm">
+                    Posted on: {new Date(blog.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                  </p>
+                  <Link
+                    href={`/blogpost/${blog.slug}`} // Assuming your blog has a slug field
+                    className="text-gradient mb-2 bg-gradient-to-r from-custom-red via-custom-purple to-custom-blue bg-clip-text text-transparent font-semibold text-center text-lg"
+                  >
+                    Read More
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

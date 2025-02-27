@@ -8,7 +8,8 @@ import { db } from "@/firebase"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
-import { Textarea } from "@/components/ui/textarea"
+
+import QuillEditor from "./QuillEditor"
 import { slugify } from "../utils/slugify"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 
@@ -161,6 +162,7 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
         <Input
           type="text"
           value={title}
+     
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Blog Post Title"
           required
@@ -172,20 +174,11 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
           placeholder="Blog Post Description"
           required
         />
-        <Input
-          type="text"
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
-          placeholder="Slug"
-          required
-        />
-        <Textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Content (Markdown)"
-          required
-          rows={10}
-        />
+        <Input className="" type="text" value={slug} onChange={(e) => setSlug(e.target.value)} placeholder="Slug" required />
+        <div className="mb-6">
+          <QuillEditor  value={content} onChange={setContent} className=" mb-4" />
+        
+        </div>
       </div>
       {/* Image Upload */}
       <Input required type="file" onChange={handleImageChange} accept="image/*" />
@@ -198,9 +191,6 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
           className="w-full max-w-md mt-4"
         />
       )}
-      <Button className="bg-red-600 hover:bg-red-700" type="submit">
-        {postId ? "Update" : "Create"} Post
-      </Button>
 
       {/* Meta Data Section */}
       <div className="space-y-4">
@@ -228,17 +218,14 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
               placeholder="Add a meta keyword (e.g., IT solutions)"
               onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), handleAddMetaKeyword())}
             />
-            <Button type="button" onClick={handleAddMetaKeyword} className="bg-blue-600 hover:bg-blue-700">
+            <Button type="button" onClick={handleAddMetaKeyword} className="bg-black">
               Add
             </Button>
           </div>
           {metaKeywords.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {metaKeywords.map((kw, index) => (
-                <span
-                  key={index}
-                  className="bg-gray-200 text-gray-800 px-2 py-1 rounded flex items-center"
-                >
+                <span key={index} className="bg-gray-200 text-gray-800 px-2 py-1 rounded flex items-center">
                   {kw}
                   <button
                     type="button"
@@ -252,9 +239,11 @@ export default function BlogPostForm({ postId }: BlogPostFormProps) {
             </div>
           )}
         </div>
+        <Button className="bg-red-600 hover:bg-red-700" type="submit">
+          {postId ? "Update" : "Create"} Post
+        </Button>
       </div>
-
-      
     </form>
   )
 }
+

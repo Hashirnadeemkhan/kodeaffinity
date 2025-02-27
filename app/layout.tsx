@@ -1,6 +1,6 @@
 
 import Footer from "./components/widgets/Footer";
-
+import "./styles/quill-content.css"
 import { Montserrat } from "next/font/google";
 import { Metadata } from "next";
 import "./globals.css"; // Assuming you have global styles
