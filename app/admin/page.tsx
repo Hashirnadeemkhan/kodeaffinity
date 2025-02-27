@@ -43,7 +43,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="mt-10 mb-10">
+    <div className=" mb-10">
       <AdminLayout title="Admin Dashboard" breadcrumb={dashboardBreadcrumb} />
       <section className="max-w-screen-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
         <div className="container mx-auto p-4">
